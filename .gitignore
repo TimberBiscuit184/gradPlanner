@@ -1,0 +1,18 @@
+# dependencies — regenerate with `npm install`, never copy between machines
+node_modules/
+
+# build output
+dist/
+tsconfig.tsbuildinfo
+
+# per-machine Claude Code permission grants (absolute paths, not portable).
+# .claude/launch.json IS committed — it is the shared dev-server config.
+.claude/settings.local.json
+
+# editor / OS noise
+.DS_Store
+Thumbs.db
+*.log
+
+# exported plans (personal data, regenerate from the app)
+gradtree-plan.json

@@ -1,0 +1,13 @@
+{
+  "_note": "Blank starting record. No transcript, no declared programs — the app opens on program selection. To use your own record, copy a filled-in file over this one (see data/student.mine.json for the shape) and re-run `npm run build`. This file ships inside the app, so it must never contain personal data.",
+  "student": "",
+  "catalog": "2026-2027",
+  "major": null,
+  "minor": null,
+  "generalEducation": null,
+  "terms": [],
+  "track": {
+    "pattern": "spring-fall"
+  },
+  "iplanTotals": {}
+}

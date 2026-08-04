@@ -1,0 +1,325 @@
+{
+  "id": "ee-bs-2024",
+  "code": "445",
+  "label": "Electrical Engineering, B.S.",
+  "type": "major",
+  "catalogYear": "2024-2025",
+  "catalogCode": "UG24",
+  "totalCredits": {
+    "min": 109,
+    "max": 120
+  },
+  "_source": "Transcribed from BYU-Idaho catalog Program Course Requirements page, 2026-07-27.",
+  "programNotes": [
+    "Grades of C- or higher required in major courses.",
+    "2.0 cumulative GPA.",
+    "Minimum 120 cumulative credits to graduate.",
+    "ABET accredited under the Electrical Engineering Program Criteria."
+  ],
+  "buckets": [
+    {
+      "id": "gen-ed",
+      "label": "General Education",
+      "credits": {
+        "min": 27,
+        "max": 28
+      },
+      "rule": {
+        "type": "programRef",
+        "programId": "ge-abet"
+      },
+      "note": "Satisfied by completing the ge-abet program. Do NOT evaluate as a credit pool - that would double count."
+    },
+    {
+      "id": "introduction",
+      "label": "Introduction",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "rule": {
+        "type": "nOfGroups",
+        "n": 1
+      },
+      "groups": [
+        {
+          "id": "intro-opt1",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "ECEN100"
+          ]
+        },
+        {
+          "id": "intro-opt2",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "CSE121c",
+            "ECEN101"
+          ],
+          "note": "ECEN101 is RETIRED. Last offered 2025. This option is closed to new students."
+        }
+      ]
+    },
+    {
+      "id": "core-engineering",
+      "label": "Core Engineering Courses",
+      "credits": {
+        "min": 36,
+        "max": 36
+      },
+      "rule": {
+        "type": "allOfGroups"
+      },
+      "groups": [
+        {
+          "id": "core-required",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "CSE110",
+            "CSE111",
+            "CSE210",
+            "CSE212",
+            "ECEN150",
+            "ECEN240",
+            "ECEN260",
+            "ECEN340",
+            "ECEN350",
+            "ECEN380",
+            "ECEN390",
+            "ECEN499"
+          ]
+        },
+        {
+          "id": "core-lab",
+          "rule": {
+            "type": "nCredits",
+            "n": 4
+          },
+          "pool": [
+            "ECEN250",
+            "ECEN299"
+          ],
+          "note": "Pool totals exactly 4 credits (3 + 1), so this is effectively 'take both'."
+        }
+      ]
+    },
+    {
+      "id": "supplemental",
+      "label": "Supplemental Courses",
+      "credits": {
+        "min": 12,
+        "max": 12
+      },
+      "rule": {
+        "type": "nOf",
+        "n": 4
+      },
+      "allowDoubleCount": false,
+      "pool": [
+        "CSE450",
+        "ECEN311",
+        "ECEN324",
+        "ECEN351",
+        "ECEN361",
+        "ECEN411",
+        "ECEN420",
+        "ECEN430",
+        "ECEN451",
+        "ECEN461",
+        "ECEN470",
+        "ECEN480",
+        "ECEN490R",
+        "ME310",
+        "ME410"
+      ]
+    },
+    {
+      "id": "experiential",
+      "label": "Experiential Learning",
+      "credits": {
+        "min": 1,
+        "max": 7
+      },
+      "rule": {
+        "type": "nOfGroups",
+        "n": 1
+      },
+      "groups": [
+        {
+          "id": "exp-internship",
+          "label": "Internship",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "ECEN398R"
+          ]
+        },
+        {
+          "id": "exp-career",
+          "label": "Professional Preparation",
+          "rule": {
+            "type": "allOfGroups"
+          },
+          "groups": [
+            {
+              "rule": {
+                "type": "allOf"
+              },
+              "pool": [
+                "ECEN397"
+              ]
+            },
+            {
+              "rule": {
+                "type": "nOf",
+                "n": 2
+              },
+              "allowDoubleCount": false,
+              "note": "Draws from the SAME pool as Supplemental Courses, with no double counting. Skipping the internship therefore costs 6 supplemental electives total, not 4.",
+              "sharedPoolId": "supplemental"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundational-math",
+      "label": "Foundational Math",
+      "credits": {
+        "min": 4,
+        "max": 9
+      },
+      "rule": {
+        "type": "nOfGroups",
+        "n": 1
+      },
+      "groups": [
+        {
+          "id": "fm-opt1",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "MATH112X"
+          ]
+        },
+        {
+          "id": "fm-opt2",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "MATH109",
+            "MATH112X"
+          ]
+        },
+        {
+          "id": "fm-opt3",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "MATH110X",
+            "MATH111",
+            "MATH112X"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math-science",
+      "label": "Math and Science Courses",
+      "credits": {
+        "min": 27,
+        "max": 27
+      },
+      "rule": {
+        "type": "allOfGroups"
+      },
+      "groups": [
+        {
+          "id": "ms-calc",
+          "rule": {
+            "type": "nCredits",
+            "n": 4
+          },
+          "pool": [
+            "MATH113",
+            "MATH214",
+            "MATH215"
+          ]
+        },
+        {
+          "id": "ms-core",
+          "rule": {
+            "type": "nCredits",
+            "n": 20
+          },
+          "pool": [
+            "CHEM105",
+            "CHEM105L",
+            "MATH316",
+            "MATH330",
+            "PH121",
+            "PH123",
+            "PH150",
+            "PH220"
+          ],
+          "note": "Pool totals 21 credits; 20 required, so only 1 credit of slack."
+        },
+        {
+          "id": "ms-elective",
+          "rule": {
+            "type": "nCredits",
+            "n": 3
+          },
+          "pool": [
+            "BIO180",
+            "BIO180L",
+            "BIO181",
+            "BIO181L",
+            "BIO221",
+            "BIO222",
+            "BIO240",
+            "BIO264",
+            "BIO264L",
+            "CHEM106",
+            "CHEM106L",
+            "CSE280",
+            "GEOL111",
+            "GEOL111L",
+            "GEOL112",
+            "GEOL404",
+            "GEOL435",
+            "MATH341",
+            "MATH411",
+            "MATH423",
+            "PH250"
+          ],
+          "note": "MATH341 lives here - it double counts with the AI minor Math Core."
+        }
+      ]
+    },
+    {
+      "id": "unspecified-electives",
+      "label": "Unspecified Electives",
+      "credits": {
+        "min": 0,
+        "max": 0
+      },
+      "rule": {
+        "type": "fillTo",
+        "n": 120
+      },
+      "note": "Any university course, to reach the 120-credit graduation minimum. This is the slack the AI minor fits into."
+    }
+  ],
+  "minGrade": "C-"
+}

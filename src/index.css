@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* dark-neutral board palette — flat, no gradients */
+  --color-bg: #14161b;
+  --color-bg-deep: #0b0d12; /* tree mode */
+  --color-surface: #1c1f26;
+  --color-surface-2: #23262f;
+  --color-line: #2e323c;
+  --color-ink: #e8eaed;
+  --color-ink-dim: #a2a8b3;
+  --color-ink-faint: #6b7280;
+
+  /* status hues */
+  --color-completed: #34d399;
+  --color-inprogress: #2dd4bf;
+  --color-registered: #a78bfa;
+  --color-planned: #4f8cff;
+  --color-available: #fbbf24;
+  --color-warn: #f59e0b;
+  --color-danger: #ef4444;
+  --color-ok: #34d399;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* available-node rim glow + slow pulse (tree mode only) */
+@keyframes rim-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgb(251 191 36 / 0.55),
+      0 0 14px 2px rgb(251 191 36 / 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgb(251 191 36 / 0.85),
+      0 0 22px 5px rgb(251 191 36 / 0.32);
+  }
+}
+.node-available {
+  animation: rim-pulse 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node-available {
+    animation: none;
+    box-shadow: 0 0 0 1px rgb(251 191 36 / 0.7);
+  }
+}
+
+/* keyboard-drag focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-planned);
+  outline-offset: 2px;
+}
+
+/* react-flow chrome on dark */
+.react-flow__attribution {
+  background: transparent;
+  color: #4b5563;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #333844;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}

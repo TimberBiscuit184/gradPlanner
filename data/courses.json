@@ -1,0 +1,3475 @@
+{
+  "$schema": "./schema/course.schema.json",
+  "_note": "prereq/coreq are recursive boolean expressions. verified:false means the edge is INFERRED from the suggested 8-semester sequence, not read from the catalog. Confirm before trusting a red warning built on it.",
+  "courses": [
+    {
+      "id": "ART101",
+      "code": "ART 101",
+      "title": "Introduction to the Visual Arts",
+      "credits": 3,
+      "dept": "ART",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ART201",
+      "code": "ART 201",
+      "title": "Art History I",
+      "credits": 3,
+      "dept": "ART",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ART202",
+      "code": "ART 202",
+      "title": "Art History II",
+      "credits": 3,
+      "dept": "ART",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ART231",
+      "code": "ART 231",
+      "title": "Design Thinking: Inquiry and Innovation",
+      "credits": 3,
+      "dept": "ART",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "BIO180",
+      "code": "BIO 180",
+      "title": "Introduction to Biology I",
+      "credits": 3,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO180L",
+      "code": "BIO 180L",
+      "title": "Introduction to Biology I Lab",
+      "credits": 1,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO181",
+      "code": "BIO 181",
+      "title": "Introduction to Biology II",
+      "credits": 3,
+      "dept": "BIO",
+      "prereq": "BIO180",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO181L",
+      "code": "BIO 181L",
+      "title": "Introduction to Biology II Lab",
+      "credits": 1,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO221",
+      "code": "BIO 221",
+      "title": "General Microbiology",
+      "credits": 3,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO222",
+      "code": "BIO 222",
+      "title": "General Microbiology Lab",
+      "credits": 1,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO240",
+      "code": "BIO 240",
+      "title": "Neurobiology",
+      "credits": 4,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO264",
+      "code": "BIO 264",
+      "title": "Human Anatomy and Physiology I",
+      "credits": 3,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BIO264L",
+      "code": "BIO 264L",
+      "title": "Human Anatomy and Physiology I Lab",
+      "credits": 1,
+      "dept": "BIO",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "BUS301",
+      "code": "BUS 301",
+      "title": "Advanced Writing in Professional Contexts",
+      "credits": 3,
+      "dept": "BUS",
+      "prereq": "ENG150",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "writing",
+        "ge"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "BYUI101",
+      "code": "BYUI 101",
+      "title": "Experience BYU-Idaho",
+      "credits": 1,
+      "dept": "BYUI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": true,
+      "tags": [
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "BYUI151",
+      "code": "BYUI 151",
+      "title": "Mission Impossible",
+      "credits": 3,
+      "dept": "BYUI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "BYUI152",
+      "code": "BYUI 152",
+      "title": "Intelligent Life",
+      "credits": 3,
+      "dept": "BYUI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "BYUI153",
+      "code": "BYUI 153",
+      "title": "The Heroic Journey",
+      "credits": 3,
+      "dept": "BYUI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CHEM105",
+      "code": "CHEM 105",
+      "title": "General Chemistry",
+      "credits": 3,
+      "dept": "CHEM",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CHEM105L",
+      "code": "CHEM 105L",
+      "title": "General Chemistry Lab",
+      "credits": 1,
+      "dept": "CHEM",
+      "prereq": null,
+      "coreq": [
+        "CHEM105"
+      ],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CHEM106",
+      "code": "CHEM 106",
+      "title": "General Chemistry II",
+      "credits": 3,
+      "dept": "CHEM",
+      "prereq": {
+        "and": [
+          "CHEM105",
+          {
+            "or": [
+              "MATH112X",
+              "MATH109",
+              "MATH113",
+              "MATH119",
+              "MATH110X"
+            ]
+          }
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "notes": "Math requirement can be waived with ALEKS >= 70 (outside the fixture data).",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "CHEM106L",
+      "code": "CHEM 106L",
+      "title": "General Chemistry Laboratory II",
+      "credits": 1,
+      "dept": "CHEM",
+      "prereq": "CHEM105L",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "CHILD210",
+      "code": "CHILD 210",
+      "title": "Child Development",
+      "credits": 3,
+      "dept": "CHILD",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CIT160",
+      "code": "CIT 160",
+      "title": "Introduction to Programming",
+      "credits": 3,
+      "dept": "CIT",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "programming",
+        "legacy"
+      ],
+      "notes": "Legacy intro course. Confirm with advisor whether this substitutes for CSE 110.",
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CIVIC150",
+      "code": "CIVIC 150",
+      "title": "Principles of Citizenship and Constitutional Government",
+      "credits": 3,
+      "dept": "CIVIC",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CSE110",
+      "code": "CSE 110",
+      "title": "Introduction to Programming",
+      "credits": 2,
+      "dept": "CSE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": true,
+      "tags": [
+        "programming",
+        "root"
+      ],
+      "skills": [
+        "python",
+        "control-flow",
+        "variables"
+      ],
+      "notes": "LUC test score of 110+ grants credit.",
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CSE111",
+      "code": "CSE 111",
+      "title": "Programming with Functions",
+      "credits": 2,
+      "dept": "CSE",
+      "prereq": {
+        "or": [
+          "CSE110",
+          "CIT160"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": true,
+      "tags": [
+        "programming"
+      ],
+      "skills": [
+        "python",
+        "functions",
+        "unit-testing"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "CSE 110 per CSE dept listing; CIT 160 user-confirmed as accepted alternative prerequisite (2026-07-27)."
+    },
+    {
+      "id": "CSE121c",
+      "code": "CSE 121c",
+      "title": "C Programming Language",
+      "credits": 1,
+      "dept": "CSE",
+      "prereq": "CSE111",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": false,
+      "tags": [
+        "programming"
+      ],
+      "skills": [
+        "c",
+        "pointers",
+        "memory"
+      ],
+      "verified": true,
+      "notes": "Dept listing: prereq CSE 111 (not CSE 110).",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CSE210",
+      "code": "CSE 210",
+      "title": "Programming with Classes",
+      "credits": 2,
+      "dept": "CSE",
+      "prereq": "CSE111",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": true,
+      "tags": [
+        "programming"
+      ],
+      "skills": [
+        "oop",
+        "classes",
+        "inheritance"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CSE212",
+      "code": "CSE 212",
+      "title": "Programming with Data Structures",
+      "credits": 2,
+      "dept": "CSE",
+      "prereq": "CSE210",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": true,
+      "tags": [
+        "programming"
+      ],
+      "skills": [
+        "data-structures",
+        "algorithms",
+        "big-o"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CSE280",
+      "code": "CSE 280",
+      "title": "Discrete Mathematics",
+      "credits": 3,
+      "dept": "CSE",
+      "prereq": "CSE210",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math",
+        "programming"
+      ],
+      "skills": [
+        "proofs",
+        "logic",
+        "combinatorics"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "notes": "Retired CS 165 / CS 241 (last offered 2023) also accepted."
+    },
+    {
+      "id": "CSE310",
+      "code": "CSE 310",
+      "title": "Applied Programming",
+      "credits": 3,
+      "dept": "CSE",
+      "prereq": "CSE210",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "programming"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "blocksConfirmed": false,
+      "notes": "Retired CS 165 / CS 241 (last offered 2023) also accepted."
+    },
+    {
+      "id": "CSE450",
+      "code": "CSE 450",
+      "title": "Machine Learning",
+      "credits": 3,
+      "dept": "CSE",
+      "prereq": {
+        "or": [
+          "DS250",
+          "CSE310"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ai-minor",
+        "ee-supplemental"
+      ],
+      "skills": [
+        "supervised-learning",
+        "model-evaluation",
+        "sklearn"
+      ],
+      "verified": true,
+      "notes": "Dept listing: prereq CSE 250 or CSE 310. CSE 310 is not in the EE major, so DS 250 is the practical path.",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "CSE455",
+      "code": "CSE 455",
+      "title": "Developing AI Systems",
+      "credits": 3,
+      "dept": "CSE",
+      "prereq": "CSE450",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ai-minor"
+      ],
+      "skills": [
+        "llm-integration",
+        "rag",
+        "ai-architecture"
+      ],
+      "notes": "NO published prerequisite found. CSE 450 assumed from course sequence. Confirm in the catalog.",
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "DS250",
+      "code": "DS 250",
+      "title": "Data Science Programming",
+      "credits": 2,
+      "dept": "DS",
+      "prereq": "CSE111",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "data",
+        "ai-minor"
+      ],
+      "skills": [
+        "pandas",
+        "data-wrangling",
+        "visualization"
+      ],
+      "verified": true,
+      "notes": "Dept listing as CSE 250 (same title, 2 cr): prereq CSE 111.",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "DS350",
+      "code": "DS 350",
+      "title": "Data Wrangling and Visualization",
+      "credits": 3,
+      "dept": "DS3",
+      "prereq": "DS250",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "programming"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "blocksConfirmed": false
+    },
+    {
+      "id": "DS460",
+      "code": "DS 460",
+      "title": "Big Data Programming",
+      "credits": 3,
+      "dept": "DS",
+      "prereq": {
+        "and": [
+          "DS250",
+          {
+            "or": [
+              "DS350",
+              "CSE450"
+            ]
+          }
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "data",
+        "ai-minor"
+      ],
+      "skills": [
+        "spark",
+        "distributed-computing",
+        "etl"
+      ],
+      "verified": true,
+      "notes": "Dept listing as CSE 451 (same title, 3 cr): prereq CSE 250 AND (CSE 350 or CSE 450).",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN100",
+      "code": "ECEN 100",
+      "title": "Intro to Electrical and Computer Engineering",
+      "credits": 2,
+      "dept": "ECEN",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "root"
+      ],
+      "skills": [
+        "circuits-intro",
+        "embedded-intro"
+      ],
+      "notes": "Replaces ECEN 101 (1 cr) from earlier catalogs. Accepted by the UG24 EE audit.",
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN101",
+      "code": "ECEN 101",
+      "title": "Intro to Elect and Comp Engr",
+      "credits": 1,
+      "dept": "ECEN",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "hardware",
+        "root",
+        "superseded"
+      ],
+      "verified": true,
+      "notes": "RETIRED. Last offered 2025. Only usable via Introduction Option 2, which is now closed.",
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN150",
+      "code": "ECEN 150",
+      "title": "Electric Circuit Analysis I",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": {
+        "or": [
+          "ECEN100",
+          "ECEN101"
+        ]
+      },
+      "coreq": [
+        "MATH112X"
+      ],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "circuits"
+      ],
+      "skills": [
+        "ohms-law",
+        "kvl-kcl",
+        "thevenin"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN240",
+      "code": "ECEN 240",
+      "title": "Fundamentals of Digital Systems",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "digital"
+      ],
+      "skills": [
+        "boolean-algebra",
+        "logic-gates",
+        "state-machines"
+      ],
+      "notes": "Catalog lists NO prerequisite - the earlier inferred CSE 111 edge was wrong and has been removed.",
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "ECEN250",
+      "code": "ECEN 250",
+      "title": "Electric Circuit Analysis II",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN150",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "circuits"
+      ],
+      "skills": [
+        "ac-analysis",
+        "phasors",
+        "filters"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN260",
+      "code": "ECEN 260",
+      "title": "Microprocessor Based System Design",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": {
+        "and": [
+          {
+            "or": [
+              "CSE121c",
+              "ECEN100"
+            ]
+          },
+          "ECEN240",
+          "CSE111"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "embedded"
+      ],
+      "skills": [
+        "assembly",
+        "microcontrollers",
+        "peripherals"
+      ],
+      "verified": true,
+      "notes": "Dept listing: CSE 121c and (ECEN 160 or 240). CSE 121c is no longer required under Introduction Option 1, so this edge may be stale.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN299",
+      "code": "ECEN 299",
+      "title": "Electric Circuit Fabrication and Evaluation Lab",
+      "credits": 1,
+      "dept": "ECEN",
+      "prereq": "ECEN250",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "lab"
+      ],
+      "skills": [
+        "soldering",
+        "pcb",
+        "test-equipment"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN311",
+      "code": "ECEN 311",
+      "title": "Intro to Electric Power and Rotating Machines",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN250",
+      "coreq": [],
+      "terms": [
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "power"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "ECEN324",
+      "code": "ECEN 324",
+      "title": "Computer Architecture",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": {
+        "and": [
+          "CSE212",
+          "ECEN240"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "digital"
+      ],
+      "verified": true,
+      "notes": "Dept listing: prereq CSE 212 and (ECEN 160 or 240). Supersedes the ECEN 260 edge inferred from the flowchart.",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN340",
+      "code": "ECEN 340",
+      "title": "Digital System Design",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN240",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "digital"
+      ],
+      "skills": [
+        "verilog",
+        "fpga",
+        "rtl-design"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN350",
+      "code": "ECEN 350",
+      "title": "Electronic Devices and Circuits",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN250",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "analog"
+      ],
+      "skills": [
+        "transistors",
+        "opamps",
+        "amplifiers"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN351",
+      "code": "ECEN 351",
+      "title": "VLSI System Design",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN340",
+      "coreq": [],
+      "terms": [
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "microelectronics",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN361",
+      "code": "ECEN 361",
+      "title": "Embedded Systems",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN260",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ee-supplemental",
+        "embedded"
+      ],
+      "verified": true,
+      "notes": "Dept listing: prereq ECEN 260.",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN380",
+      "code": "ECEN 380",
+      "title": "Signals and Systems",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "MATH316",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "signals",
+        "critical-path"
+      ],
+      "skills": [
+        "fourier",
+        "convolution",
+        "laplace"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN390",
+      "code": "ECEN 390",
+      "title": "Electricity and Magnetism",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": {
+        "and": [
+          "MATH316",
+          "PH220"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware"
+      ],
+      "skills": [
+        "maxwell-equations",
+        "transmission-lines"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN397",
+      "code": "ECEN 397",
+      "title": "Professional Career Preparation",
+      "credits": 1,
+      "dept": "ECEN",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "career"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN398R",
+      "code": "ECEN 398R",
+      "title": "Internship",
+      "credits": 1,
+      "dept": "ECEN",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "career",
+        "experiential"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN411",
+      "code": "ECEN 411",
+      "title": "Power Systems Analysis",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN311",
+      "coreq": [],
+      "terms": [
+        "F"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "power",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN420",
+      "code": "ECEN 420",
+      "title": "RF Circuits",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN390",
+      "coreq": [],
+      "terms": [
+        "F"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "rf",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN430",
+      "code": "ECEN 430",
+      "title": "Signal and Power Integrity",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN390",
+      "coreq": [],
+      "terms": [
+        "F",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "rf"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN451",
+      "code": "ECEN 451",
+      "title": "Semiconductor Device Engineering",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN350",
+      "coreq": [],
+      "terms": [
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "microelectronics",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN461",
+      "code": "ECEN 461",
+      "title": "Advanced Embedded Systems",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN361",
+      "coreq": [],
+      "terms": [
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "embedded",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN470",
+      "code": "ECEN 470",
+      "title": "Feedback Control of Dynamic Systems",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN380",
+      "coreq": [],
+      "terms": [
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "controls",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN480",
+      "code": "ECEN 480",
+      "title": "Digital Signal Processing",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN380",
+      "coreq": [],
+      "terms": [
+        "W"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "signals",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN490R",
+      "code": "ECEN 490R",
+      "title": "Special Topics",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": "ECEN420",
+      "coreq": [],
+      "terms": [
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECEN499",
+      "code": "ECEN 499",
+      "title": "Senior Project",
+      "credits": 3,
+      "dept": "ECEN",
+      "prereq": {
+        "and": [
+          "ECEN340",
+          "ECEN350"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "hardware",
+        "capstone"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECON150",
+      "code": "ECON 150",
+      "title": "Economic Principles and Problems - Micro",
+      "credits": 3,
+      "dept": "ECON",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ECON151",
+      "code": "ECON 151",
+      "title": "Economic Principles and Problems - Macro",
+      "credits": 3,
+      "dept": "ECON",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ENG150",
+      "code": "ENG 150",
+      "title": "Writing and Reasoning Foundations",
+      "credits": 3,
+      "dept": "ENG",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "writing",
+        "ge"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ENG151",
+      "code": "ENG 151",
+      "title": "Introduction to Literature",
+      "credits": 3,
+      "dept": "ENG",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ENG217",
+      "code": "ENG 217",
+      "title": "Great Books of the World",
+      "credits": 3,
+      "dept": "ENG",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "ENG301",
+      "code": "ENG 301",
+      "title": "Advanced Writing and Research",
+      "credits": 3,
+      "dept": "ENG",
+      "prereq": "ENG150",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "writing",
+        "ge"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "FAML160",
+      "code": "FAML 160",
+      "title": "Family Relations",
+      "credits": 3,
+      "dept": "FAML",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "FOREIGN_LANG",
+      "code": "Foreign Language",
+      "title": "Any Foreign Language Course",
+      "credits": 4,
+      "dept": "LANG",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities",
+        "placeholder"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "isPlaceholder": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GE101",
+      "code": "GE 101",
+      "title": "Growth and Grit",
+      "credits": 1,
+      "dept": "GE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GE102",
+      "code": "GE 102",
+      "title": "Academic and Emotional Well-Being",
+      "credits": 1,
+      "dept": "GE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GE103",
+      "code": "GE 103",
+      "title": "Online University Skills",
+      "credits": 1,
+      "dept": "GE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GE105",
+      "code": "GE 105",
+      "title": "Study and Life Skills",
+      "credits": 2,
+      "dept": "GE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GECIV100",
+      "code": "GECIV 100",
+      "title": "American Heritage",
+      "credits": 3,
+      "dept": "GECIV",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GECIV105",
+      "code": "GECIV 105",
+      "title": "Foundations of World History",
+      "credits": 3,
+      "dept": "GECI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GECIV210",
+      "code": "GECIV 210",
+      "title": "Religious Freedom",
+      "credits": 3,
+      "dept": "GECIV",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GEINT212",
+      "code": "GEINT 212",
+      "title": "Latin American Focus: Chile and Cuba",
+      "credits": 3,
+      "dept": "GEINT",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GEINT213",
+      "code": "GEINT 213",
+      "title": "Introduction to the Middle East",
+      "credits": 3,
+      "dept": "GEINT",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GEINT215",
+      "code": "GEINT 215",
+      "title": "China: Past, Present, Future",
+      "credits": 3,
+      "dept": "GEINT",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GEOL111",
+      "code": "GEOL 111",
+      "title": "Physical Geology",
+      "credits": 3,
+      "dept": "GEOL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "GEOL111L",
+      "code": "GEOL 111L",
+      "title": "Physical Geology Lab",
+      "credits": 1,
+      "dept": "GEOL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "notes": "Catalog lists no prerequisite.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "GEOL112",
+      "code": "GEOL 112",
+      "title": "Historical Geology",
+      "credits": 4,
+      "dept": "GEOL",
+      "prereq": {
+        "and": [
+          "GEOL111",
+          "GEOL111L"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "GEOL404",
+      "code": "GEOL 404",
+      "title": "Environmental Geology",
+      "credits": 3,
+      "dept": "GEOL",
+      "prereq": {
+        "and": [
+          "GEOL111L",
+          {
+            "or": [
+              "ENG301",
+              "BUS301"
+            ]
+          }
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "GEOL435",
+      "code": "GEOL 435",
+      "title": "Groundwater Hydrology",
+      "credits": 3,
+      "dept": "GEOL",
+      "prereq": {
+        "and": [
+          "GEOL111L",
+          {
+            "or": [
+              "ENG301",
+              "BUS301"
+            ]
+          },
+          {
+            "or": [
+              "MATH109",
+              "MATH110X",
+              "MATH112X"
+            ]
+          }
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "GE_PLACEHOLDER",
+      "code": "GE",
+      "title": "General Education course",
+      "credits": 3,
+      "dept": "GE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "placeholder"
+      ],
+      "verified": true,
+      "isPlaceholder": true,
+      "notes": "Generic GE slot. The GE-ABET pool has not been transcribed; use placeholder cards.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GS100",
+      "code": "GS 100",
+      "title": "Career and Self Discovery",
+      "credits": 1,
+      "dept": "GE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "GS102R",
+      "code": "GS 102R",
+      "title": "Academic Success Strategies",
+      "credits": 1,
+      "dept": "GS",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full",
+        "1st",
+        "2nd"
+      ],
+      "online": true,
+      "tags": [
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HIST120",
+      "code": "HIST 120",
+      "title": "U.S. History to 1877",
+      "credits": 3,
+      "dept": "HIST",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HIST121",
+      "code": "HIST 121",
+      "title": "U.S. History Since 1877",
+      "credits": 3,
+      "dept": "HIST",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HIST201",
+      "code": "HIST 201",
+      "title": "World History to 1500",
+      "credits": 3,
+      "dept": "HIST",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HIST202",
+      "code": "HIST 202",
+      "title": "Modern World History",
+      "credits": 3,
+      "dept": "HIST",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HUM110",
+      "code": "HUM 110",
+      "title": "Discovery and Discernment Through the Arts",
+      "credits": 3,
+      "dept": "HUM",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HUM201",
+      "code": "HUM 201",
+      "title": "Searching for Meaning in the Ancient World",
+      "credits": 3,
+      "dept": "HUM",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HUM202",
+      "code": "HUM 202",
+      "title": "Searching for Meaning in the Modern World",
+      "credits": 3,
+      "dept": "HUM",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "HUM214",
+      "code": "HUM 214",
+      "title": "Modern Arts and Propaganda",
+      "credits": 3,
+      "dept": "HUM",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MATH109",
+      "code": "MATH 109",
+      "title": "Precalculus",
+      "credits": 5,
+      "dept": "MATH",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "notes": "Catalog prereq: MATH 101, or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 55 - all outside the fixture data, so no edge is drawn.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH110X",
+      "code": "MATH 110X",
+      "title": "College Algebra",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "notes": "Catalog prereq: MATH 101 (C- or higher), or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 53 - all outside the fixture data, so no edge is drawn.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH111",
+      "code": "MATH 111",
+      "title": "Trigonometry",
+      "credits": 2,
+      "dept": "MATH",
+      "prereq": {
+        "or": [
+          "MATH110X"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "notes": "MATH 101, or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 53 also satisfy this (outside the fixture data).",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH112X",
+      "code": "MATH 112X",
+      "title": "Calculus I",
+      "credits": 4,
+      "dept": "MATH",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "math",
+        "root",
+        "critical-path"
+      ],
+      "skills": [
+        "derivatives",
+        "limits",
+        "integrals"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MATH113",
+      "code": "MATH 113",
+      "title": "Calculus II",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": "MATH112X",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH119",
+      "code": "MATH 119",
+      "title": "Applied Calculus: Data Science",
+      "credits": 4,
+      "dept": "MATH",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "math"
+      ],
+      "notes": "Alternative to MATH 112X for the AI minor ONLY. Does not satisfy EE major.",
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MATH214",
+      "code": "MATH 214",
+      "title": "Multivariable and Vector Calculus",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": "MATH113",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH215",
+      "code": "MATH 215",
+      "title": "Multivariable Calculus",
+      "credits": 4,
+      "dept": "MATH",
+      "prereq": "MATH112X",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math",
+        "critical-path"
+      ],
+      "skills": [
+        "vector-calculus",
+        "partial-derivatives"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MATH316",
+      "code": "MATH 316",
+      "title": "Differential Equations with Linear Algebra",
+      "credits": 4,
+      "dept": "MATH",
+      "prereq": "MATH215",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math",
+        "critical-path"
+      ],
+      "skills": [
+        "odes",
+        "laplace",
+        "linear-systems"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MATH330",
+      "code": "MATH 330",
+      "title": "Engineering Statistics",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": "MATH112X",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "skills": [
+        "probability",
+        "hypothesis-testing"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH341",
+      "code": "MATH 341",
+      "title": "Linear Algebra",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": {
+        "or": [
+          "MATH112X",
+          "MATH119"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math",
+        "ai-minor",
+        "ee-math-science-elective"
+      ],
+      "skills": [
+        "matrices",
+        "eigenvalues",
+        "vector-spaces"
+      ],
+      "verified": true,
+      "notes": "Dept listing: prereq MATH 119 or MATH 112.",
+      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MATH411",
+      "code": "MATH 411",
+      "title": "Numerical Analysis I",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": {
+        "and": [
+          "MATH316",
+          "CSE110"
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "notes": "Retired CS 101 / CS 124 (last offered 2023) also accepted in place of CSE 110.",
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "MATH423",
+      "code": "MATH 423",
+      "title": "Probability and Statistics",
+      "credits": 3,
+      "dept": "MATH",
+      "prereq": {
+        "and": [
+          {
+            "or": [
+              "MATH214",
+              "MATH215"
+            ]
+          },
+          {
+            "or": [
+              "MATH330"
+            ]
+          }
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "math"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "notes": "MATH 221A/B/C/D also satisfy the statistics half (outside the fixture data)."
+    },
+    {
+      "id": "ME310",
+      "code": "ME 310",
+      "title": "Mechatronics and Measurement Systems II",
+      "credits": 3,
+      "dept": "ME",
+      "prereq": {
+        "and": [
+          {
+            "or": [
+              "ECEN250"
+            ]
+          },
+          {
+            "or": [
+              "MATH316",
+              "MATH341"
+            ]
+          }
+        ]
+      },
+      "coreq": [],
+      "terms": [
+        "F"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "notes": "ME 305 (not in the fixture) is the catalog's alternative to ECEN 250."
+    },
+    {
+      "id": "ME410",
+      "code": "ME 410",
+      "title": "Autonomous Control of Dynamic Systems",
+      "credits": 3,
+      "dept": "ME",
+      "prereq": "ME310",
+      "coreq": [],
+      "terms": [
+        "F"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "ee-supplemental",
+        "scarce"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MUSIC101",
+      "code": "MUSIC 101",
+      "title": "Music and the Humanities",
+      "credits": 3,
+      "dept": "MUSI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "MUSIC102",
+      "code": "MUSIC 102",
+      "title": "Music in Western Civilization",
+      "credits": 3,
+      "dept": "MUSI",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PEACE101",
+      "code": "PEACE 101",
+      "title": "Conflict and Peace",
+      "credits": 3,
+      "dept": "PEACE",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PH121",
+      "code": "PH 121",
+      "title": "Principles of Physics I",
+      "credits": 3,
+      "dept": "PH",
+      "prereq": null,
+      "coreq": [
+        "MATH112X"
+      ],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "skills": [
+        "mechanics",
+        "kinematics"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PH123",
+      "code": "PH 123",
+      "title": "Principles of Physics II",
+      "credits": 3,
+      "dept": "PH",
+      "prereq": "PH121",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "skills": [
+        "thermodynamics",
+        "waves"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PH135",
+      "code": "PH 135",
+      "title": "Introduction to Scientific Computing",
+      "credits": 2,
+      "dept": "PH",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "programming",
+        "ai-minor"
+      ],
+      "notes": "Alternative to CSE 110 for the AI minor.",
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PH150",
+      "code": "PH 150",
+      "title": "Beginning Physics Lab",
+      "credits": 1,
+      "dept": "PH",
+      "prereq": null,
+      "coreq": [
+        "PH121"
+      ],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "notes": "Catalog lists no prerequisite."
+    },
+    {
+      "id": "PH220",
+      "code": "PH 220",
+      "title": "Principles of Physics III",
+      "credits": 3,
+      "dept": "PH",
+      "prereq": "PH123",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science"
+      ],
+      "skills": [
+        "electromagnetism",
+        "optics"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PH250",
+      "code": "PH 250",
+      "title": "Intermediate Physics Lab",
+      "credits": 1,
+      "dept": "PH",
+      "prereq": "PH150",
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": false,
+      "tags": [
+        "science",
+        "lab"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+    },
+    {
+      "id": "PHIL110",
+      "code": "PHIL 110",
+      "title": "The Search for Wisdom",
+      "credits": 3,
+      "dept": "PHIL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "POLSC110",
+      "code": "POLSC 110",
+      "title": "American Government",
+      "credits": 3,
+      "dept": "POLSC",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "POLSC150",
+      "code": "POLSC 150",
+      "title": "Introduction to Comparative Politics",
+      "credits": 3,
+      "dept": "POLSC",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "POLSC170",
+      "code": "POLSC 170",
+      "title": "International Politics",
+      "credits": 3,
+      "dept": "POLSC",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "PSYCH111",
+      "code": "PSYCH 111",
+      "title": "General Psychology",
+      "credits": 3,
+      "dept": "PSYCH",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL200C",
+      "code": "REL 200C",
+      "title": "The Eternal Family",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "cornerstone"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL225C",
+      "code": "REL 225C",
+      "title": "Foundations of the Restoration",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "cornerstone"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL250C",
+      "code": "REL 250C",
+      "title": "Jesus Christ and His Everlasting Gospel",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "cornerstone"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL275C",
+      "code": "REL 275C",
+      "title": "Teachings and Doctrine of the Book of Mormon",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "cornerstone"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL327",
+      "code": "REL 327",
+      "title": "Pearl of Great Price",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "religion-elective"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL333",
+      "code": "REL 333",
+      "title": "Teachings of the Living Prophets",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "religion-elective"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "REL_ELECTIVE",
+      "code": "REL elective",
+      "title": "Any other REL course",
+      "credits": 2,
+      "dept": "REL",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "religion",
+        "religion-elective",
+        "placeholder"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "isPlaceholder": true,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "SOC111",
+      "code": "SOC 111",
+      "title": "Introduction to Sociology",
+      "credits": 3,
+      "dept": "SOC",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "social-science"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "TA115",
+      "code": "TA 115",
+      "title": "Introduction to Theatre",
+      "credits": 3,
+      "dept": "TA",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    },
+    {
+      "id": "TA117",
+      "code": "TA 117",
+      "title": "Introduction to Film Art and Analysis",
+      "credits": 3,
+      "dept": "TA",
+      "prereq": null,
+      "coreq": [],
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": null,
+      "online": true,
+      "tags": [
+        "ge",
+        "arts-humanities"
+      ],
+      "verified": true,
+      "termsConfirmed": false,
+      "blocksConfirmed": false
+    }
+  ]
+}

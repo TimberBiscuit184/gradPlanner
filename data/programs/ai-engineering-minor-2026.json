@@ -1,0 +1,121 @@
+{
+  "id": "ai-engineering-minor",
+  "code": "292",
+  "label": "A.I. Engineering Minor",
+  "type": "minor",
+  "catalogYear": "2026-2027",
+  "totalCredits": {
+    "min": 26,
+    "max": 26
+  },
+  "_source": "Transcribed from I-Plan Requirements panel screenshots, 2026-07-27. Complete and verified.",
+  "buckets": [
+    {
+      "id": "ai-core",
+      "label": "Core",
+      "credits": {
+        "min": 8,
+        "max": 8
+      },
+      "rule": {
+        "type": "allOfGroups"
+      },
+      "groups": [
+        {
+          "id": "core-a",
+          "label": "Core A",
+          "rule": {
+            "type": "nOf",
+            "n": 1
+          },
+          "pool": [
+            "CSE110",
+            "PH135"
+          ],
+          "note": "Students who pass the LUC test with 110 or above can receive credit for CSE 110."
+        },
+        {
+          "id": "core-b",
+          "label": "Core B",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "CSE111",
+            "CSE210",
+            "CSE212"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-math-core",
+      "label": "Math Core",
+      "credits": {
+        "min": 7,
+        "max": 7
+      },
+      "rule": {
+        "type": "allOfGroups"
+      },
+      "groups": [
+        {
+          "id": "math-a",
+          "label": "Math A",
+          "rule": {
+            "type": "nOf",
+            "n": 1
+          },
+          "pool": [
+            "MATH112X",
+            "MATH119"
+          ]
+        },
+        {
+          "id": "math-b",
+          "label": "Math B",
+          "rule": {
+            "type": "allOf"
+          },
+          "pool": [
+            "MATH341"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-supplemental",
+      "label": "Supplemental Courses",
+      "credits": {
+        "min": 11,
+        "max": 11
+      },
+      "rule": {
+        "type": "allOf"
+      },
+      "pool": [
+        "DS250",
+        "CSE450",
+        "DS460",
+        "CSE455"
+      ]
+    }
+  ],
+  "doubleCountsWith": {
+    "ee-bs-2024": [
+      "CSE110",
+      "CSE111",
+      "CSE210",
+      "CSE212",
+      "MATH112X",
+      "CSE450"
+    ],
+    "_note": "I-Plan shows CSE 111 and CSE 210 flagged DOUBLE COUNTED against the EE major. MATH 112X is flagged DOUBLE COUNTED under Math A. Confirm the full double-count set with an advisor - it determines the true marginal cost of this minor."
+  },
+  "marginalCredits": {
+    "estimate": 12,
+    "_reasoning": "26 total minus roughly 14 credits already required by the EE major (CSE110/111/210/212 = 8, MATH112X = 4... plus CSE450 if used as an EE supplemental elective). Net new: MATH341 (3), DS250 (2), DS460 (3), CSE455 (3) = 11-12 credits.",
+    "_confidence": "low - verify"
+  },
+  "minGrade": "C-"
+}

@@ -1,0 +1,78 @@
+{
+  "id": "ge-abet",
+  "code": "GE - ABET",
+  "label": "General Education for ABET Accredited Programs",
+  "type": "general-education",
+  "catalogYear": "2024-2025",
+  "totalCredits": { "min": 27, "max": 28 },
+  "minGrade": null,
+  "_source": "Transcribed from BYU-Idaho catalog GE - ABET program page, 2026-07-27.",
+  "_gap": "The Social Science pool between CHILD210 and FAML160 was obscured by an overlay in the source screenshot. CIVIC150, ECON150, and ECON151 were restored from the EE four-year plan PDF. Verify.",
+
+  "buckets": [
+    {
+      "id": "first-semester",
+      "label": "First Semester",
+      "credits": { "min": 1, "max": 2 },
+      "rule": { "type": "nOfGroups", "n": 1 },
+      "groups": [
+        { "id": "fs-byui101", "rule": { "type": "allOf" }, "pool": ["BYUI101"] },
+        { "id": "fs-alt", "rule": { "type": "nOf", "n": 1 },
+          "pool": ["GE101", "GE102", "GE103", "GE105", "GS100"],
+          "note": "Only for students who did not satisfy this with BYUI101 in their first on-campus semester. GE103 is for online students only." }
+      ]
+    },
+    {
+      "id": "cornerstone",
+      "label": "Cornerstone",
+      "credits": { "min": 14, "max": 14 },
+      "rule": { "type": "allOfGroups" },
+      "groups": [
+        { "id": "cs-required", "rule": { "type": "allOf" },
+          "pool": ["REL200C", "REL225C", "REL250C", "REL275C"] },
+        { "id": "cs-electives", "rule": { "type": "nCredits", "n": 6 },
+          "pool": ["REL_ELECTIVE", "REL327", "REL333"],
+          "usesPlaceholders": true,
+          "note": "Any other REL course. REL 121 and REL 122 may substitute for REL 275C; students who do so earn 2 extra credits applied here." }
+      ]
+    },
+    {
+      "id": "writing",
+      "label": "Writing",
+      "credits": { "min": 6, "max": 6 },
+      "rule": { "type": "allOfGroups" },
+      "groups": [
+        { "id": "wr-foundation", "rule": { "type": "allOf" }, "pool": ["ENG150"] },
+        { "id": "wr-advanced", "rule": { "type": "nOf", "n": 1 }, "pool": ["BUS301", "ENG301"] }
+      ]
+    },
+    {
+      "id": "breadth",
+      "label": "Breadth Courses",
+      "credits": { "min": 6, "max": 6 },
+      "rule": { "type": "allOfGroups" },
+      "groups": [
+        {
+          "id": "arts-humanities",
+          "label": "Arts and Humanities",
+          "rule": { "type": "nOfGroups", "n": 1 },
+          "groups": [
+            { "id": "ah-lang", "rule": { "type": "allOf" }, "pool": ["FOREIGN_LANG"], "usesPlaceholders": true },
+            { "id": "ah-course", "rule": { "type": "nOf", "n": 1 },
+              "pool": ["ART101","ART201","ART202","ART231","BYUI153","ENG151","ENG217","GECIV105",
+                       "HIST201","HUM110","HUM201","HUM202","HUM214","MUSIC101","MUSIC102",
+                       "PHIL110","TA115","TA117"] }
+          ]
+        },
+        {
+          "id": "social-science",
+          "label": "Social Science",
+          "rule": { "type": "nCredits", "n": 3 },
+          "pool": ["BYUI151","BYUI152","CHILD210","CIVIC150","ECON150","ECON151","FAML160",
+                   "GECIV100","GECIV210","GEINT212","GEINT213","GEINT215","HIST120","HIST121",
+                   "HIST202","PEACE101","POLSC110","POLSC150","POLSC170","PSYCH111","SOC111"]
+        }
+      ]
+    }
+  ]
+}
