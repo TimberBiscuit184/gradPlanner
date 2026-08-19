@@ -23,7 +23,7 @@ export function Toast() {
   return (
     <div
       role="alert"
-      className={`absolute left-1/2 top-12 z-40 max-w-md -translate-x-1/2 rounded-md border-2 bg-surface px-3 py-2 text-xs shadow-xl ${style}`}
+      className={`absolute left-1/2 top-12 z-50 max-w-md -translate-x-1/2 rounded-md border-2 bg-surface px-3 py-2 text-xs shadow-xl ${style}`}
     >
       {toast.text}
     </div>

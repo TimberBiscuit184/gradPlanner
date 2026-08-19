@@ -1,12 +1,30 @@
 /**
  * Portfolio project ideas for a medical-device R&D career direction.
  *
+ * **Written for electrical engineering specifically.** Every write-up assumes
+ * ECEN/CSE coursework — instrumentation amplifiers, embedded firmware, signal
+ * integrity — so it is shown only to students enrolled in a program listed in
+ * `PROJECTS_PROGRAM_IDS`. Offering "build a three-lead ECG front end" to a
+ * music major would be noise dressed up as advice.
+ *
  * PROVENANCE: these are **authored suggestions**, not data from BYU-Idaho or
  * any employer. Every `courses` entry is a real course id from courses.json,
  * and the write-ups are built on those courses' actual subject matter, but the
  * projects themselves are editorial. Nothing here should be presented as a
  * university requirement or as a verified path to employment. See DATA_GAPS M2.
  */
+/**
+ * Programs this project set is written for. The Projects tab hides itself for
+ * anyone else. Widening the audience means writing projects for them, not
+ * adding an id here.
+ */
+export const PROJECTS_PROGRAM_IDS: readonly string[] = ["ee-bs-2026"];
+
+/** Does this editorial content apply to the programs the student is doing? */
+export function projectsApplyTo(enrolledIds: readonly string[]): boolean {
+  return enrolledIds.some((id) => PROJECTS_PROGRAM_IDS.includes(id));
+}
+
 export interface Project {
   id: string;
   title: string;

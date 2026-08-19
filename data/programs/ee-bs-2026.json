@@ -1,15 +1,16 @@
 {
-  "id": "ee-bs-2024",
+  "id": "ee-bs-2026",
   "code": "445",
   "label": "Electrical Engineering, B.S.",
   "type": "major",
-  "catalogYear": "2024-2025",
-  "catalogCode": "UG24",
+  "catalogYear": "2026-2027",
+  "catalogCode": "UG26",
   "totalCredits": {
     "min": 109,
     "max": 120
   },
-  "_source": "Transcribed from BYU-Idaho catalog Program Course Requirements page, 2026-07-27.",
+  "_source": "BYU-Idaho catalog program EkeNMX-nsZ, 2026-2027 catalog (byui.kuali.co API). Transcribed 2026-07-27, re-verified rule-by-rule 2026-08-06 — matches exactly.",
+  "_catalogYearNote": "This file was previously labeled 2024-2025 / UG24 while containing the 2026-2027 program; the label was corrected 2026-08-06. The real 2024-2025 program differs materially: a 38-credit core with CSE 121c and the retired ECEN 101 required outright (no Introduction bucket), no PH 150 in the Math & Science core pool (20 of 20 credits, zero slack), a Professional Preparation option that draws its first elective from a restricted 6-course subset (ECEN 351/361/420/430/461/470), and a flat 120-credit total. Confirm in I-Plan which catalog year your audit actually runs on.",
   "programNotes": [
     "Grades of C- or higher required in major courses.",
     "2.0 cumulative GPA.",

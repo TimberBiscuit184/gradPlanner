@@ -1,0 +1,1024 @@
+{
+  "_fetchedOn": "2026-08-06",
+  "catalogId": "68dc4d77c3ad086d83653f48",
+  "courses": {
+    "ART101": {
+      "title": "Introduction to the Visual Arts",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "ART201": {
+      "title": "Art History I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "ART202": {
+      "title": "Art History II",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "ART231": {
+      "title": "Design Thinking: Inquiry and Innovation",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "BIO180": {
+      "title": "Introduction to Biology I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "BIO180L": {
+      "title": "Introduction to Biology I Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "BIO181": {
+      "title": "Introduction to Biology II",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • BIO180 - Introduction to Biology I (3)",
+      "courseRequirementText": "Students are required to bring a laptop or tablet with them to lab each week (access to the internet)."
+    },
+    "BIO181L": {
+      "title": "Introduction to Biology II Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • BIO181 - Introduction to Biology II (3)"
+    },
+    "BIO221": {
+      "title": "General Microbiology",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • BIO222 - General Microbiology Lab (1)"
+    },
+    "BIO222": {
+      "title": "General Microbiology Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • BIO221 - General Microbiology (3)"
+    },
+    "BIO240": {
+      "title": "Neurobiology",
+      "credits": {
+        "min": 4,
+        "max": 4
+      },
+      "courseRequirementText": "Student mastery of the subject matter will be evaluated on the basis of: seven examinations given during the course and four summary reports on articles related to neuroscience."
+    },
+    "BIO264": {
+      "title": "Human Anatomy and Physiology I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "BIO264L": {
+      "title": "Human Anatomy  and Physiology I Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "BUS301": {
+      "title": "Advanced Writing in Professional Contexts",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ENG150 - Writing and Reasoning Foundations (3)",
+      "courseRequirements": "• Complete all of the following • Earned at least this many credits: 22 • Students must be declared in one of the programs listed below to register for campus/day sections. Online sections are available to all students. • Declared in 415, 428, 429, 431, 600, 643, 652, 675, 686, 715, 720, or 752"
+    },
+    "BYUI101": {
+      "title": "Experience BYU-Idaho",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "courseRequirements": "• This course is available to DAY (campus) students only."
+    },
+    "BYUI151": {
+      "title": "Mission Impossible",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "BYUI152": {
+      "title": "Intelligent Life",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "BYUI153": {
+      "title": "The Heroic Journey",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "CHEM105": {
+      "title": "General Chemistry I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "coRequisites": "• Complete 1 of the following • Completed or concurrently enrolled in at least 1 of the following: • MATH109 - Precalculus (5) • MATH110X - College Algebra (3) • MATH112X - Calculus I (4) • MATH113 - Calculus II (3) • MATH119 - Applied Calculus for Data Analysis (4) • The math requirement can be waived with an ALEKS score of 70 or higher.",
+      "courseRequirements": "• Some sections may be reserved for Chemistry and Biochemistry students."
+    },
+    "CHEM105L": {
+      "title": "General Chemistry Laboratory I",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • CHEM105 - General Chemistry I (3)"
+    },
+    "CHEM106": {
+      "title": "General Chemistry II",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take the following course(s): • CHEM105 - General Chemistry I (3) • Take 1 of the following courses: • MATH112X - Calculus I (4) • MATH109 - Precalculus (5) • MATH113 - Calculus II (3) • MATH119 - Applied Calculus for Data Analysis (4) • MATH110X - College Algebra (3) • The math requirement can be waived with an ALEKS score of 70 or higher."
+    },
+    "CHEM106L": {
+      "title": "General Chemistry Laboratory II",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "prerequisites": "• Take the following course(s): • CHEM105L - General Chemistry Laboratory I (1)",
+      "coRequisites": "• Completed or concurrently enrolled in: • CHEM106 - General Chemistry II (3)"
+    },
+    "CHILD210": {
+      "title": "Child Development",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "CIVIC150": {
+      "title": "Principles of Citizenship and Constitutional Government",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "CSE110": {
+      "title": "Introduction to Programming",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "CSE111": {
+      "title": "Programming with Functions",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • CSE110 - Introduction to Programming (2) • -or- CS101 (last offered 2023) • -or- CIT160 (last offered 2023) • -or- successful completion of PathwayConnect • -or- LUC test score of at least 110"
+    },
+    "CSE121c": {
+      "title": "C Language",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • CSE111 - Programming with Functions (2)"
+    },
+    "CSE210": {
+      "title": "Programming with Classes",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "prerequisites": "• Take the following course(s): • CSE111 - Programming with Functions (2)"
+    },
+    "CSE212": {
+      "title": "Programming with Data Structures",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "prerequisites": "• Complete 1 of the following • Take the following course(s): • CSE210 - Programming with Classes (2) • -or- CS165 (last offered 2023) • -or- CIT260 (last offered 2023)"
+    },
+    "CSE280": {
+      "title": "Discrete Mathematics ",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete 1 of the following • Take the following course(s): • CSE210 - Programming with Classes (2) • -or- CS165 (last offered 2023) • -or- CS241 (last offered 2023)"
+    },
+    "CSE310": {
+      "title": "Applied Programming",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • CSE210 - Programming with Classes (2) • -or- CS241 (last offered 2023) • -or- CS165 (last offered 2023)"
+    },
+    "CSE450": {
+      "title": "Machine Learning",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete 1 of the following • Take the following course(s): • DS250 - Data Science Programming (2) • Take the following course(s): • CSE310 - Applied Programming (3) • MATH341 - Linear Algebra (3) • Take the following course(s): • CSE111 - Programming with Functions (2) • DS350 - Data Wrangling and Visualization (3) • Take the following course(s): • CSE212 - Programming with Data Structures (2) • MATH330 - Engineering Statistics (3)"
+    },
+    "CSE455": {
+      "title": "Developing AI Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • CSE450 - Machine Learning (3)"
+    },
+    "DS250": {
+      "title": "Data Science Programming",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "prerequisites": "• Complete 1 of the following • Take 1 of the following courses: • CSE110 - Introduction to Programming (2) • PH135 - Introduction to Scientific Computing in Physics (2) • CSE111 - Programming with Functions (2) • -or- CS101 (last offered 2023) • -or- CS165 (last offered 2023) • -or- CS241 (last offered 2023)"
+    },
+    "DS350": {
+      "title": "Data Wrangling and Visualization",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete 1 of the followingOption 1: • Take the following course(s): • MATH325 - Intermediate Statistics (3)Option 2: • Take the following course(s): • CSE111 - Programming with Functions (2) • DS250 - Data Science Programming (2)"
+    },
+    "DS460": {
+      "title": "Big Data Programming and Analytics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take the following course(s): • DS250 - Data Science Programming (2)AND • Take 1 of the following courses: • CSE450 - Machine Learning (3) • DS350 - Data Wrangling and Visualization (3) • ITM327 - Data Warehousing (3)"
+    },
+    "ECEN100": {
+      "title": "Introduction to Electrical and Computer Engineering",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "ECEN150": {
+      "title": "Electric Circuit Analysis I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take the following course(s): • MATH112X - Calculus I (4)AND • Take 1 of the following courses: • ECEN100 - Introduction to Electrical and Computer Engineering (2) • -or- ECEN101 (last offered 2025)"
+    },
+    "ECEN240": {
+      "title": "Fundamentals of Digital Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "coRequisites": "• Complete all of the following • Completed or concurrently enrolled in at least 1 of the following: • CSE121C - C Language (1) • ECEN100 - Introduction to Electrical and Computer Engineering (2) • Completed or concurrently enrolled in: • CSE111 - Programming with Functions (2)"
+    },
+    "ECEN250": {
+      "title": "Electric Circuit Analysis II",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN150 - Electric Circuit Analysis I (3)"
+    },
+    "ECEN260": {
+      "title": "Microprocessor Based-System Design",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • CSE121C - C Language (1) • ECEN100 - Introduction to Electrical and Computer Engineering (2)AND • Take the following course(s): • ECEN240 - Fundamentals of Digital Systems (3) • CSE111 - Programming with Functions (2)"
+    },
+    "ECEN299": {
+      "title": "Electronic Circuit Fabrication and Evaluation Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • ECEN250 - Electric Circuit Analysis II (3)"
+    },
+    "ECEN311": {
+      "title": "Introduction to Electrical Power and Rotating Machines",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN250 - Electric Circuit Analysis II (3)",
+      "courseRequirementText": "Students will be required to use various industry-standard SW packages installed in the lab."
+    },
+    "ECEN324": {
+      "title": "Computer Architecture",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • CSE212 - Programming with Data Structures (2) • ECEN260 - Microprocessor Based-System Design (3)"
+    },
+    "ECEN340": {
+      "title": "Digital Systems Design",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • ECEN240 - Fundamentals of Digital Systems (3) • -or- ECEN160L (last offered 2023)",
+      "courseRequirementText": "Must purchase FPGA board"
+    },
+    "ECEN350": {
+      "title": "Electronic Devices and Circuits",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN250 - Electric Circuit Analysis II (3)"
+    },
+    "ECEN351": {
+      "title": "VLSI System Design",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN350 - Electronic Devices and Circuits (3)"
+    },
+    "ECEN361": {
+      "title": "Embedded Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN260 - Microprocessor Based-System Design (3)"
+    },
+    "ECEN380": {
+      "title": "Signals and Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN250 - Electric Circuit Analysis II (3)"
+    },
+    "ECEN390": {
+      "title": "Electromagnetics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN250 - Electric Circuit Analysis II (3) • MATH316 - Differential Equations with Linear Algebra (4)"
+    },
+    "ECEN397": {
+      "title": "Professional Career Preparation",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "courseRequirements": "• Instructor authorization"
+    },
+    "ECEN398R": {
+      "title": "Internship",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "prerequisites": "• Take the following course(s): • ECEN260 - Microprocessor Based-System Design (3) • ECEN250 - Electric Circuit Analysis II (3)",
+      "courseRequirements": "• Internship application authorization"
+    },
+    "ECEN411": {
+      "title": "Power Systems Analysis",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN311 - Introduction to Electrical Power and Rotating Machines (3)"
+    },
+    "ECEN420": {
+      "title": "RF Circuits",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN350 - Electronic Devices and Circuits (3)"
+    },
+    "ECEN430": {
+      "title": "Signal and Power Integrity",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN250 - Electric Circuit Analysis II (3)"
+    },
+    "ECEN451": {
+      "title": "Semiconductor Device Engineering",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN350 - Electronic Devices and Circuits (3)"
+    },
+    "ECEN461": {
+      "title": "Advanced Embedded Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN361 - Embedded Systems (3)"
+    },
+    "ECEN470": {
+      "title": "Feedback Control of Dynamic Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • ECEN250 - Electric Circuit Analysis II (3) • ME305 - Mechatronics (3) • Take 1 of the following courses: • MATH316 - Differential Equations with Linear Algebra (4) • MATH341 - Linear Algebra (3)"
+    },
+    "ECEN480": {
+      "title": "Digital Signal Processing",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ECEN250 - Electric Circuit Analysis II (3)"
+    },
+    "ECEN490R": {
+      "title": "Special Topics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "courseRequirements": "• Instructor authorization"
+    },
+    "ECEN499": {
+      "title": "Senior Project",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take 1 of the following courses: • ECEN398R - Internship (1) • ECEN397 - Professional Career Preparation (1)",
+      "courseRequirements": "• Instructor authorization"
+    },
+    "ECON150": {
+      "title": "Economic Principles and Problems-Micro",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "courseRequirementText": "Laptop may be required at the discretion of the instructor"
+    },
+    "ECON151": {
+      "title": "Economic Principles and Problems-Macro",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "courseRequirementText": "Laptop may be required at the discretion of the instructor"
+    },
+    "ENG150": {
+      "title": "Writing and Reasoning Foundations",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete 1 of the followingOption 1 • Complete 1 of the following • ACT English score of at least 17 • SAT English score of at least 400 • SATR Writing score of at least 23 • SATR Reading/Writing score of at least 390 • TOEFL of at least 80 OR TOEFL score of at least 4.0 for 2026 and later. • IELTS of at least 6.5Option 2 • ENG 106 with a grade of C or higherOption 3 • ENG 106L with a grade of B or higherOption 4 • ENG 109 with a grade of B or higherOption 5 • The Write Class exam with a placement of ENG 150 or higherOption 6 • The Basic Writing exam with a score of 80 or higher"
+    },
+    "ENG151": {
+      "title": "Introduction to Literature",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "ENG217": {
+      "title": "Great Books of the World",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ENG150 - Writing and Reasoning Foundations (3)",
+      "courseRequirementText": "Students attend a cultural event."
+    },
+    "ENG301": {
+      "title": "Advanced Writing and Research",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ENG150 - Writing and Reasoning Foundations (3)",
+      "courseRequirements": "• Earned at least this many credits: 22"
+    },
+    "FAML160": {
+      "title": "Family Relations",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GE101": {
+      "title": "Growth and Grit ",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "courseRequirementText": "Students should bring a laptop or tablet to class for in-class writing assignments."
+    },
+    "GE102": {
+      "title": "Academic and Emotional Well-Being",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "courseRequirements": "• This course is available to campus students only."
+    },
+    "GE103": {
+      "title": "Online University Skills",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "courseRequirements": "• This course is available to online and BYU Pathway online students only.",
+      "courseRequirementText": "Requires attendance in weekly online gatherings"
+    },
+    "GE105": {
+      "title": "Study and Life Skills",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "courseRequirements": "• This course is available to campus and concurrent enrollment students only."
+    },
+    "GECIV100": {
+      "title": "American Heritage",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GECIV105": {
+      "title": "Foundations of World History",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GECIV210": {
+      "title": "Religious Freedom",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GEINT212": {
+      "title": "Latin American Focus: Chile and Cuba",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GEINT213": {
+      "title": "Introduction to the Middle East",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GEINT215": {
+      "title": "China: Past, Present, Future",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "GEOL111": {
+      "title": "Physical Geology",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "courseRequirements": "• Declared in 154, 445, 450, 465, 740, 748, 770, 845, or 384"
+    },
+    "GEOL111L": {
+      "title": "Physical Geology Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • GEOL111 - Physical Geology (3)",
+      "courseRequirementText": "Attendance on an overnight field trip is required unless instructor authorizes non-attendance. Course/Field trip Fee: $75"
+    },
+    "GEOL112": {
+      "title": "Historical Geology",
+      "credits": {
+        "min": 4,
+        "max": 4
+      },
+      "prerequisites": "• Take the following course(s): • GEOL111 - Physical Geology (3) • GEOL111L - Physical Geology Lab (1)",
+      "courseRequirementText": "Course includes a required 3-day field trip."
+    },
+    "GEOL404": {
+      "title": "Environmental Geology",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take the following course(s): • GEOL111L - Physical Geology Lab (1) • Take 1 of the following courses: • ENG301 - Advanced Writing and Research (3) • BUS301 - Advanced Writing in Professional Contexts (3)",
+      "courseRequirementText": "Field trip"
+    },
+    "GEOL435": {
+      "title": "Groundwater Hydrology",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take the following course(s): • GEOL111L - Physical Geology Lab (1) • Take 1 of the following courses: • ENG301 - Advanced Writing and Research (3) • BUS301 - Advanced Writing in Professional Contexts (3) • Take 1 of the following courses: • MATH109 - Precalculus (5) • MATH110X - College Algebra (3) • MATH112X - Calculus I (4)"
+    },
+    "GS100": {
+      "title": "Career and Self Discovery",
+      "credits": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    "GS102R": {
+      "title": "Strategies for Academic Success",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "courseRequirements": "• This course is available to campus students only."
+    },
+    "HIST120": {
+      "title": "U.S. History to 1877",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HIST121": {
+      "title": "U.S. History Since 1877",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HIST201": {
+      "title": "World History to 1500",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HIST202": {
+      "title": "Modern World History",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HUM110": {
+      "title": "Discovery and Discernment Through the Arts",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HUM201": {
+      "title": "Searching for Meaning in the Ancient World",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HUM202": {
+      "title": "Searching for Meaning in the Modern World",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "HUM214": {
+      "title": "Modern Arts and Propaganda",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "MATH109": {
+      "title": "Precalculus",
+      "credits": {
+        "min": 5,
+        "max": 5
+      },
+      "prerequisites": "• Complete 1 of the following • Take the following course(s): • MATH101 - Intermediate Algebra (4) • ACT 23 or SAT 540 (Post 2016, 570) or ALEKS 55"
+    },
+    "MATH110X": {
+      "title": "College Algebra",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete 1 of the following • MATH 101 with a grade of C- or higher. • ACT Math score with a 23 or higher • SAT Math score with 540 or higher • New SAT Math score (2016 & Later) with a 570 or higher • ALEKS preparation course score with a 53 or higher"
+    },
+    "MATH111": {
+      "title": "Trigonometry",
+      "credits": {
+        "min": 2,
+        "max": 2
+      },
+      "prerequisites": "• Complete 1 of the following • Take 1 of the following courses: • MATH101 - Intermediate Algebra (4) • MATH110X - College Algebra (3) • ACT Math score of at least 23, or an SAT Math score of at least 540 (Post 2016, 570) , or an ALEKS score of at least 53"
+    },
+    "MATH112X": {
+      "title": "Calculus I",
+      "credits": {
+        "min": 4,
+        "max": 4
+      },
+      "prerequisites": "• Complete 1 of the followingOption 1: • Take the following course(s): • MATH109 - Precalculus (5)Option 2: • Take the following course(s): • MATH110X - College Algebra (3) • MATH111 - Trigonometry (2)Option 3: • ACT 27Option 4: • SAT 620Option 5: • 2016 SAT 640Option 6: • ALEKS 85"
+    },
+    "MATH113": {
+      "title": "Calculus II",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • MATH112X - Calculus I (4)"
+    },
+    "MATH119": {
+      "title": "Applied Calculus for Data Analysis",
+      "credits": {
+        "min": 4,
+        "max": 4
+      },
+      "prerequisites": "• Complete all of the following • Complete 1 of the following • Take 1 of the following courses: • MATH109 - Precalculus (5) • MATH110X - College Algebra (3) • MATH101 - Intermediate Algebra (4) • ACT 23 or SAT 540 or 2016 SAT 570 or ALEKS 55 • Take 1 of the following courses: • CHEM105 - General Chemistry I (3) • DS250 - Data Science Programming (2) • DS350 - Data Wrangling and Visualization (3) • -or- CS124 (last offered 2023)",
+      "courseRequirementText": "Laptop required"
+    },
+    "MATH214": {
+      "title": "Multivariable and Vector Calculus",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • MATH113 - Calculus II (3)"
+    },
+    "MATH215": {
+      "title": "Multivariable Calculus",
+      "credits": {
+        "min": 4,
+        "max": 4
+      },
+      "prerequisites": "• Take the following course(s): • MATH112X - Calculus I (4)"
+    },
+    "MATH316": {
+      "title": "Differential Equations with Linear Algebra",
+      "credits": {
+        "min": 4,
+        "max": 4
+      },
+      "prerequisites": "• Take 1 of the following courses: • MATH214 - Multivariable and Vector Calculus (3) • MATH215 - Multivariable Calculus (4)"
+    },
+    "MATH330": {
+      "title": "Engineering Statistics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • MATH112X - Calculus I (4)"
+    },
+    "MATH341": {
+      "title": "Linear Algebra",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take 1 of the following courses: • MATH119 - Applied Calculus for Data Analysis (4) • MATH112X - Calculus I (4)"
+    },
+    "MATH411": {
+      "title": "Numerical Analysis I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take the following course(s): • MATH316 - Differential Equations with Linear Algebra (4) • Take 1 of the following courses: • CSE110 - Introduction to Programming (2) • -or- CS101 (last offered 2023) • -or- CS124 (last offered 2023)"
+    },
+    "MATH423": {
+      "title": "Probability and Statistics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • MATH214 - Multivariable and Vector Calculus (3) • MATH215 - Multivariable Calculus (4) • Take 1 of the following courses: • MATH221A - Business Statistics (3) • MATH221B - Biostatistics (3) • MATH221C - Social Science Statistics (3) • MATH330 - Engineering Statistics (3) • MATH221D - Introductory Statistics with R (3)"
+    },
+    "ME310": {
+      "title": "Dynamic Systems Modeling and Control",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Complete all of the following • Take 1 of the following courses: • ME305 - Mechatronics (3) • ECEN250 - Electric Circuit Analysis II (3) • Take 1 of the following courses: • MATH316 - Differential Equations with Linear Algebra (4) • MATH341 - Linear Algebra (3)"
+    },
+    "ME410": {
+      "title": "Autonomous Control of Dynamic Systems",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • ME310 - Dynamic Systems Modeling and Control (3)"
+    },
+    "MUSIC101": {
+      "title": "Music and the Humanities",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "MUSIC102": {
+      "title": "Music in Western Civilization",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "coRequisites": "• Complete all of the following • Completed or concurrently enrolled in at least 1 of the following: • MUSIC172 - Musicianship 1 (3) • MUSIC130 - Practical Musicianship (3) • Complete 1 of the following • Completed or concurrently enrolled in at least 1 of the following: • MUSIC155 - Introduction to Vocal Methods (2) • Completed or concurrently enrolled in at least 1 courses from the following: • arrow_drop_downMUSIC 160 A-Z, T • MUSIC160A - Piano Lessons - I (2) • MUSIC160B - Organ Lessons - I (2) • MUSIC160C - Harp Lessons - I (2) • MUSIC160E - Violin Lessons - I (2) • MUSIC160F - Viola Lessons - I (2) • MUSIC160G - Cello Lessons - I (2) • MUSIC160H - String Bass Lessons - I (2) • MUSIC160I - Classical Guitar Lessons - I (2) • MUSIC160J - Flute Lessons - I (1 - 2) • MUSIC160K - Oboe Lessons - I (1 - 2) • MUSIC160L - Bassoon Lessons - I (1 - 2) • MUSIC160M - Clarinet Lessons - I (1 - 2) • MUSIC160N - Saxophone Lessons - I (1 - 2) • MUSIC160O - Trumpet Lessons - I (1 - 2) • MUSIC160P - French Horn Lessons - I (1 - 2) • MUSIC160Q - Trombone Lessons - I (1 - 2) • MUSIC160R - Euphonium Lessons - I (1 - 2) • MUSIC160S - Tuba Lessons - I (1 - 2) • MUSIC160T - Percussion Lessons - I (1 - 2) • MUSIC160Z - Jazz Piano Lessons - I (2)",
+      "courseRequirements": "• Declared in 203, 687, 690, 693, 795, or 890"
+    },
+    "PEACE101": {
+      "title": "Conflict and Peace",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "PH121": {
+      "title": "Principles of Physics I",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • MATH112X - Calculus I (4)"
+    },
+    "PH123": {
+      "title": "Principles of Physics II",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • PH121 - Principles of Physics I (3)",
+      "coRequisites": "• Completed or concurrently enrolled in: • MATH112X - Calculus I (4)"
+    },
+    "PH135": {
+      "title": "Introduction to Scientific Computing in Physics",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "PH150": {
+      "title": "Beginning Physics Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "coRequisites": "• Completed or concurrently enrolled in: • PH121 - Principles of Physics I (3)"
+    },
+    "PH220": {
+      "title": "Principles of Physics III",
+      "credits": {
+        "min": 3,
+        "max": 3
+      },
+      "prerequisites": "• Take the following course(s): • PH121 - Principles of Physics I (3)",
+      "coRequisites": "• Completed or concurrently enrolled in at least 1 of the following: • MATH113 - Calculus II (3) • MATH215 - Multivariable Calculus (4)"
+    },
+    "PH250": {
+      "title": "Intermediate Physics Lab",
+      "credits": {
+        "min": 1,
+        "max": 1
+      },
+      "prerequisites": "• Take the following course(s): • PH150 - Beginning Physics Lab (1)",
+      "coRequisites": "• Completed or concurrently enrolled in at least 1 of the following: • PH220 - Principles of Physics III (3) • PH223 - Engineering Physics (4)"
+    },
+    "PHIL110": {
+      "title": "The Search for Wisdom",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "POLSC110": {
+      "title": "American Government",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "POLSC150": {
+      "title": "Introduction to Comparative Politics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "POLSC170": {
+      "title": "International Politics",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "PSYCH111": {
+      "title": "General Psychology",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "REL200C": {
+      "title": "The Eternal Family",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "REL225C": {
+      "title": "Foundations of the Restoration",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "REL250C": {
+      "title": "Jesus Christ and His Everlasting Gospel",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "REL275C": {
+      "title": "The Teachings and Doctrine  of the Book of Mormon",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "REL327": {
+      "title": "Pearl of Great Price",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "REL333": {
+      "title": "Teachings of the Living Prophets",
+      "credits": {
+        "min": 2,
+        "max": 2
+      }
+    },
+    "SOC111": {
+      "title": "Introduction to Sociology",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "TA115": {
+      "title": "Introduction to Theatre",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    },
+    "TA117": {
+      "title": "Introduction to Film Art and Analysis",
+      "credits": {
+        "min": 3,
+        "max": 3
+      }
+    }
+  }
+}

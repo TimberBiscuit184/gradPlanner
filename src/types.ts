@@ -8,6 +8,37 @@ export type PrereqNode =
   | { or: PrereqNode[] }
   | null;
 
+/**
+ * How much a prerequisite expression can be relied on. Defined here rather than
+ * beside the enforcement rules so `types.ts` stays the shared vocabulary and
+ * does not import from `engine/` — see `src/engine/trust.ts` for what each
+ * grade *means* for enforcement.
+ */
+export type PrereqTrust = "human" | "exact" | "parsed" | "unsure" | "none";
+
+/**
+ * An enrollment gate the catalogue states outside its requisite rules. Defined
+ * here for the same reason as `PrereqTrust`: `types.ts` is the shared
+ * vocabulary and must not import from `engine/`. See `engine/restrictions.ts`
+ * for how each kind is checked.
+ */
+export type Restriction =
+  | {
+      kind: "declaredIn";
+      programCodes: string[];
+      /**
+       * Set when the restriction only governs *some* sections — BUS 301 limits
+       * its campus sections by program while its online sections are open to
+       * everyone. Without this the gate reads as an absolute exclusion.
+       */
+      appliesTo?: "campus";
+      text: string;
+    }
+  | { kind: "minCredits"; credits: number; text: string }
+  | { kind: "approval"; of: "instructor" | "application"; text: string }
+  | { kind: "delivery"; mode: "campus" | "online" | "concurrent"; text: string }
+  | { kind: "note"; text: string };
+
 export interface Course {
   id: string;
   code: string;
@@ -15,17 +46,57 @@ export interface Course {
   credits: number;
   dept: string;
   prereq: PrereqNode;
-  coreq: string[];
+  /**
+   * Same boolean-expression shape as `prereq`. The catalog states several
+   * corequisites as "completed or concurrently enrolled in at least 1 of …",
+   * so a flat string[] cannot represent them.
+   */
+  coreq: PrereqNode;
   terms: Season[];
   blocks: string[] | null;
   online: boolean;
   tags: string[];
+  /**
+   * true = compared against the live catalog on `prereqCheckedOn` and matches.
+   * Kept for the 136 hand-audited courses; `prereqTrust` supersedes it for
+   * anything generated. See `src/engine/trust.ts`.
+   */
   verified: boolean;
+  /**
+   * How much the prerequisite expression can be relied on. Absent means "derive
+   * it from `verified`" — legacy fixture data was all human-checked. Only
+   * `human` and `exact` are *enforced*; everything else warns, because refusing
+   * a legal registration is worse than allowing an illegal one.
+   */
+  prereqTrust?: PrereqTrust;
+  /** Catalogue codes or conditions the parser could not model, kept verbatim. */
+  prereqDropped?: string[];
   termsConfirmed: boolean;
   blocksConfirmed: boolean;
   notes?: string;
   skills?: string[];
   prereqSource?: string;
+  /** ISO date of the last catalog comparison. */
+  prereqCheckedOn?: string;
+  /** Where `terms`/`blocks`/`online` came from, and when. */
+  scheduleSource?: string;
+  scheduleCheckedOn?: string;
+  /** Sections seen per season in the scraped year — a proxy for how easy it is to get in. */
+  sectionCounts?: Partial<Record<Season, number>>;
+  /**
+   * `online` is the union of two sources that disagree on 9 courses. These
+   * record which one backs it: an Online-delivery section actually seen in the
+   * scraped schedule, and/or BYU-Idaho's curated online course list.
+   */
+  onlineConfirmedBySchedule?: boolean;
+  onlineListed?: boolean;
+  /** Enrollment gates the catalog states outside the requisite rules. */
+  /** Legacy free prose. Parsed into `Restriction`s on read when the structured
+   * form is absent — see `restrictionsOf`. */
+  restrictions?: string[];
+  /** Structured enrollment gates. Authoritative when present. */
+  restrictionRules?: Restriction[];
+  repeatable?: { maxCredits?: number; maxAttempts?: number };
   isPlaceholder?: boolean;
 }
 
@@ -60,17 +131,48 @@ export interface Bucket {
   sharedPoolId?: string;
   usesPlaceholders?: boolean;
   note?: string;
+  /**
+   * Every course in this bucket must be taken in the SAME term.
+   *
+   * "The following courses must be taken together in the same semester" —
+   * Business Management's IBC block (BUS 300 + BUS 302 + MKT 301) and the
+   * Small Business minor. Requiring all three was never the hard part; the app
+   * happily let a student spread them across three semesters, which is a plan
+   * that looks complete and cannot be registered.
+   */
+  sameTerm?: boolean;
 }
 
 export interface Program {
   id: string;
   code: string;
   label: string;
-  type: "major" | "minor" | "general-education";
+  /**
+   * `cluster` is a small BYU-Idaho credential (~12 cr) that some degrees are
+   * assembled from — Interdisciplinary Studies is built entirely out of them.
+   * Carried so those references resolve, but kept out of the picker: 110
+   * clusters would bury the 205 majors and minors people actually choose.
+   *
+   * `certificate` is carried for the same reason: 13 degrees reference one,
+   * and without them those references dangle and the program cannot assert.
+   * Both are excluded from the picker by type, which is a one-line change to
+   * reverse if students should be able to declare them directly.
+   */
+  type: "major" | "minor" | "general-education" | "cluster" | "certificate";
   catalogYear: string;
   totalCredits: { min: number; max: number };
   buckets: Bucket[];
   minGrade: string | null;
+  /**
+   * How this program's requirements were obtained. Absent means a human wrote
+   * the file — see `engine/trust.ts`. Present means a parser read it out of the
+   * catalogue, and how completely.
+   */
+  parseConfidence?: "exact" | "parsed" | "unsure";
+  /** Requirement clauses the parser could not model, verbatim. */
+  parseDropped?: string[];
+  /** Courses the catalogue named for this program that we do not carry. */
+  parseUnknownCourses?: string[];
   programNotes?: string[];
   doubleCountsWith?: Record<string, string[] | string>;
   marginalCredits?: { estimate: number };
@@ -102,19 +204,48 @@ export interface StudentTerm {
   status: "complete" | "in-progress" | "registered";
   attemptedCredits?: number;
   earnedCredits?: number;
+  termGpa?: number;
   gradesPostedOn?: string;
   courses: TranscriptEntry[];
+}
+
+/** Figures read straight off the official transcript, used to check our math. */
+export interface TranscriptSummary {
+  advisor?: string;
+  classification?: string;
+  degree?: string;
+  academicStatus?: string;
+  cumulative: {
+    attemptedCredits: number;
+    earnedCredits: number;
+    gpaCredits: number;
+    qualityPoints: number;
+    gpa: number;
+  };
+  testScores?: Record<string, unknown>;
+}
+
+export interface Declaration {
+  code: string;
+  label: string;
+  catalogYear: string;
 }
 
 export interface Student {
   student: string;
   catalog: string;
-  major: { code: string; label: string; catalogYear: string };
-  minor: { code: string; label: string; catalogYear: string };
+  /**
+   * Declarations are optional: the shipped record is blank so a new user picks
+   * their own programs on first run. Everything that reads these must cope
+   * with their absence rather than assuming a major exists.
+   */
+  major?: Declaration | null;
+  minor?: Declaration | null;
   terms: StudentTerm[];
   track: { pattern: string };
-  iplanTotals: Record<string, number>;
-  generalEducation: { code: string; label: string; catalogYear: string };
+  iplanTotals?: Record<string, number>;
+  generalEducation?: Declaration | null;
+  _transcript?: TranscriptSummary;
 }
 
 // ---- Derived / engine types ----

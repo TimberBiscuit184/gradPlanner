@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { COURSE_BY_ID } from "../data";
-import { PROJECTS, type Project } from "../data/projects";
+import { PROJECTS, projectsApplyTo, type Project } from "../data/projects";
 import { useModel } from "../model";
 import { usePlan } from "../store";
+import { useProfile } from "../profileStore";
 
 const DONE = new Set(["completed", "in-progress"]);
 const ON_PLAN = new Set(["completed", "in-progress", "registered", "planned"]);
@@ -33,11 +34,13 @@ const READINESS_STYLE: Record<Readiness, { label: string; cls: string }> = {
 
 export function Projects() {
   const { model } = useModel();
+  const enrolledIds = useProfile((s) => s.enrolledIds);
   const select = usePlan((s) => s.select);
   const setMode = usePlan((s) => s.setMode);
   const setFocusCourse = usePlan((s) => s.setFocusCourse);
   const [filter, setFilter] = useState<"all" | Readiness>("all");
   const [open, setOpen] = useState<string | null>(null);
+  const applies = projectsApplyTo(enrolledIds);
 
   const scored: Scored[] = useMemo(() => {
     return PROJECTS.map((project) => {
@@ -96,6 +99,27 @@ export function Projects() {
     setMode("tree");
     setFocusCourse(id);
   };
+
+  // The tab is hidden for other majors, but `mode` is persisted state and can
+  // arrive from an older profile — so refuse here too rather than offering
+  // electrical-engineering advice to someone who is not doing it.
+  if (!applies) {
+    return (
+      <div className="flex h-full items-center justify-center p-8">
+        <div className="max-w-md rounded-lg border border-line bg-surface px-4 py-3 text-center">
+          <div className="text-sm font-semibold">
+            Written for Electrical Engineering
+          </div>
+          <p className="mt-1 text-xs text-ink-dim">
+            These portfolio projects assume ECEN and CSE coursework — analog
+            front ends, embedded firmware, signal integrity. They are shown to
+            students enrolled in that major. Everything else in Sprout works
+            for any program.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full overflow-y-auto px-4 py-3">

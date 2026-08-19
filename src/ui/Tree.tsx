@@ -3,6 +3,7 @@ import {
   applyNodeChanges,
   Background,
   Handle,
+  PanOnScrollMode,
   Position,
   ReactFlow,
   type Edge,
@@ -12,25 +13,46 @@ import {
   type Viewport,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { COURSES, COURSE_BY_ID } from "../data";
-import { EMPHASES } from "../data/emphases";
-import { CLUSTERS, clusterOf } from "../engine/clusters";
+import { relevantCourseIds } from "../engine/scope";
+import { clusters, clusterOf } from "../engine/clusters";
 import { geGroupOf, geGroups } from "../engine/geGroups";
 import {
   isAtRisk,
   prereqDepth,
+  dependencyIds,
   prereqLeaves,
   programsContaining,
   transitiveAncestorsOf,
   transitiveDescendantsOf,
 } from "../engine/plan";
 import { requiredCourseIds } from "../engine/requirements";
+import { layoutColumns } from "../engine/treeLayout";
 import { useModel } from "../model";
+import { useProfile } from "../profileStore";
 import { usePlan } from "../store";
+import { useFocusSet } from "./useFocusSet";
+import type { PrereqNode } from "../types";
 
 const NODE_W = 168;
 const NODE_H = 56;
+const MIN_ZOOM = 0.08;
+const MAX_ZOOM = 2.5;
+/**
+ * Wheel-zoom rate, per pixel of scroll. React Flow's d3-zoom default works out
+ * to about 1.15× per 100px notch, which takes a dozen scrolls to cross this
+ * graph. At 0.004 a notch is ~1.49×. Turn it up if that still feels slow —
+ * this is the only knob.
+ */
+const ZOOM_SENSITIVITY = 0.004;
 const LABEL_W = 760;
 const LABEL_H = 52;
 
@@ -43,24 +65,6 @@ type LabelNodeData = {
   count?: number;
 };
 
-/** Emphasis highlight set: the emphasis's courses plus their prereq ancestors. */
-function emphasisSet(emphasisId: string | null): Set<string> | null {
-  if (!emphasisId) return null;
-  const e = EMPHASES.find((x) => x.id === emphasisId);
-  if (!e) return null;
-  const out = new Set<string>();
-  const addWithAncestors = (id: string) => {
-    if (out.has(id)) return;
-    out.add(id);
-    const c = COURSE_BY_ID.get(id);
-    if (!c) return;
-    for (const p of prereqLeaves(c.prereq)) addWithAncestors(p);
-    for (const q of c.coreq) addWithAncestors(q);
-  };
-  [...e.supplemental, ...e.core].forEach(addWithAncestors);
-  return out;
-}
-
 function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
   const { courseId } = data;
   const { model, bottlenecks, obsolete } = useModel();
@@ -71,14 +75,23 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
   const downstreamRoot = usePlan((s) => s.downstreamRoot);
   const whatBreaks = usePlan((s) => s.whatBreaks);
   const lensPool = usePlan((s) => s.lensPool);
-  const emphasis = usePlan((s) => s.emphasis);
   const picking = usePlan((s) => s.picking);
   const wished = usePlan((s) => s.wishlist.includes(courseId));
   const toggleWish = usePlan((s) => s.toggleWish);
+  const selected = usePlan((s) => s.selectedCourse);
+
+  /**
+   * Two-step drag: a course is only draggable once it is the selected node.
+   * With listeners on every node, any pointer-down started a drag, so panning
+   * the canvas kept picking courses up. Unselected nodes now let the pointer
+   * event through to React Flow, which pans as expected.
+   */
+  const armed = selected === courseId && !picking;
 
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `node-${courseId}`,
     data: { kind: "course", courseId },
+    disabled: !armed,
   });
 
   // Selecting a node lights up both directions: what it needs first (upstream)
@@ -93,7 +106,7 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
     return "none" as const;
   }, [downstreamRoot, courseId]);
 
-  const emphSet = useMemo(() => emphasisSet(emphasis), [emphasis]);
+  const emphSet = useFocusSet();
 
   const isObsolete = obsolete.has(courseId);
   const inHighlight = relation === null || relation !== "none";
@@ -116,7 +129,7 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
   // hue so it reads apart from the dulled-out rest.
   let statusClass =
     d.status === "locked"
-      ? "opacity-40 border-line bg-surface"
+      ? "dim-obsolete border-line bg-surface"
       : d.status === "available"
         ? "node-available border-available/70 bg-surface"
         : d.status === "completed"
@@ -133,7 +146,7 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
       "border-planned/60 bg-planned/10 opacity-95 shadow-[0_0_10px_rgba(79,140,255,0.15)]";
   }
   if (isObsolete) {
-    statusClass = "border-line/60 bg-surface opacity-25 border-dotted";
+    statusClass = "border-line/60 bg-surface dim-locked border-dotted";
   }
 
   // "What breaks if I drop this?" recolors only the downstream side — the
@@ -157,12 +170,14 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
   return (
     <div
       ref={setNodeRef}
-      {...listeners}
+      {...(armed ? listeners : {})}
       {...attributes}
       role="button"
       tabIndex={0}
       onPointerDown={(e) => {
-        // keep React Flow from panning the canvas with the drag
+        // Only an armed (selected) node swallows the pointer event. Otherwise
+        // it falls through to React Flow so the drag pans the canvas.
+        if (!armed) return;
         e.stopPropagation();
         (listeners?.onPointerDown as ((ev: unknown) => void) | undefined)?.(e);
       }}
@@ -176,7 +191,10 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
         setDownstream(courseId);
       }}
       onKeyDown={(e) => {
-        (listeners?.onKeyDown as ((ev: unknown) => void) | undefined)?.(e);
+        // Space lifts the card, but only once Enter has selected it — same
+        // two-step rule as the pointer, so arrow-key panning stays free.
+        if (armed)
+          (listeners?.onKeyDown as ((ev: unknown) => void) | undefined)?.(e);
         if (e.key === "Enter" && !e.defaultPrevented) {
           if (picking) toggleWish(courseId);
           else {
@@ -185,16 +203,20 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
           }
         }
       }}
-      className={`focus-ring nodrag nopan flex flex-col justify-center rounded-lg border-2 px-2.5 transition-opacity duration-200 ${statusClass} ${
+      className={`focus-ring nodrag ${
+        armed ? "nopan" : ""
+      } relative flex flex-col justify-center rounded-lg border-2 px-2.5 transition-opacity duration-200 ${statusClass} ${
         atRisk && !whatBreaks && relation === null
-          ? `!border-warn ${!course.verified ? "border-dashed" : ""}`
+          ? // node-at-risk kills the amber available pulse, so an at-risk
+            // available node reads red rather than amber-on-amber.
+            `node-at-risk !border-risk ${!course.verified ? "border-dashed" : ""}`
           : ""
       } ${relationTint} ${warnTint} ${
         wished ? "!border-planned ring-2 ring-planned" : ""
       } ${
-        !isObsolete && (!inHighlight || !inLens || !inEmph) ? "!opacity-[0.15]" : ""
+        !isObsolete && (!inHighlight || !inLens || !inEmph) ? "dim-muted" : ""
       } ${isDragging ? "opacity-40" : ""} ${
-        picking ? "cursor-pointer" : "cursor-grab active:cursor-grabbing"
+        armed ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"
       }`}
       style={{ width: NODE_W, height: NODE_H, touchAction: "none" }}
       title={`${course.title}${
@@ -203,9 +225,22 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
           : ""
       }${required ? "\n★ Required — no alternative satisfies this requirement." : ""}${
         bottleneck ? `\n⧗ Bottleneck: ${bottleneck.reasons.join("; ")}` : ""
-      }\n${d.flags.map((f) => f.text).join("\n")}`}
+      }\n${d.flags.map((f) => f.text).join("\n")}${
+        armed
+          ? "\nDrag to a semester to plan it."
+          : "\nClick to see its connections; click again to drag it."
+      }`}
     >
       <Handle type="target" position={Position.Left} className="!bg-line !border-0" />
+      {/* The card is only draggable once selected — say so, or nobody finds it. */}
+      {armed && !isDragging && (
+        <span
+          className="pointer-events-none absolute -top-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-ink px-1 text-[9px] font-medium leading-[13px] text-bg"
+          aria-hidden
+        >
+          drag to a term
+        </span>
+      )}
       <div className="flex items-center gap-1.5">
         {picking && (
           <span
@@ -222,7 +257,7 @@ function TreeNode({ data }: NodeProps<Node<TreeNodeData>>) {
         )}
         <span className="font-mono text-[13px] font-bold">{course.code}</span>
         {d.status === "completed" && <span className="text-completed text-xs">✓</span>}
-        {atRisk && <span className="text-warn text-xs">⚠</span>}
+        {atRisk && <span className="text-risk text-xs">⚠</span>}
         {bottleneck && (
           <span className="text-[11px] text-warn" aria-label="bottleneck" title={bottleneck.reasons.join("; ")}>
             ⧗
@@ -295,19 +330,77 @@ function LabelNode({ data }: NodeProps<Node<LabelNodeData>>) {
 
 const nodeTypes = { course: TreeNode, label: LabelNode };
 
+/* Theme tokens, not literals — these strokes have to follow light/dark like
+   everything else. SVG accepts var() for stroke and fill. */
+const PREREQ_STROKE = "var(--color-edge)";
+const COREQ_STROKE = "var(--color-edge-coreq)";
+
+type EdgeKind = "required" | "alternative" | "coreq";
+
+/**
+ * Leaves reachable without passing through an OR — the prerequisites a course
+ * genuinely cannot avoid. Everything else is one route among several.
+ */
+function requiredLeaves(node: PrereqNode, out: Set<string> = new Set()): Set<string> {
+  if (node == null) return out;
+  if (typeof node === "string") {
+    out.add(node);
+    return out;
+  }
+  if ("and" in node) node.and.forEach((k) => requiredLeaves(k, out));
+  return out; // an OR branch is optional by definition
+}
+
+/**
+ * Not every edge deserves the same ink. Half the prerequisite edges are OR
+ * alternatives the student will never use, and half cross between clusters,
+ * where the two ends can sit 2,600px apart — drawn at equal weight they bury
+ * the chain you actually care about. Alternatives go dashed, long-distance
+ * edges go faint, and selecting a node restores everything in its neighbourhood
+ * to full strength.
+ */
+function edgeStyle(kind: EdgeKind, cross: boolean): CSSProperties {
+  const base =
+    kind === "coreq"
+      ? { stroke: COREQ_STROKE, strokeWidth: 1.2, strokeDasharray: "2 3" }
+      : kind === "alternative"
+        ? { stroke: PREREQ_STROKE, strokeWidth: 1.2, strokeDasharray: "5 5" }
+        : { stroke: PREREQ_STROKE, strokeWidth: 1.5 };
+  const opacity = cross
+    ? kind === "required"
+      ? 0.22
+      : 0.1
+    : kind === "alternative"
+      ? 0.45
+      : 1;
+  return { ...base, opacity };
+}
+
 /**
  * Layout: the connected prerequisite graph (dagre), then a "Major electives"
  * grid, then one collapsible grid per GE group (they need little planning, so
  * they start collapsed).
  */
-function layoutGraph(collapsed: string[]): { nodes: Node[]; edges: Edge[] } {
-  const real = COURSES.filter((c) => !c.isPlaceholder);
+function layoutGraph(
+  collapsed: string[],
+  placedIds: ReadonlySet<string>,
+): { nodes: Node[]; edges: Edge[] } {
+  // The tree draws the planning scope, not the catalogue. Rendering all 2,031
+  // harvested courses is both unreadable and beside the point — the graph
+  // exists to show *your* prerequisite chains. Search and the picker still
+  // reach every course.
+  const scope = relevantCourseIds();
+  const real = COURSES.filter(
+    (c) =>
+      !c.isPlaceholder &&
+      // Scope, plus anything actually placed — planning a catalogue course from
+      // the picker must put it on the graph, not leave it invisible.
+      (scope.has(c.id) || placedIds.has(c.id)),
+  );
 
   const connected = new Set<string>();
   for (const c of real) {
-    const deps = [...new Set([...prereqLeaves(c.prereq), ...c.coreq])].filter(
-      (p) => COURSE_BY_ID.has(p),
-    );
+    const deps = dependencyIds(c).filter((p) => COURSE_BY_ID.has(p));
     if (deps.length) connected.add(c.id);
     deps.forEach((p) => connected.add(p));
   }
@@ -319,27 +412,34 @@ function layoutGraph(collapsed: string[]): { nodes: Node[]; edges: Edge[] } {
   );
   const geStandalone = standalone.filter((c) => !majorStandalone.includes(c));
 
-  // All dependency edges, drawn regardless of which cluster each end sits in.
+  // All dependency edges, drawn regardless of which cluster each end sits in,
+  // but weighted by how much each one matters (see edgeStyle).
   const edges: Edge[] = [];
   for (const c of graphCourses) {
+    const must = requiredLeaves(c.prereq);
     for (const p of new Set(prereqLeaves(c.prereq))) {
       if (!COURSE_BY_ID.has(p)) continue;
+      const kind: EdgeKind = must.has(p) ? "required" : "alternative";
+      const cross = clusterOf(p) !== clusterOf(c.id);
       edges.push({
         id: `${p}->${c.id}`,
         source: p,
         target: c.id,
+        data: { kind, cross },
         style: c.verified
-          ? { stroke: "#3f4552", strokeWidth: 1.5 }
-          : { stroke: "#8a6d1f", strokeWidth: 1.5, strokeDasharray: "6 4" },
+          ? edgeStyle(kind, cross)
+          : { stroke: "var(--color-edge-unverified)", strokeWidth: 1.5, strokeDasharray: "6 4" },
       });
     }
-    for (const q of c.coreq) {
+    for (const q of new Set(prereqLeaves(c.coreq))) {
       if (!COURSE_BY_ID.has(q)) continue;
+      const cross = clusterOf(q) !== clusterOf(c.id);
       edges.push({
         id: `${q}=>${c.id}`,
         source: q,
         target: c.id,
-        style: { stroke: "#1f6a63", strokeWidth: 1.2, strokeDasharray: "2 3" },
+        data: { kind: "coreq" as EdgeKind, cross },
+        style: edgeStyle("coreq", cross),
       });
     }
   }
@@ -375,7 +475,7 @@ function layoutGraph(collapsed: string[]): { nodes: Node[]; edges: Edge[] } {
   // Each cluster gets its own dagre run over only its internal edges, so
   // related chains stay tight instead of being interleaved with everything else.
   let y = 0;
-  for (const cluster of CLUSTERS) {
+  for (const cluster of clusters()) {
     const members = graphCourses.filter((c) => clusterOf(c.id) === cluster.id);
     if (!members.length) continue;
     const isCollapsed = collapsed.includes(cluster.id);
@@ -393,58 +493,54 @@ function layoutGraph(collapsed: string[]): { nodes: Node[]; edges: Edge[] } {
     }
 
     /**
-     * Columns come from the *global* prerequisite depth, so a course sitting
-     * four prerequisites deep is drawn four columns right even when its
-     * prerequisites live in another cluster. Dagre ranks only within its own
-     * subgraph, which made advanced electives like ECEN 351 look like
-     * entry-level courses.
+     * Columns and rows both come from `layoutColumns`.
+     *
+     * Columns used to be the *global* `prereqDepth`, ordered by a single
+     * forward barycentre pass. Measuring that (`npm run tree:stats`) found 107
+     * prerequisite edges across the degrees checked drawn level with — or
+     * right of — the course that needed them. A backwards arrow is worse than
+     * a crossing: a crossing is noise, but an arrow pointing the wrong way
+     * says something untrue about which course comes first.
+     *
+     * Corequisites were also drawn as two arrows between courses that nothing
+     * kept adjacent, which is most of what made Nursing's lecture/clinical
+     * block a hairball. They now share a row key and land side by side.
      */
-    const byDepth = new Map<number, typeof members>();
-    for (const c of members) {
-      const d = prereqDepth(c.id);
-      if (!byDepth.has(d)) byDepth.set(d, []);
-      byDepth.get(d)!.push(c);
-    }
+    const inScope = (id: string) => COURSE_BY_ID.has(id);
+    const placement = layoutColumns(
+      members.map((c) => c.id),
+      {
+        parentsOf: (id) => {
+          const c = COURSE_BY_ID.get(id);
+          return c ? [...new Set(prereqLeaves(c.prereq))].filter(inScope) : [];
+        },
+        peersOf: (id) => {
+          const c = COURSE_BY_ID.get(id);
+          return c ? [...new Set(prereqLeaves(c.coreq))].filter(inScope) : [];
+        },
+      },
+      { depthOf: prereqDepth },
+    );
 
     const top = y + 52;
     const rowGap = NODE_H + 16;
-    const placed = new Map<string, number>(); // courseId -> row index
     let rows = 0;
 
-    for (const depth of [...byDepth.keys()].sort((a, b) => a - b)) {
-      const column = byDepth.get(depth)!;
-      // Order each column near its prerequisites (barycenter of already-placed
-      // parents) so the connecting lines stay short and mostly untangled.
-      const scored = column.map((c) => {
-        const parents = [...new Set([...prereqLeaves(c.prereq), ...c.coreq])]
-          .map((p) => placed.get(p))
-          .filter((v): v is number => v !== undefined);
-        return {
-          c,
-          key: parents.length
-            ? parents.reduce((s, v) => s + v, 0) / parents.length
-            : Number.POSITIVE_INFINITY,
-        };
+    for (const c of members) {
+      const at = placement.get(c.id) ?? { col: 0, row: 0 };
+      nodes.push({
+        id: c.id,
+        type: "course",
+        position: {
+          x: 20 + at.col * (NODE_W + 90),
+          y: top + at.row * rowGap,
+        },
+        data: { courseId: c.id },
+        draggable: false,
+        width: NODE_W,
+        height: NODE_H,
       });
-      scored.sort(
-        (a, b) => a.key - b.key || a.c.id.localeCompare(b.c.id),
-      );
-      scored.forEach(({ c }, i) => {
-        placed.set(c.id, i);
-        nodes.push({
-          id: c.id,
-          type: "course",
-          position: {
-            x: 20 + depth * (NODE_W + 90),
-            y: top + i * rowGap,
-          },
-          data: { courseId: c.id },
-          draggable: false,
-          width: NODE_W,
-          height: NODE_H,
-        });
-      });
-      rows = Math.max(rows, column.length);
+      rows = Math.max(rows, at.row + 1);
     }
     y = top + rows * rowGap + 48;
   }
@@ -539,12 +635,35 @@ const LEGEND: { cls: string; label: string }[] = [
   { cls: "bg-planned", label: "planned" },
   { cls: "bg-available", label: "available" },
   { cls: "bg-ink-faint", label: "locked" },
-  { cls: "bg-warn", label: "at-risk" },
+  { cls: "bg-risk", label: "at-risk" },
 ];
 
 export function Tree() {
   const collapsed = usePlan((s) => s.collapsedGroups);
-  const { nodes, edges } = useMemo(() => layoutGraph(collapsed), [collapsed]);
+  const placements = usePlan((s) => s.placements);
+  const placedIds = useMemo(
+    () => new Set(placements.map((p) => p.courseId)),
+    [placements],
+  );
+  /**
+   * Rebuild when the enrolment changes.
+   *
+   * `layoutGraph` reads the scope from `relevantCourseIds()`, which is module
+   * state set from the enrolment — but this memo only listed `collapsed` and
+   * `placedIds`, so picking a major never re-ran it. A new student opened the
+   * tree with the pre-enrolment scope (three placeholders, i.e. empty), chose
+   * their degree, and saw nothing happen; the graph then appeared to *grow* a
+   * branch at a time, because planning a course changed `placedIds` and that
+   * was the only thing that could refresh it.
+   *
+   * The tree is the planning tool. It has to show the whole degree the moment
+   * the degree is known.
+   */
+  const enrolledIds = useProfile((s) => s.enrolledIds);
+  const { nodes, edges } = useMemo(
+    () => layoutGraph(collapsed, placedIds),
+    [collapsed, placedIds, enrolledIds],
+  );
   const setDownstream = usePlan((s) => s.setDownstream);
   const downstreamRoot = usePlan((s) => s.downstreamRoot);
   const focusCourse = usePlan((s) => s.focusCourse);
@@ -571,6 +690,48 @@ export function Tree() {
     [],
   );
 
+  /**
+   * Our own ctrl/⌘ + wheel zoom. React Flow exposes no zoom-speed prop and its
+   * d3-zoom default works out to roughly 1.15× per wheel notch, which takes a
+   * dozen scrolls to cross this graph's range. The viewport is already
+   * controlled here, so we do the math ourselves and zoom about the cursor.
+   *
+   * Registered natively with `passive: false` because React's synthetic wheel
+   * listener is passive — preventDefault would be ignored — and in the capture
+   * phase so it beats React Flow's own handler on the inner pane.
+   */
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (!(e.ctrlKey || e.metaKey)) return; // a plain wheel still pans
+      e.preventDefault();
+      e.stopPropagation();
+      const box = el.getBoundingClientRect();
+      const cx = e.clientX - box.left;
+      const cy = e.clientY - box.top;
+      // Normalize line/page wheels to pixels so a mouse and a trackpad agree.
+      const dy =
+        e.deltaMode === 1
+          ? e.deltaY * 16
+          : e.deltaMode === 2
+            ? e.deltaY * box.height
+            : e.deltaY;
+      setViewport((v) => {
+        const next = Math.min(
+          MAX_ZOOM,
+          Math.max(MIN_ZOOM, v.zoom * Math.exp(-dy * ZOOM_SENSITIVITY)),
+        );
+        const k = next / v.zoom;
+        // Keep whatever is under the pointer pinned in place.
+        return { zoom: next, x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k };
+      });
+    };
+    el.addEventListener("wheel", onWheel, { passive: false, capture: true });
+    return () =>
+      el.removeEventListener("wheel", onWheel, { capture: true });
+  }, []);
+
   const centerOn = (x: number, y: number, zoom: number) => {
     const box = wrapRef.current?.getBoundingClientRect();
     if (!box) return;
@@ -581,7 +742,18 @@ export function Tree() {
     });
   };
 
-  // Initial view: frame the prerequisite graph (the part worth looking at).
+  /**
+   * Frame the prerequisite graph — again, when the enrolment changes.
+   *
+   * A one-shot fit was right when the tree could only be built once. Now that
+   * choosing a degree rebuilds it, the first fit may have framed an empty
+   * canvas; without re-framing, the student's new tree is laid out somewhere
+   * off-screen and the panel still looks blank.
+   */
+  useEffect(() => {
+    didFit.current = false;
+  }, [enrolledIds]);
+
   useEffect(() => {
     if (didFit.current || !nodes.length) return;
     didFit.current = true;
@@ -618,7 +790,7 @@ export function Tree() {
         // amber forward to what it unlocks, violet back to what it needs
         style: {
           ...e.style,
-          stroke: isDown ? "#fbbf24" : "#a78bfa",
+          stroke: isDown ? "var(--color-available)" : "var(--color-registered)",
           strokeWidth: 2,
           opacity: 1,
         },
@@ -629,6 +801,22 @@ export function Tree() {
 
   return (
     <div ref={wrapRef} className="relative h-full bg-bg-deep">
+      {/* The graph draws the enrolled programs' courses. With none picked there
+          is nothing to draw, and a blank canvas reads as a broken app rather
+          than an empty one. */}
+      {nodes.length === 0 && (
+        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center p-8">
+          <div className="max-w-md rounded-lg border border-planned/50 bg-surface/95 px-4 py-3 text-center">
+            <div className="text-sm font-semibold">No programs picked yet</div>
+            <p className="mt-1 text-xs text-ink-dim">
+              The tree shows the prerequisite chains for your major and minor.
+              Choose them under{" "}
+              <span className="font-mono text-ink">⋯ → Programs</span> and they
+              will appear here.
+            </p>
+          </div>
+        </div>
+      )}
       <ReactFlow
         nodes={rfNodes}
         onNodesChange={onNodesChange}
@@ -636,15 +824,22 @@ export function Tree() {
         nodeTypes={nodeTypes}
         nodesDraggable={false}
         nodesConnectable={false}
-        zoomOnScroll
+        // The wheel scrolls the canvas instead of zooming — the graph is tall,
+        // so scrolling to read it should not change the zoom out from under you.
+        // Ctrl/⌘ + wheel still zooms, and pinch works on a trackpad.
+        zoomOnScroll={false}
+        panOnScroll
+        panOnScrollMode={PanOnScrollMode.Free}
+        zoomOnPinch
         panOnDrag
-        minZoom={0.1}
+        maxZoom={MAX_ZOOM}
+        minZoom={MIN_ZOOM}
         viewport={viewport}
         onViewportChange={setViewport}
         onPaneClick={() => setDownstream(null)}
         proOptions={{ hideAttribution: false }}
       >
-        <Background color="#232732" gap={28} />
+        <Background color="var(--color-canvas-dot)" gap={28} />
       </ReactFlow>
       <div className="pointer-events-none absolute bottom-3 left-3 z-10 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-line bg-surface/85 px-2.5 py-1.5 text-[10px] text-ink-dim">
         {LEGEND.map((l) => (
@@ -664,6 +859,65 @@ export function Tree() {
             ···
           </span>
           not needed
+        </span>
+        <span className="flex items-center gap-2 border-l border-line pl-3">
+          <span className="flex items-center gap-1" title="A prerequisite you cannot avoid.">
+            <svg width="18" height="4" aria-hidden>
+              <line x1="0" y1="2" x2="18" y2="2" stroke={PREREQ_STROKE} strokeWidth="1.5" />
+            </svg>
+            required
+          </span>
+          <span
+            className="flex items-center gap-1"
+            title="One of several routes into this course — you only need one of them."
+          >
+            <svg width="18" height="4" aria-hidden>
+              <line
+                x1="0"
+                y1="2"
+                x2="18"
+                y2="2"
+                stroke={PREREQ_STROKE}
+                strokeWidth="1.2"
+                strokeDasharray="5 5"
+              />
+            </svg>
+            alternative
+          </span>
+          <span
+            className="flex items-center gap-1"
+            title="Can be taken in the same semester as the course it points to."
+          >
+            <svg width="18" height="4" aria-hidden>
+              <line
+                x1="0"
+                y1="2"
+                x2="18"
+                y2="2"
+                stroke={COREQ_STROKE}
+                strokeWidth="1.2"
+                strokeDasharray="2 3"
+              />
+            </svg>
+            corequisite
+          </span>
+          <span
+            className="flex items-center gap-1 text-ink-faint"
+            title="Edges between two sections are drawn faint so they don't bury the chain you're reading. Click a course to bring its own back to full strength."
+          >
+            <svg width="18" height="4" aria-hidden>
+              <line
+                x1="0"
+                y1="2"
+                x2="18"
+                y2="2"
+                stroke={PREREQ_STROKE}
+                strokeWidth="1.5"
+                opacity="0.22"
+              />
+            </svg>
+            crosses sections
+          </span>
         </span>
         {downstreamRoot && (
           <span className="flex items-center gap-2 border-l border-line pl-3">

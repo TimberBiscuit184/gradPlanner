@@ -1,12 +1,121 @@
 @import "tailwindcss";
 
+/**
+ * Fonts are bundled, not fetched. The desktop build has to render correctly
+ * with no network at all, and a Google Fonts <link> silently fell back to
+ * system-ui offline — which changed every metric in a layout tuned at 10-11px.
+ * Only the weights actually used are imported.
+ *
+ * Public Sans and Bricolage Grotesque come from the Sprout website; JetBrains
+ * Mono was already here and is what the website uses too. The website's own
+ * @font-face blocks point at opaque asset ids, so the files could not be
+ * lifted out of that HTML — these are the npm releases of the same faces.
+ */
+@import "@fontsource/public-sans/400.css";
+@import "@fontsource/public-sans/500.css";
+@import "@fontsource/public-sans/600.css";
+@import "@fontsource/public-sans/700.css";
+@import "@fontsource/bricolage-grotesque/600.css";
+@import "@fontsource/bricolage-grotesque/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/600.css";
+
+/**
+ * ---------------------------------------------------------------------------
+ * Theme
+ * ---------------------------------------------------------------------------
+ * Two complete palettes, one set of names. Every component styles itself
+ * through these tokens — there are no colours in the components — so the whole
+ * app restyles from this block. Light is the default because the Sprout site
+ * is light; dark is kept because a planning board at 11px is genuinely easier
+ * on the eyes at night, and throwing it away to match a marketing page would
+ * be trading something that works for something that matches.
+ *
+ * Status hues are NOT the same colours in both themes. The dark set was tuned
+ * against #14161b; on warm paper #fbbf24 amber is nearly invisible, so the
+ * light set steps several stops darker. Same meaning, different value — which
+ * is the entire reason these are tokens and not a filter over one palette.
+ */
 @theme {
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* dark-neutral board palette — flat, no gradients */
+  /* --- surfaces: the website's warm paper ------------------------------- */
+  --color-bg: #f7f5ef;
+  --color-bg-deep: #f2efe5; /* tree mode */
+  --color-surface: #fffdf8;
+  --color-surface-2: #f2efe5;
+  --color-line: #e2ded2;
+  --color-ink: #1a1a17;
+  --color-ink-dim: #55524a;
+  --color-ink-faint: #77746a;
+
+  /* --- brand ------------------------------------------------------------ */
+  --color-brand: #3d7a1c;
+  --color-brand-strong: #2f6b1d;
+  --color-brand-soft: #57a32b;
+
+  /* --- status ----------------------------------------------------------- */
+  --color-completed: #2f6b1d;
+  --color-inprogress: #0f766e;
+  --color-registered: #6d28d9;
+  --color-planned: #1d4ed8;
+  --color-available: #a1650b;
+  --color-warn: #a1650b;
+  --color-danger: #b3261e;
+  --color-ok: #2f6b1d;
+  --color-risk: #b3123c;
+
+  /**
+   * Flex Track is a property of a *term*, not of a course, so it never sits
+   * beside a status chip and cannot be mistaken for one. It had been borrowing
+   * `registered` — a course status — which was both a violet clash against the
+   * warm palette and a meaning collision. The lighter brand green keeps it
+   * clearly apart from `completed`.
+   */
+  --color-flex: #57a32b;
+
+  /* --- graph ------------------------------------------------------------ */
+  --color-edge: #b9b2a0;
+  --color-edge-coreq: #4f8f74;
+  /**
+   * The "unverified" dash is drawn for 1,895 of 2,031 courses — it is the
+   * ordinary case, not a warning. Picking a strong amber for it turned the
+   * whole light canvas tan. It has to recede exactly as the dark theme's dim
+   * brown did against near-black.
+   */
+  --color-edge-unverified: #c4b48a;
+  --color-canvas-dot: #e2ded2;
+  --color-scrollbar: #ddd8c8;
+}
+
+/* Glow triplets, kept outside @theme because they are composed into rgb(). */
+:root {
+  --glow-available: 161 101 11;
+  --glow-risk: 179 18 60;
+
+  /**
+   * How far a de-emphasised node fades.
+   *
+   * These were Tailwind opacity utilities with one value for both themes. A
+   * card at 25% opacity over near-black still reads; the same card over warm
+   * paper is gone — the first light build had a tree of ghosts where the
+   * locked courses should be. Fading is a contrast ratio against the ground,
+   * so it needs a value per ground.
+   */
+  --dim-locked: 0.78;
+  --dim-obsolete: 0.78;
+  --dim-muted: 0.4;
+}
+
+/**
+ * Dark. Only the values change — every selector below this block reads the
+ * same token names, so nothing else in the file (or the app) is theme-aware.
+ */
+:root[data-theme="dark"] {
   --color-bg: #14161b;
-  --color-bg-deep: #0b0d12; /* tree mode */
+  --color-bg-deep: #0b0d12;
   --color-surface: #1c1f26;
   --color-surface-2: #23262f;
   --color-line: #2e323c;
@@ -14,7 +123,10 @@
   --color-ink-dim: #a2a8b3;
   --color-ink-faint: #6b7280;
 
-  /* status hues */
+  --color-brand: #7cc043;
+  --color-brand-strong: #57a32b;
+  --color-brand-soft: #9bd167;
+
   --color-completed: #34d399;
   --color-inprogress: #2dd4bf;
   --color-registered: #a78bfa;
@@ -23,6 +135,21 @@
   --color-warn: #f59e0b;
   --color-danger: #ef4444;
   --color-ok: #34d399;
+  --color-risk: #f43f5e;
+  --color-flex: #9bd167;
+
+  --color-edge: #3f4552;
+  --color-edge-coreq: #1f6a63;
+  --color-edge-unverified: #8a6d1f;
+  --color-canvas-dot: #232732;
+  --color-scrollbar: #333844;
+
+  --glow-available: 251 191 36;
+  --glow-risk: 244 63 94;
+
+  --dim-locked: 0.25;
+  --dim-obsolete: 0.4;
+  --dim-muted: 0.15;
 }
 
 html,
@@ -39,36 +166,95 @@ body,
   0%,
   100% {
     box-shadow:
-      0 0 0 1px rgb(251 191 36 / 0.55),
-      0 0 14px 2px rgb(251 191 36 / 0.18);
+      0 0 0 1px rgb(var(--glow-available) / 0.55),
+      0 0 14px 2px rgb(var(--glow-available) / 0.18);
   }
   50% {
     box-shadow:
-      0 0 0 1px rgb(251 191 36 / 0.85),
-      0 0 22px 5px rgb(251 191 36 / 0.32);
+      0 0 0 1px rgb(var(--glow-available) / 0.85),
+      0 0 22px 5px rgb(var(--glow-available) / 0.32);
   }
 }
 .node-available {
   animation: rim-pulse 3.2s ease-in-out infinite;
 }
 
+/**
+ * At-risk rim: a steady red halo, no pulse. Motion means "ready to take",
+ * colour means "something is wrong" — so the two never read as each other even
+ * when a node is both available and at risk.
+ */
+.node-at-risk {
+  animation: none !important;
+  box-shadow:
+    0 0 0 1px rgb(var(--glow-risk) / 0.9),
+    0 0 16px 3px rgb(var(--glow-risk) / 0.28);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .node-available {
     animation: none;
-    box-shadow: 0 0 0 1px rgb(251 191 36 / 0.7);
+    box-shadow: 0 0 0 1px rgb(var(--glow-available) / 0.7);
   }
 }
 
+/**
+ * Panel dragging. Set on <html> for the duration of a header drag: a pointer
+ * that leaves the panel mid-drag would otherwise select text across the board,
+ * and hover styles firing on whatever passes underneath makes the drag feel
+ * like it is snagging on things.
+ */
+.panel-dragging,
+.panel-dragging * {
+  cursor: grabbing !important;
+  user-select: none !important;
+}
+
+/**
+ * Desktop shell (Electron). The app header doubles as the window title bar:
+ * drag it to move the window, and keep clear of the native minimise/maximise/
+ * close buttons, whose exact width the Window Controls Overlay reports through
+ * the `titlebar-area-*` environment variables. Falling back to 100vw makes the
+ * reserved gap zero in a plain browser, where there are no controls to dodge.
+ */
+.is-desktop .app-header {
+  -webkit-app-region: drag;
+  padding-right: calc(
+    100vw - env(titlebar-area-width, 100vw) - env(titlebar-area-x, 0px) + 0.5rem
+  );
+  min-height: env(titlebar-area-height, 2rem);
+}
+
+/* Anything you can actually click has to opt back out of the drag region. */
+.is-desktop .app-header button,
+.is-desktop .app-header input,
+.is-desktop .app-header select,
+.is-desktop .app-header label,
+.is-desktop .app-header [role="tablist"],
+.is-desktop .app-header ul {
+  -webkit-app-region: no-drag;
+}
+
+/* No rubber-band overscroll or text cursor — it should read as an app window. */
+.is-desktop body {
+  overscroll-behavior: none;
+  cursor: default;
+}
+
+/* Node de-emphasis, per theme — see --dim-* above. */
+.dim-locked { opacity: var(--dim-locked); }
+.dim-obsolete { opacity: var(--dim-obsolete); }
+.dim-muted { opacity: var(--dim-muted) !important; }
+
 /* keyboard-drag focus ring */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--color-planned);
+  outline: 2px solid var(--color-brand);
   outline-offset: 2px;
 }
 
-/* react-flow chrome on dark */
 .react-flow__attribution {
   background: transparent;
-  color: #4b5563;
+  color: var(--color-ink-faint);
 }
 
 ::-webkit-scrollbar {
@@ -76,7 +262,7 @@ body,
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333844;
+  background: var(--color-scrollbar);
   border-radius: 5px;
 }
 ::-webkit-scrollbar-track {

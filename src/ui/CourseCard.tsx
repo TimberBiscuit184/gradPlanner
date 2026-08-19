@@ -1,34 +1,12 @@
 import { useDraggable } from "@dnd-kit/core";
-import { useMemo } from "react";
 import { COURSE_BY_ID } from "../data";
-import { EMPHASES } from "../data/emphases";
 import type { Occurrence } from "../engine/plan";
-import { isAtRisk, prereqLeaves } from "../engine/plan";
+import { isAtRisk, isEditableTerm } from "../engine/plan";
 import { useModel } from "../model";
 import { usePlan } from "../store";
+import { useFocusSet } from "./useFocusSet";
 import { BLOCK_LABELS, STATUS_STYLE } from "./status";
 import type { BlockChoice } from "../types";
-
-/** Emphasis highlight set incl. prereq ancestors (mirrors the tree behavior). */
-export function useEmphasisSet(): Set<string> | null {
-  const emphasis = usePlan((s) => s.emphasis);
-  return useMemo(() => {
-    if (!emphasis) return null;
-    const e = EMPHASES.find((x) => x.id === emphasis);
-    if (!e) return null;
-    const out = new Set<string>();
-    const add = (id: string) => {
-      if (out.has(id)) return;
-      out.add(id);
-      const c = COURSE_BY_ID.get(id);
-      if (!c) return;
-      prereqLeaves(c.prereq).forEach(add);
-      c.coreq.forEach(add);
-    };
-    [...e.supplemental, ...e.core].forEach(add);
-    return out;
-  }, [emphasis]);
-}
 
 /** A course card on the semester board. Real-term cards are read-only history. */
 export function CourseCard({ occ }: { occ: Occurrence }) {
@@ -39,6 +17,11 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
   const removePlacement = usePlan((s) => s.removePlacement);
   const setBlock = usePlan((s) => s.setBlock);
   const lensPool = usePlan((s) => s.lensPool);
+  const toggleRegistration = usePlan((s) => s.toggleRegistration);
+  const showToast = usePlan((s) => s.showToast);
+  // Registered (not completed) terms can still be rearranged.
+  const term = model.termById.get(occ.termId);
+  const editableRegistration = !!term && term.real && isEditableTerm(term);
   const placement = usePlan((s) =>
     s.placements.find((p) => p.instanceId === occ.placementId),
   );
@@ -61,7 +44,7 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
   const sty = STATUS_STYLE[cardStatus];
   const atRisk = !course.isPlaceholder && isAtRisk(occ.courseId, model);
   const unconfirmedEdge = !course.verified;
-  const emphSet = useEmphasisSet();
+  const emphSet = useFocusSet();
   const outsideLens =
     (lensPool !== null && !lensPool.includes(occ.courseId)) ||
     (emphSet !== null && !emphSet.has(occ.courseId));
@@ -80,7 +63,7 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
       }}
       className={`focus-ring group relative rounded-md border px-2 py-1.5 text-left text-sm transition-opacity ${sty.card} ${
         atRisk
-          ? `border-2 ${unconfirmedEdge ? "border-dashed" : ""} !border-warn`
+          ? `border-2 ${unconfirmedEdge ? "border-dashed" : ""} !border-risk`
           : ""
       } ${outsideLens ? "opacity-30 saturate-0" : ""} ${
         isDragging ? "opacity-40" : ""
@@ -109,7 +92,7 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
           </span>
         )}
         {atRisk && (
-          <span className="text-warn" title="at-risk">
+          <span className="text-risk" title="at-risk">
             ⚠
           </span>
         )}
@@ -126,16 +109,32 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
           offered terms unconfirmed
         </div>
       )}
-      {/* M1: no block data exists for any course — manual assignment only.
-          No block selected = full semester (the default). */}
+      {/* Blocks are real data since the 2026-08-06 schedule scrape: only the
+          halves a course actually runs are offered. No selection = full
+          semester, which is itself only valid if the course has one. */}
       <div className="mt-1 flex items-center gap-1">
-        <span className="text-[10px] text-ink-faint" title="Block availability unknown — check the class schedule. No selection = full semester.">
-          block?
+        <span
+          className="text-[10px] text-ink-faint"
+          title={
+            !course.blocksConfirmed
+              ? "Block availability unknown — check the class schedule."
+              : course.blocks?.includes("full")
+                ? "No selection = full semester."
+                : `${course.code} has no full-semester section — pick a block.`
+          }
+        >
+          {course.blocksConfirmed && !course.blocks?.includes("full")
+            ? "block:"
+            : "block?"}
         </span>
         {occ.source === "placement" && placement ? (
           <>
-            {[...BLOCK_LABELS, ...(course.online ? (["online"] as const) : [])].map(
-              (b) => (
+            {[
+              ...BLOCK_LABELS.filter(
+                (b) => !course.blocksConfirmed || course.blocks?.includes(b),
+              ),
+              ...(course.online ? (["online"] as const) : []),
+            ].map((b) => (
                 <button
                   key={b}
                   onClick={(e) => {
@@ -158,15 +157,16 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
                 >
                   {b}
                 </button>
-              ),
-            )}
+            ))}
           </>
         ) : occ.entry?.modality === "online" ? (
           <span className="rounded bg-surface-2 px-1 text-[10px] text-inprogress">
             online
           </span>
         ) : (
-          <span className="text-[10px] text-ink-faint">unknown</span>
+          <span className="text-[10px] text-ink-faint">
+            {course.blocksConfirmed ? (course.blocks?.join("/") ?? "—") : "unknown"}
+          </span>
         )}
       </div>
       {occ.source === "placement" && (
@@ -175,6 +175,25 @@ export function CourseCard({ occ }: { occ: Occurrence }) {
           onClick={(e) => {
             e.stopPropagation();
             removePlacement(occ.placementId!);
+          }}
+          className="absolute -right-1.5 -top-1.5 hidden h-4 w-4 items-center justify-center rounded-full bg-surface-2 text-[10px] text-ink-dim hover:text-danger group-hover:flex"
+        >
+          ✕
+        </button>
+      )}
+      {/* A registration you can still change. Drops it from the plan only —
+          student.json is never written, so this is reversible and undoable. */}
+      {occ.source === "transcript" && editableRegistration && (
+        <button
+          aria-label={`Drop ${course.code} from ${occ.termId}`}
+          title={`Drop ${course.code} from this term so you can move it. Your transcript is untouched — undo puts it straight back.`}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleRegistration(occ.termId, occ.courseId);
+            showToast({
+              text: `${course.code} dropped from ${occ.termId}. It is out of your plan, not your transcript — undo to restore.`,
+              level: "info",
+            });
           }}
           className="absolute -right-1.5 -top-1.5 hidden h-4 w-4 items-center justify-center rounded-full bg-surface-2 text-[10px] text-ink-dim hover:text-danger group-hover:flex"
         >

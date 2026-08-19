@@ -185,10 +185,14 @@ export interface Bottleneck {
   reasons: string[];
 }
 
-export function bottlenecks(model: PlanModel): Bottleneck[] {
+export function bottlenecks(
+  model: PlanModel,
+  /** "not needed" courses can't bottleneck a degree you no longer need them for. */
+  obsolete: ReadonlySet<string> = new Set(),
+): Bottleneck[] {
   const out: Bottleneck[] = [];
   for (const c of COURSES) {
-    if (c.isPlaceholder) continue;
+    if (c.isPlaceholder || obsolete.has(c.id)) continue;
     const d = model.derived.get(c.id)!;
     const unplanned = d.status === "available" || d.status === "locked";
     if (!unplanned) continue;

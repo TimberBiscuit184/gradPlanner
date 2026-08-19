@@ -1,6 +1,6 @@
 {
   "$schema": "./schema/course.schema.json",
-  "_note": "prereq/coreq are recursive boolean expressions. verified:false means the edge is INFERRED from the suggested 8-semester sequence, not read from the catalog. Confirm before trusting a red warning built on it.",
+  "_note": "prereq/coreq are recursive boolean expressions (null = no rule). Requisites, credits, titles and enrollment restrictions were compared field-by-field against the live BYU-Idaho 2026-2027 catalog on 2026-08-06 (verified/prereqCheckedOn; re-run `npm run audit`). Offered terms, half-semester blocks and online availability come from the public class schedule for Winter+Spring+Fall 2026 (termsConfirmed/blocksConfirmed/scheduleCheckedOn; evidence in data/schedule-2026.json).",
   "courses": [
     {
       "id": "ART101",
@@ -9,21 +9,34 @@
       "credits": 3,
       "dept": "ART",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 1,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ART201",
@@ -32,21 +45,35 @@
       "credits": 3,
       "dept": "ART",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "1st",
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 4,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ART202",
@@ -55,21 +82,35 @@
       "credits": 3,
       "dept": "ART",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "1st",
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ART231",
@@ -78,21 +119,34 @@
       "credits": 3,
       "dept": "ART",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 3,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BIO180",
@@ -101,22 +155,34 @@
       "credits": 3,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science"
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 10,
+        "W": 9,
+        "S": 7
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "BIO180L",
@@ -125,13 +191,15 @@
       "credits": 1,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
@@ -139,9 +207,19 @@
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 16,
+        "W": 16,
+        "S": 12
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BIO181",
@@ -150,21 +228,33 @@
       "credits": 3,
       "dept": "BIO",
       "prereq": "BIO180",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 5,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "BIO181L",
@@ -173,13 +263,15 @@
       "credits": 1,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": "BIO181",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
@@ -187,9 +279,19 @@
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 11,
+        "S": 8
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BIO221",
@@ -198,22 +300,34 @@
       "credits": 3,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": "BIO222",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science"
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 6,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "BIO222",
@@ -222,13 +336,15 @@
       "credits": 1,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": "BIO221",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
@@ -236,9 +352,19 @@
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 9,
+        "S": 7
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BIO240",
@@ -247,22 +373,34 @@
       "credits": 4,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BIO264",
@@ -271,22 +409,34 @@
       "credits": 3,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science"
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 9,
+        "S": 7
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "BIO264L",
@@ -295,23 +445,35 @@
       "credits": 1,
       "dept": "BIO",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science",
         "lab"
       ],
       "verified": true,
       "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 19,
+        "W": 21,
+        "S": 13
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "BUS301",
@@ -320,13 +482,15 @@
       "credits": 3,
       "dept": "BUS",
       "prereq": "ENG150",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "writing",
@@ -334,7 +498,23 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "As an EE major you can only take the ONLINE section of BUS 301. ENG 301 has no program restriction.",
+      "restrictions": [
+        "Requires at least 22 earned credits.",
+        "Campus/day sections require declaration in program 415, 428, 429, 431, 600, 643, 652, 675, 686, 715, 720, or 752 — 445 (Electrical Engineering) is NOT on that list. Online sections are open to all students."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 29,
+        "W": 30,
+        "S": 24
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "BYUI101",
@@ -343,24 +523,38 @@
       "credits": 1,
       "dept": "BYUI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
         "1st",
-        "2nd"
+        "full"
       ],
       "online": true,
       "tags": [
         "college-success"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "DAY (campus) students only."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 416,
+        "W": 191,
+        "S": 65
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
     },
     {
       "id": "BYUI151",
@@ -369,21 +563,27 @@
       "credits": 3,
       "dept": "BYUI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": null,
-      "online": true,
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
       "termsConfirmed": false,
-      "blocksConfirmed": false
+      "blocksConfirmed": false,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "notes": "Not found in any Winter/Spring/Fall 2026 class schedule. Not offered in any 2026 term.",
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BYUI152",
@@ -392,21 +592,27 @@
       "credits": 3,
       "dept": "BYUI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": null,
-      "online": true,
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
       "termsConfirmed": false,
-      "blocksConfirmed": false
+      "blocksConfirmed": false,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "notes": "Not found in any Winter/Spring/Fall 2026 class schedule. Not offered in any 2026 term.",
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "BYUI153",
@@ -415,68 +621,110 @@
       "credits": 3,
       "dept": "BYUI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": null,
-      "online": true,
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
       "termsConfirmed": false,
-      "blocksConfirmed": false
+      "blocksConfirmed": false,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "notes": "Not found in any Winter/Spring/Fall 2026 class schedule. Not offered in any 2026 term.",
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "CHEM105",
       "code": "CHEM 105",
-      "title": "General Chemistry",
+      "title": "General Chemistry I",
       "credits": 3,
       "dept": "CHEM",
       "prereq": null,
-      "coreq": [],
+      "coreq": {
+        "or": [
+          "MATH109",
+          "MATH110X",
+          "MATH112X",
+          "MATH113",
+          "MATH119"
+        ]
+      },
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "notes": "Catalog: math requirement may be waived with an ALEKS score of 70 or higher. Some sections are reserved for Chemistry and Biochemistry students.",
+      "restrictions": [
+        "Some sections may be reserved for Chemistry and Biochemistry students."
+      ],
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 13,
+        "W": 12,
+        "S": 8
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "CHEM105L",
       "code": "CHEM 105L",
-      "title": "General Chemistry Lab",
+      "title": "General Chemistry Laboratory I",
       "credits": 1,
       "dept": "CHEM",
       "prereq": null,
-      "coreq": [
-        "CHEM105"
-      ],
+      "coreq": "CHEM105",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
         "lab"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 11,
+        "W": 11,
+        "S": 6
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "CHEM106",
@@ -498,22 +746,34 @@
           }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
       ],
       "verified": true,
       "notes": "Math requirement can be waived with ALEKS >= 70 (outside the fixture data).",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 6,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "CHEM106L",
@@ -522,22 +782,34 @@
       "credits": 1,
       "dept": "CHEM",
       "prereq": "CHEM105L",
-      "coreq": [],
+      "coreq": "CHEM106",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
         "lab"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 6,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "CHILD210",
@@ -546,21 +818,34 @@
       "credits": 3,
       "dept": "CHILD",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 16,
+        "W": 15,
+        "S": 11
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CIT160",
@@ -569,22 +854,22 @@
       "credits": 3,
       "dept": "CIT",
       "prereq": null,
-      "coreq": [],
-      "terms": [
-        "F",
-        "W",
-        "S"
-      ],
-      "blocks": null,
-      "online": true,
+      "coreq": null,
+      "terms": [],
+      "blocks": [],
+      "online": false,
       "tags": [
         "programming",
         "legacy"
       ],
-      "notes": "Legacy intro course. Confirm with advisor whether this substitutes for CSE 110.",
+      "notes": "Legacy intro course, RETIRED — last offered 2023 and absent from both the 2026-2027 catalog and every 2026 class-schedule term. It cannot be taken or retaken; terms is empty so nothing can be planned into it. Your completed CIT 160 credit is still accepted as the CSE 111 prerequisite (DATA_GAPS U7). CSE 110 is the current equivalent.",
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleCheckedOn": "2026-08-06",
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "CIVIC150",
@@ -593,21 +878,35 @@
       "credits": 3,
       "dept": "CIVIC",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
     },
     {
       "id": "CSE110",
@@ -616,16 +915,16 @@
       "credits": 2,
       "dept": "CSE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
         "1st",
-        "2nd"
+        "2nd",
+        "full"
       ],
       "online": true,
       "tags": [
@@ -639,8 +938,19 @@
       ],
       "notes": "LUC test score of 110+ grants credit.",
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 15,
+        "W": 16,
+        "S": 12
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE111",
@@ -654,16 +964,16 @@
           "CIT160"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
         "1st",
-        "2nd"
+        "2nd",
+        "full"
       ],
       "online": true,
       "tags": [
@@ -675,29 +985,39 @@
         "unit-testing"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "CSE 110 per CSE dept listing; CIT 160 user-confirmed as accepted alternative prerequisite (2026-07-27)."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "CSE 110 per CSE dept listing; CIT 160 user-confirmed as accepted alternative prerequisite (2026-07-27).",
+      "notes": "Catalog also accepts successful completion of PathwayConnect or an LUC test score of at least 110 in place of CSE 110. CS 101 and CIT 160 (both last offered 2023) are the retired alternatives.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 13,
+        "S": 10
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE121c",
       "code": "CSE 121c",
-      "title": "C Programming Language",
+      "title": "C Language",
       "credits": 1,
       "dept": "CSE",
-      "prereq": "CSE111",
-      "coreq": [],
+      "prereq": null,
+      "coreq": "CSE111",
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
         "1st",
         "2nd"
       ],
-      "online": false,
+      "online": true,
       "tags": [
         "programming"
       ],
@@ -707,10 +1027,20 @@
         "memory"
       ],
       "verified": true,
-      "notes": "Dept listing: prereq CSE 111 (not CSE 110).",
-      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "notes": "Dept listing: prereq CSE 111 (not CSE 110). Catalog rule is a corequisite: completed or concurrently enrolled in CSE 111.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 4,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE210",
@@ -719,16 +1049,16 @@
       "credits": 2,
       "dept": "CSE",
       "prereq": "CSE111",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
         "1st",
-        "2nd"
+        "2nd",
+        "full"
       ],
       "online": true,
       "tags": [
@@ -740,8 +1070,19 @@
         "inheritance"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 7,
+        "W": 8,
+        "S": 8
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE212",
@@ -750,16 +1091,14 @@
       "credits": 2,
       "dept": "CSE",
       "prereq": "CSE210",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
-        "1st",
-        "2nd"
+        "full"
       ],
       "online": true,
       "tags": [
@@ -771,8 +1110,20 @@
         "big-o"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "notes": "Retired alternatives to CSE 210: CS 165, CIT 260 (both last offered 2023).",
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 5,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE280",
@@ -781,14 +1132,16 @@
       "credits": 3,
       "dept": "CSE",
       "prereq": "CSE210",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "math",
         "programming"
@@ -799,10 +1152,20 @@
         "combinatorics"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
       "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
-      "notes": "Retired CS 165 / CS 241 (last offered 2023) also accepted."
+      "notes": "Retired CS 165 / CS 241 (last offered 2023) also accepted.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE310",
@@ -811,22 +1174,34 @@
       "credits": 3,
       "dept": "CSE",
       "prereq": "CSE210",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "programming"
       ],
       "verified": true,
-      "termsConfirmed": false,
+      "termsConfirmed": true,
       "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
-      "blocksConfirmed": false,
-      "notes": "Retired CS 165 / CS 241 (last offered 2023) also accepted."
+      "blocksConfirmed": true,
+      "notes": "Retired CS 165 / CS 241 (last offered 2023) also accepted. Retired alternatives to CSE 210: CS 241, CS 165 (last offered 2023).",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 5,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE450",
@@ -837,17 +1212,36 @@
       "prereq": {
         "or": [
           "DS250",
-          "CSE310"
+          {
+            "and": [
+              "CSE310",
+              "MATH341"
+            ]
+          },
+          {
+            "and": [
+              "CSE111",
+              "DS350"
+            ]
+          },
+          {
+            "and": [
+              "CSE212",
+              "MATH330"
+            ]
+          }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "ai-minor",
         "ee-supplemental"
@@ -858,10 +1252,20 @@
         "sklearn"
       ],
       "verified": true,
-      "notes": "Dept listing: prereq CSE 250 or CSE 310. CSE 310 is not in the EE major, so DS 250 is the practical path.",
-      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "notes": "Dept listing: prereq CSE 250 or CSE 310. CSE 310 is not in the EE major, so DS 250 is the practical path. Four independent entry paths; DS 250 alone is the shortest.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "CSE455",
@@ -870,13 +1274,13 @@
       "credits": 3,
       "dept": "CSE",
       "prereq": "CSE450",
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F",
-        "W",
-        "S"
+        "F"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ai-minor"
@@ -888,9 +1292,17 @@
       ],
       "notes": "NO published prerequisite found. CSE 450 assumed from course sequence. Confirm in the catalog.",
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "DS250",
@@ -898,14 +1310,22 @@
       "title": "Data Science Programming",
       "credits": 2,
       "dept": "DS",
-      "prereq": "CSE111",
-      "coreq": [],
+      "prereq": {
+        "or": [
+          "CSE110",
+          "PH135",
+          "CSE111"
+        ]
+      },
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "data",
@@ -918,9 +1338,19 @@
       ],
       "verified": true,
       "notes": "Dept listing as CSE 250 (same title, 2 cr): prereq CSE 111.",
-      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 7,
+        "W": 6,
+        "S": 6
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "DS350",
@@ -928,27 +1358,45 @@
       "title": "Data Wrangling and Visualization",
       "credits": 3,
       "dept": "DS3",
-      "prereq": "DS250",
-      "coreq": [],
+      "prereq": {
+        "and": [
+          "CSE111",
+          "DS250"
+        ]
+      },
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "programming"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "blocksConfirmed": true,
+      "notes": "MATH 325 (Intermediate Statistics) alone is an alternative path; it is not in this fixture.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "DS460",
       "code": "DS 460",
-      "title": "Big Data Programming",
+      "title": "Big Data Programming and Analytics",
       "credits": 3,
       "dept": "DS",
       "prereq": {
@@ -956,19 +1404,21 @@
           "DS250",
           {
             "or": [
-              "DS350",
-              "CSE450"
+              "CSE450",
+              "DS350"
             ]
           }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "data",
@@ -980,25 +1430,36 @@
         "etl"
       ],
       "verified": true,
-      "notes": "Dept listing as CSE 451 (same title, 3 cr): prereq CSE 250 AND (CSE 350 or CSE 450).",
-      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "notes": "Dept listing as CSE 451 (same title, 3 cr): prereq CSE 250 AND (CSE 350 or CSE 450). ITM 327 (Data Warehousing) is a third alternative for the second branch; not in this fixture.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN100",
       "code": "ECEN 100",
-      "title": "Intro to Electrical and Computer Engineering",
+      "title": "Introduction to Electrical and Computer Engineering",
       "credits": 2,
       "dept": "ECEN",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
-        "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1011,7 +1472,17 @@
       "notes": "Replaces ECEN 101 (1 cr) from earlier catalogs. Accepted by the UG24 EE audit.",
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN101",
@@ -1020,23 +1491,27 @@
       "credits": 1,
       "dept": "ECEN",
       "prereq": null,
-      "coreq": [],
-      "terms": [
-        "F",
-        "W",
-        "S"
-      ],
-      "blocks": null,
-      "online": true,
+      "coreq": null,
+      "terms": [],
+      "blocks": [],
+      "online": false,
       "tags": [
         "hardware",
         "root",
         "superseded"
       ],
       "verified": true,
-      "notes": "RETIRED. Last offered 2025. Only usable via Introduction Option 2, which is now closed.",
+      "notes": "RETIRED — the EE program page states it was last offered in 2025. The class schedule shows 3 sections in Winter 2026 (the tail of that academic year), but that term has passed and it will not run again; terms is empty so nothing can be planned into it. ECEN 100 replaced it.",
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN150",
@@ -1045,21 +1520,26 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": {
-        "or": [
-          "ECEN100",
-          "ECEN101"
+        "and": [
+          "MATH112X",
+          {
+            "or": [
+              "ECEN100",
+              "ECEN101"
+            ]
+          }
         ]
       },
-      "coreq": [
-        "MATH112X"
-      ],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "hardware",
         "circuits"
@@ -1071,7 +1551,19 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "MATH 112X is a prerequisite in the catalog, not a corequisite. BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true
     },
     {
       "id": "ECEN240",
@@ -1080,13 +1572,25 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": null,
-      "coreq": [],
+      "coreq": {
+        "and": [
+          {
+            "or": [
+              "CSE121c",
+              "ECEN100"
+            ]
+          },
+          "CSE111"
+        ]
+      },
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1097,11 +1601,21 @@
         "logic-gates",
         "state-machines"
       ],
-      "notes": "Catalog lists NO prerequisite - the earlier inferred CSE 111 edge was wrong and has been removed.",
+      "notes": "Catalog lists NO prerequisite - the earlier inferred CSE 111 edge was wrong and has been removed. Catalog rule is entirely corequisite: completed OR concurrently enrolled in (CSE 121c or ECEN 100) and CSE 111.",
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN250",
@@ -1110,13 +1624,15 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN150",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1129,12 +1645,23 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN260",
       "code": "ECEN 260",
-      "title": "Microprocessor Based System Design",
+      "title": "Microprocessor Based-System Design",
       "credits": 3,
       "dept": "ECEN",
       "prereq": {
@@ -1149,13 +1676,15 @@
           "CSE111"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1170,22 +1699,34 @@
       "notes": "Dept listing: CSE 121c and (ECEN 160 or 240). CSE 121c is no longer required under Introduction Option 1, so this edge may be stale.",
       "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN299",
       "code": "ECEN 299",
-      "title": "Electric Circuit Fabrication and Evaluation Lab",
+      "title": "Electronic Circuit Fabrication and Evaluation Lab",
       "credits": 1,
       "dept": "ECEN",
-      "prereq": "ECEN250",
-      "coreq": [],
+      "prereq": null,
+      "coreq": "ECEN250",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1198,20 +1739,35 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "Corequisite, so ECEN 299 can be taken in the same semester as ECEN 250.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN311",
       "code": "ECEN 311",
-      "title": "Intro to Electric Power and Rotating Machines",
+      "title": "Introduction to Electrical Power and Rotating Machines",
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN250",
-      "coreq": [],
+      "coreq": null,
       "terms": [
+        "F",
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1219,8 +1775,17 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN324",
@@ -1231,15 +1796,17 @@
       "prereq": {
         "and": [
           "CSE212",
-          "ECEN240"
+          "ECEN260"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1247,24 +1814,35 @@
       ],
       "verified": true,
       "notes": "Dept listing: prereq CSE 212 and (ECEN 160 or 240). Supersedes the ECEN 260 edge inferred from the flowchart.",
-      "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN340",
       "code": "ECEN 340",
-      "title": "Digital System Design",
+      "title": "Digital Systems Design",
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN240",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1277,7 +1855,19 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "ECEN 160L (last offered 2023) is the retired alternative to ECEN 240. Must purchase an FPGA board.",
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN350",
@@ -1286,13 +1876,15 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN250",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1305,7 +1897,18 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN351",
@@ -1313,12 +1916,14 @@
       "title": "VLSI System Design",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "ECEN340",
-      "coreq": [],
+      "prereq": "ECEN350",
+      "coreq": null,
       "terms": [
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1327,7 +1932,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN361",
@@ -1336,12 +1950,15 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN260",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
-        "W"
+        "W",
+        "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ee-supplemental",
@@ -1351,7 +1968,17 @@
       "notes": "Dept listing: prereq ECEN 260.",
       "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "ECEN380",
@@ -1359,13 +1986,15 @@
       "title": "Signals and Systems",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "MATH316",
-      "coreq": [],
+      "prereq": "ECEN250",
+      "coreq": null,
       "terms": [
         "F",
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1379,26 +2008,38 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN390",
       "code": "ECEN 390",
-      "title": "Electricity and Magnetism",
+      "title": "Electromagnetics",
       "credits": 3,
       "dept": "ECEN",
       "prereq": {
         "and": [
-          "MATH316",
-          "PH220"
+          "ECEN250",
+          "MATH316"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware"
@@ -1409,7 +2050,17 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN397",
@@ -1418,20 +2069,36 @@
       "credits": 1,
       "dept": "ECEN",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "career"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Instructor authorization required."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN398R",
@@ -1439,22 +2106,47 @@
       "title": "Internship",
       "credits": 1,
       "dept": "ECEN",
-      "prereq": null,
-      "coreq": [],
+      "prereq": {
+        "and": [
+          "ECEN260",
+          "ECEN250"
+        ]
+      },
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "career",
         "experiential"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Internship application authorization required."
+      ],
+      "repeatable": {
+        "maxCredits": 7
+      },
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
     },
     {
       "id": "ECEN411",
@@ -1463,11 +2155,13 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN311",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1476,7 +2170,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN420",
@@ -1484,13 +2187,15 @@
       "title": "RF Circuits",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "ECEN390",
-      "coreq": [],
+      "prereq": "ECEN350",
+      "coreq": null,
       "terms": [
         "F"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "ee-supplemental",
         "rf",
@@ -1498,7 +2203,17 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
     },
     {
       "id": "ECEN430",
@@ -1506,13 +2221,14 @@
       "title": "Signal and Power Integrity",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "ECEN390",
-      "coreq": [],
+      "prereq": "ECEN250",
+      "coreq": null,
       "terms": [
-        "F",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1520,7 +2236,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN451",
@@ -1529,11 +2254,13 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN350",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1542,7 +2269,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN461",
@@ -1551,11 +2287,13 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": "ECEN361",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1564,7 +2302,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN470",
@@ -1572,12 +2319,25 @@
       "title": "Feedback Control of Dynamic Systems",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "ECEN380",
-      "coreq": [],
+      "prereq": {
+        "and": [
+          "ECEN250",
+          {
+            "or": [
+              "MATH316",
+              "MATH341"
+            ]
+          }
+        ]
+      },
+      "coreq": null,
       "terms": [
+        "F",
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1586,7 +2346,18 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "ME 305 (Mechatronics) is an alternative to ECEN 250; it is not in this fixture.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN480",
@@ -1594,12 +2365,14 @@
       "title": "Digital Signal Processing",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "ECEN380",
-      "coreq": [],
+      "prereq": "ECEN250",
+      "coreq": null,
       "terms": [
         "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1608,7 +2381,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN490R",
@@ -1616,12 +2398,16 @@
       "title": "Special Topics",
       "credits": 3,
       "dept": "ECEN",
-      "prereq": "ECEN420",
-      "coreq": [],
+      "prereq": null,
+      "coreq": null,
       "terms": [
+        "F",
+        "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -1629,7 +2415,24 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Instructor authorization required."
+      ],
+      "repeatable": {
+        "maxAttempts": 6
+      },
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECEN499",
@@ -1638,18 +2441,20 @@
       "credits": 3,
       "dept": "ECEN",
       "prereq": {
-        "and": [
-          "ECEN340",
-          "ECEN350"
+        "or": [
+          "ECEN398R",
+          "ECEN397"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "hardware",
@@ -1657,53 +2462,94 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "Senior Project requires the Experiential Learning course first — schedule ECEN 397 or ECEN 398R in an earlier term.",
+      "restrictions": [
+        "Instructor authorization required."
+      ],
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ECON150",
       "code": "ECON 150",
-      "title": "Economic Principles and Problems - Micro",
+      "title": "Economic Principles and Problems-Micro",
       "credits": 3,
       "dept": "ECON",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 18,
+        "W": 22,
+        "S": 13
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "ECON151",
       "code": "ECON 151",
-      "title": "Economic Principles and Problems - Macro",
+      "title": "Economic Principles and Problems-Macro",
       "credits": 3,
       "dept": "ECON",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 11,
+        "S": 7
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "ENG150",
@@ -1712,13 +2558,15 @@
       "credits": 3,
       "dept": "ENG",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "writing",
@@ -1726,7 +2574,19 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "notes": "No course prerequisite for most students. Catalog alternatives: ACT English 17 / SAT 400 / SATR 390-423 / TOEFL 80 / IELTS 6.5, or ENG 106 (C), ENG 106L (B), ENG 109 (B), or a Write Class / Basic Writing placement. Placement paths are outside this fixture's model.",
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 92,
+        "W": 85,
+        "S": 50
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "ENG151",
@@ -1735,21 +2595,34 @@
       "credits": 3,
       "dept": "ENG",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 5,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ENG217",
@@ -1757,22 +2630,35 @@
       "title": "Great Books of the World",
       "credits": 3,
       "dept": "ENG",
-      "prereq": null,
-      "coreq": [],
+      "prereq": "ENG150",
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 5,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ENG301",
@@ -1781,13 +2667,15 @@
       "credits": 3,
       "dept": "ENG",
       "prereq": "ENG150",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "writing",
@@ -1795,7 +2683,21 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Requires at least 22 earned credits."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 46,
+        "W": 50,
+        "S": 36
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "FAML160",
@@ -1804,21 +2706,34 @@
       "credits": 3,
       "dept": "FAML",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 12,
+        "W": 15,
+        "S": 9
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "FOREIGN_LANG",
@@ -1827,7 +2742,7 @@
       "credits": 4,
       "dept": "LANG",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
@@ -1852,21 +2767,34 @@
       "credits": 1,
       "dept": "GE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "college-success"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 7,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GE102",
@@ -1875,21 +2803,37 @@
       "credits": 1,
       "dept": "GE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "college-success"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Campus students only."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 6,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "GE103",
@@ -1898,21 +2842,37 @@
       "credits": 1,
       "dept": "GE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "college-success"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Online and BYU Pathway online students only; requires weekly online gatherings."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "GE105",
@@ -1921,21 +2881,37 @@
       "credits": 2,
       "dept": "GE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "college-success"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Campus and concurrent-enrollment students only."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 14,
+        "W": 13,
+        "S": 8
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "GECIV100",
@@ -1944,21 +2920,34 @@
       "credits": 3,
       "dept": "GECIV",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 6,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "GECIV105",
@@ -1967,21 +2956,34 @@
       "credits": 3,
       "dept": "GECI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GECIV210",
@@ -1990,21 +2992,34 @@
       "credits": 3,
       "dept": "GECIV",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEINT212",
@@ -2013,21 +3028,27 @@
       "credits": 3,
       "dept": "GEINT",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": null,
-      "online": true,
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
       "termsConfirmed": false,
-      "blocksConfirmed": false
+      "blocksConfirmed": false,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "notes": "Not found in any Winter/Spring/Fall 2026 class schedule. Not offered in any 2026 term.",
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEINT213",
@@ -2036,21 +3057,30 @@
       "credits": 3,
       "dept": "GEINT",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F",
-        "W",
-        "S"
+        "W"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEINT215",
@@ -2059,21 +3089,30 @@
       "credits": 3,
       "dept": "GEINT",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F",
-        "W",
-        "S"
+        "W"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEOL111",
@@ -2082,22 +3121,37 @@
       "credits": 3,
       "dept": "GEOL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science"
       ],
       "verified": true,
-      "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "notes": "Catalog lists no prerequisite. BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "restrictions": [
+        "Declared in program 154, 445, 450, 465, 740, 748, 770, 845, or 384 (445 = Electrical Engineering, so this is open to you)."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true
     },
     {
       "id": "GEOL111L",
@@ -2106,23 +3160,35 @@
       "credits": 1,
       "dept": "GEOL",
       "prereq": null,
-      "coreq": [],
+      "coreq": "GEOL111",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
         "lab"
       ],
       "verified": true,
-      "notes": "Catalog lists no prerequisite.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "notes": "Catalog lists no prerequisite. Overnight field trip required unless the instructor authorizes non-attendance. $75 course/field-trip fee.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEOL112",
@@ -2136,21 +3202,32 @@
           "GEOL111L"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
-        "W",
-        "S"
+        "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "notes": "Includes a required 3-day field trip.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEOL404",
@@ -2169,21 +3246,29 @@
           }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F",
-        "W",
-        "S"
+        "W"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "W": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GEOL435",
@@ -2209,21 +3294,29 @@
           }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F",
-        "W",
-        "S"
+        "F"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "GE_PLACEHOLDER",
@@ -2232,7 +3325,7 @@
       "credits": 3,
       "dept": "GE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
@@ -2257,47 +3350,76 @@
       "credits": 1,
       "dept": "GE",
       "prereq": null,
-      "coreq": [],
-      "terms": [
-        "F",
-        "W",
-        "S"
-      ],
-      "blocks": null,
-      "online": true,
-      "tags": [
-        "ge",
-        "college-success"
-      ],
-      "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
-    },
-    {
-      "id": "GS102R",
-      "code": "GS 102R",
-      "title": "Academic Success Strategies",
-      "credits": 1,
-      "dept": "GS",
-      "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
       "blocks": [
-        "full",
-        "1st",
-        "2nd"
+        "full"
       ],
       "online": true,
+      "tags": [
+        "ge",
+        "college-success"
+      ],
+      "verified": true,
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 10,
+        "W": 10,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
+    },
+    {
+      "id": "GS102R",
+      "code": "GS 102R",
+      "title": "Strategies for Academic Success",
+      "credits": 1,
+      "dept": "GS",
+      "prereq": null,
+      "coreq": null,
+      "terms": [
+        "F",
+        "W",
+        "S"
+      ],
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "college-success"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "restrictions": [
+        "Campus students only."
+      ],
+      "repeatable": {
+        "maxCredits": 6
+      },
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 36,
+        "W": 36,
+        "S": 36
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HIST120",
@@ -2306,21 +3428,34 @@
       "credits": 3,
       "dept": "HIST",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 4,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HIST121",
@@ -2329,21 +3464,34 @@
       "credits": 3,
       "dept": "HIST",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 4,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HIST201",
@@ -2352,21 +3500,34 @@
       "credits": 3,
       "dept": "HIST",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HIST202",
@@ -2375,21 +3536,34 @@
       "credits": 3,
       "dept": "HIST",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 4,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HUM110",
@@ -2398,21 +3572,34 @@
       "credits": 3,
       "dept": "HUM",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 14,
+        "W": 15,
+        "S": 8
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "HUM201",
@@ -2421,21 +3608,35 @@
       "credits": 3,
       "dept": "HUM",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "1st",
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HUM202",
@@ -2444,21 +3645,35 @@
       "credits": 3,
       "dept": "HUM",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "1st",
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "HUM214",
@@ -2467,21 +3682,34 @@
       "credits": 3,
       "dept": "HUM",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "MATH109",
@@ -2490,22 +3718,34 @@
       "credits": 5,
       "dept": "MATH",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "math"
       ],
       "verified": true,
       "notes": "Catalog prereq: MATH 101, or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 55 - all outside the fixture data, so no edge is drawn.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 7,
+        "S": 6
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "MATH110X",
@@ -2514,22 +3754,34 @@
       "credits": 3,
       "dept": "MATH",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math"
       ],
       "verified": true,
       "notes": "Catalog prereq: MATH 101 (C- or higher), or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 53 - all outside the fixture data, so no edge is drawn.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 5,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH111",
@@ -2537,27 +3789,36 @@
       "title": "Trigonometry",
       "credits": 2,
       "dept": "MATH",
-      "prereq": {
-        "or": [
-          "MATH110X"
-        ]
-      },
-      "coreq": [],
+      "prereq": "MATH110X",
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "1st",
+        "full"
+      ],
+      "online": true,
       "tags": [
         "math"
       ],
       "verified": true,
-      "notes": "MATH 101, or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 53 also satisfy this (outside the fixture data).",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "notes": "MATH 101, or ACT >= 23 / SAT >= 540 (post-2016: 570) / ALEKS >= 53 also satisfy this (outside the fixture data). MATH 101 (not in this fixture) or ACT 23 / SAT 540 / 2016 SAT 570 / ALEKS 53 also satisfy this.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "MATH112X",
@@ -2566,13 +3827,15 @@
       "credits": 4,
       "dept": "MATH",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "math",
@@ -2585,8 +3848,19 @@
         "integrals"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 10,
+        "W": 12,
+        "S": 11
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "MATH113",
@@ -2595,44 +3869,85 @@
       "credits": 3,
       "dept": "MATH",
       "prereq": "MATH112X",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 4,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH119",
       "code": "MATH 119",
-      "title": "Applied Calculus: Data Science",
+      "title": "Applied Calculus for Data Analysis",
       "credits": 4,
       "dept": "MATH",
-      "prereq": null,
-      "coreq": [],
+      "prereq": {
+        "and": [
+          {
+            "or": [
+              "MATH109",
+              "MATH110X"
+            ]
+          },
+          {
+            "or": [
+              "CHEM105",
+              "DS250",
+              "DS350"
+            ]
+          }
+        ]
+      },
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "math"
       ],
-      "notes": "Alternative to MATH 112X for the AI minor ONLY. Does not satisfy EE major.",
+      "notes": "Alternative to MATH 112X for the AI minor ONLY. Does not satisfy EE major. The first branch may also be satisfied by MATH 101 (not in this fixture) or by ACT 23 / SAT 540 / 2016 SAT 570 / ALEKS 55. Laptop required.",
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH214",
@@ -2641,21 +3956,33 @@
       "credits": 3,
       "dept": "MATH",
       "prereq": "MATH113",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH215",
@@ -2664,14 +3991,16 @@
       "credits": 4,
       "dept": "MATH",
       "prereq": "MATH112X",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "math",
         "critical-path"
@@ -2681,8 +4010,20 @@
         "partial-derivatives"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 2,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
     },
     {
       "id": "MATH316",
@@ -2690,15 +4031,22 @@
       "title": "Differential Equations with Linear Algebra",
       "credits": 4,
       "dept": "MATH",
-      "prereq": "MATH215",
-      "coreq": [],
+      "prereq": {
+        "or": [
+          "MATH214",
+          "MATH215"
+        ]
+      },
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "math",
         "critical-path"
@@ -2709,8 +4057,20 @@
         "linear-systems"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": true,
+      "notes": "BYU-Idaho's online course list advertises an online section, but no Online-delivery section appeared in Winter/Spring/Fall 2026 — the online toggle is offered on the strength of the curated list alone. Verify in the class schedule before relying on it."
     },
     {
       "id": "MATH330",
@@ -2719,13 +4079,15 @@
       "credits": 3,
       "dept": "MATH",
       "prereq": "MATH112X",
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math"
@@ -2735,9 +4097,19 @@
         "hypothesis-testing"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH341",
@@ -2751,13 +4123,15 @@
           "MATH119"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math",
@@ -2772,8 +4146,18 @@
       "verified": true,
       "notes": "Dept listing: prereq MATH 119 or MATH 112.",
       "prereqSource": "BYU-Idaho CSE dept course listing (byui-cse.github.io, 2020 program change doc)",
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH411",
@@ -2787,22 +4171,30 @@
           "CSE110"
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F",
-        "W",
-        "S"
+        "F"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math"
       ],
       "verified": true,
-      "notes": "Retired CS 101 / CS 124 (last offered 2023) also accepted in place of CSE 110.",
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "notes": "Retired CS 101 / CS 124 (last offered 2023) also accepted in place of CSE 110. CS 101 and CS 124 (last offered 2023) are retired alternatives to CSE 110.",
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MATH423",
@@ -2825,27 +4217,37 @@
           }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
-        "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "math"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
       "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
-      "notes": "MATH 221A/B/C/D also satisfy the statistics half (outside the fixture data)."
+      "notes": "MATH 221A/B/C/D also satisfy the statistics half (outside the fixture data). MATH 221A-D (Business / Bio / Social Science / R statistics) also satisfy the statistics branch; not in this fixture.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ME310",
       "code": "ME 310",
-      "title": "Mechatronics and Measurement Systems II",
+      "title": "Dynamic Systems Modeling and Control",
       "credits": 3,
       "dept": "ME",
       "prereq": {
@@ -2863,11 +4265,15 @@
           }
         ]
       },
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F"
+        "F",
+        "W",
+        "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -2875,9 +4281,19 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false,
+      "blocksConfirmed": true,
       "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
-      "notes": "ME 305 (not in the fixture) is the catalog's alternative to ECEN 250."
+      "notes": "ME 305 (not in the fixture) is the catalog's alternative to ECEN 250. ME 305 (Mechatronics) is an alternative to ECEN 250; it is not in this fixture.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "ME410",
@@ -2886,11 +4302,13 @@
       "credits": 3,
       "dept": "ME",
       "prereq": "ME310",
-      "coreq": [],
+      "coreq": null,
       "terms": [
-        "F"
+        "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "ee-supplemental",
@@ -2898,7 +4316,16 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MUSIC101",
@@ -2907,21 +4334,34 @@
       "credits": 3,
       "dept": "MUSI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 4,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "MUSIC102",
@@ -2930,21 +4370,38 @@
       "credits": 3,
       "dept": "MUSI",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "notes": "Catalog also requires MUSIC 172 or MUSIC 130 concurrently, plus a MUSIC 155/160-series lesson. None of those are in this fixture; the program restriction already rules the course out.",
+      "restrictions": [
+        "Declared in program 203, 687, 690, 693, 795, or 890 — NOT open to Electrical Engineering (445)."
+      ],
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 2,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "PEACE101",
@@ -2953,21 +4410,36 @@
       "credits": 3,
       "dept": "PEACE",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "1st",
+        "2nd",
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 8,
+        "W": 6,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "PH121",
@@ -2976,16 +4448,16 @@
       "credits": 3,
       "dept": "PH",
       "prereq": null,
-      "coreq": [
-        "MATH112X"
-      ],
+      "coreq": "MATH112X",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": false,
+      "blocks": [
+        "full"
+      ],
+      "online": true,
       "tags": [
         "science"
       ],
@@ -2994,8 +4466,19 @@
         "kinematics"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 9,
+        "W": 9,
+        "S": 7
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "PH123",
@@ -3004,13 +4487,15 @@
       "credits": 3,
       "dept": "PH",
       "prereq": "PH121",
-      "coreq": [],
+      "coreq": "MATH112X",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
@@ -3020,23 +4505,36 @@
         "waves"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 4,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "PH135",
       "code": "PH 135",
-      "title": "Introduction to Scientific Computing",
+      "title": "Introduction to Scientific Computing in Physics",
       "credits": 2,
       "dept": "PH",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "programming",
@@ -3044,8 +4542,19 @@
       ],
       "notes": "Alternative to CSE 110 for the AI minor.",
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "PH150",
@@ -3054,25 +4563,35 @@
       "credits": 1,
       "dept": "PH",
       "prereq": null,
-      "coreq": [
-        "PH121"
-      ],
+      "coreq": "PH121",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
         "lab"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
       "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27.",
-      "notes": "Catalog lists no prerequisite."
+      "notes": "Catalog lists no prerequisite.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 2,
+        "W": 2,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "PH220",
@@ -3080,14 +4599,21 @@
       "title": "Principles of Physics III",
       "credits": 3,
       "dept": "PH",
-      "prereq": "PH123",
-      "coreq": [],
+      "prereq": "PH121",
+      "coreq": {
+        "or": [
+          "MATH113",
+          "MATH215"
+        ]
+      },
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science"
@@ -3097,8 +4623,20 @@
         "optics"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "notes": "PH 123 is NOT a prerequisite in the catalog — PH 220 needs only PH 121, with Calculus II or Multivariable Calculus alongside it.",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "PH250",
@@ -3107,22 +4645,35 @@
       "credits": 1,
       "dept": "PH",
       "prereq": "PH150",
-      "coreq": [],
+      "coreq": "PH220",
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": false,
       "tags": [
         "science",
         "lab"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false,
-      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), fetched 2026-07-27."
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "notes": "PH 223 (Engineering Physics) also satisfies the corequisite; it is not in this fixture.",
+      "prereqCheckedOn": "2026-08-06",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 1,
+        "W": 1,
+        "S": 1
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "PHIL110",
@@ -3131,21 +4682,34 @@
       "credits": 3,
       "dept": "PHIL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 5,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "POLSC110",
@@ -3154,21 +4718,34 @@
       "credits": 3,
       "dept": "POLSC",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 6,
+        "W": 6,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "POLSC150",
@@ -3177,21 +4754,34 @@
       "credits": 3,
       "dept": "POLSC",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "POLSC170",
@@ -3200,21 +4790,34 @@
       "credits": 3,
       "dept": "POLSC",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 4,
+        "W": 4,
+        "S": 3
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "PSYCH111",
@@ -3223,21 +4826,34 @@
       "credits": 3,
       "dept": "PSYCH",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 16,
+        "W": 15,
+        "S": 12
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "REL200C",
@@ -3246,13 +4862,17 @@
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "1st",
+        "2nd",
+        "full"
+      ],
       "online": true,
       "tags": [
         "religion",
@@ -3260,7 +4880,18 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 53,
+        "W": 59,
+        "S": 45
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "REL225C",
@@ -3269,13 +4900,16 @@
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "2nd",
+        "full"
+      ],
       "online": true,
       "tags": [
         "religion",
@@ -3283,7 +4917,18 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 50,
+        "W": 54,
+        "S": 43
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "REL250C",
@@ -3292,13 +4937,15 @@
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "religion",
@@ -3306,22 +4953,37 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 42,
+        "W": 46,
+        "S": 46
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "REL275C",
       "code": "REL 275C",
-      "title": "Teachings and Doctrine of the Book of Mormon",
+      "title": "The Teachings and Doctrine of the Book of Mormon",
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "1st",
+        "2nd",
+        "full"
+      ],
       "online": true,
       "tags": [
         "religion",
@@ -3329,7 +4991,18 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 46,
+        "W": 47,
+        "S": 40
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "REL327",
@@ -3338,21 +5011,34 @@
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "religion",
         "religion-elective"
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 3,
+        "W": 3,
+        "S": 2
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     },
     {
       "id": "REL333",
@@ -3361,13 +5047,15 @@
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "religion",
@@ -3375,7 +5063,18 @@
       ],
       "verified": true,
       "termsConfirmed": true,
-      "blocksConfirmed": false
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 8,
+        "W": 8,
+        "S": 7
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "REL_ELECTIVE",
@@ -3384,7 +5083,7 @@
       "credits": 2,
       "dept": "REL",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
@@ -3409,21 +5108,34 @@
       "credits": 3,
       "dept": "SOC",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "social-science"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 10,
+        "W": 9,
+        "S": 8
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "TA115",
@@ -3432,21 +5144,34 @@
       "credits": 3,
       "dept": "TA",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
+      "blocks": [
+        "full"
+      ],
       "online": true,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 6,
+        "S": 5
+      },
+      "onlineConfirmedBySchedule": true,
+      "onlineListed": true
     },
     {
       "id": "TA117",
@@ -3455,21 +5180,34 @@
       "credits": 3,
       "dept": "TA",
       "prereq": null,
-      "coreq": [],
+      "coreq": null,
       "terms": [
         "F",
         "W",
         "S"
       ],
-      "blocks": null,
-      "online": true,
+      "blocks": [
+        "full"
+      ],
+      "online": false,
       "tags": [
         "ge",
         "arts-humanities"
       ],
       "verified": true,
-      "termsConfirmed": false,
-      "blocksConfirmed": false
+      "termsConfirmed": true,
+      "blocksConfirmed": true,
+      "prereqCheckedOn": "2026-08-06",
+      "prereqSource": "BYU-Idaho 2026-2027 catalog (byui.kuali.co API), re-audited 2026-08-06.",
+      "scheduleSource": "BYU-Idaho public class schedule (student.byui.edu), Winter+Spring+Fall 2026, read 2026-08-06.",
+      "scheduleCheckedOn": "2026-08-06",
+      "sectionCounts": {
+        "F": 5,
+        "W": 5,
+        "S": 4
+      },
+      "onlineConfirmedBySchedule": false,
+      "onlineListed": false
     }
   ]
 }

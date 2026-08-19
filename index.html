@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GradTree — EE Degree Planner</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <title>Sprout — BYU-Idaho Degree Planner</title>
+    <!-- No stylesheet or font links on purpose: everything ships in the bundle
+         so the desktop build renders identically with no network. The
+         production Content-Security-Policy is injected at build time by
+         `csp()` in vite.config.ts — it cannot live here, because Vite's dev
+         server injects an inline React Refresh script that a strict
+         `script-src` would block. -->
   </head>
   <body>
     <div id="root"></div>

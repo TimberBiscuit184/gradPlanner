@@ -1,24 +1,158 @@
-import { AI_MINOR, COURSE_BY_ID, EE, GE_ABET, PROGRAM_BY_ID } from "../data";
+import { COURSE_BY_ID, PROGRAM_BY_ID } from "../data";
+import { activeEnrollment } from "./scope";
+import { assertsRequirements, trustOfProgram } from "./trust";
 import type { Bucket, Program } from "../types";
 import type { PlanModel } from "./plan";
 
+/** A retired course (no offered season) can never be part of a viable path. */
+function isReachable(id: string): boolean {
+  const c = COURSE_BY_ID.get(id);
+  if (!c) return false;
+  return !c.termsConfirmed || c.terms.length > 0;
+}
+
+function creditsOf(id: string): number {
+  return COURSE_BY_ID.get(id)?.credits ?? 0;
+}
+
+/** Every course id anywhere inside a bucket, following shared pools. */
+function poolOfBucket(b: Bucket, program: Program): string[] {
+  let pool = b.pool ?? [];
+  if (b.sharedPoolId) pool = findBucket(program, b.sharedPoolId)?.pool ?? [];
+  return pool;
+}
+
 /**
- * Courses that are unconditionally required — members of an allOf pool in any
- * of the three programs. There is no alternative to these; the tree marks
- * them with the "required" badge.
+ * Courses you must take — not just the ones a program spells out as `allOf`,
+ * but every course a rule leaves no way around:
+ *
+ *  - **allOf** — stated outright.
+ *  - **nOf where the pool has exactly n reachable options** — no choice left.
+ *  - **nCredits where dropping a course puts the pool below n.** This is the
+ *    one that matters most. EE's Math & Science core pool holds 21 credits and
+ *    demands 20, so the single credit of slack means every course of 2 credits
+ *    or more is unavoidable; only PH 150 (1 cr) is genuinely optional. The same
+ *    rule makes ECEN 250 + ECEN 299 required, since their pool is an exact fit.
+ *  - **nOfGroups where only n groups are still reachable** — the Introduction
+ *    bucket offers ECEN 100 *or* CSE 121c + the retired ECEN 101, so ECEN 100
+ *    is the only surviving path and is therefore required.
+ *
+ * Recomputed from the data, so it stays correct if a pool or a retirement
+ * changes. Used for the ★ marker in the tree and the add-course picker.
  */
-let REQUIRED_CACHE: Set<string> | null = null;
+const REQUIRED_CACHE = new Map<string, Set<string>>();
 export function requiredCourseIds(): Set<string> {
-  if (REQUIRED_CACHE) return REQUIRED_CACHE;
+  /**
+   * Keyed by enrolment, because ★ is a statement about *this student's*
+   * degree. It used to be a single global cache over every asserting program,
+   * which was invisibly correct while three programs existed and the student
+   * was enrolled in all three. The moment machine-read programs began
+   * asserting, that same line marked 941 courses across the whole university
+   * as unavoidable — for everyone, whatever they had picked.
+   */
+  const enrolled = activeEnrollment();
+  const key = [...enrolled].sort().join("|");
+  const cached = REQUIRED_CACHE.get(key);
+  if (cached) return cached;
+
+  /** Every course this bucket forces you to take, if you must satisfy it. */
+  const forcedBy = (b: Bucket, prog: Program): Set<string> => {
+    const out = new Set<string>();
+    const pool = poolOfBucket(b, prog).filter(isReachable);
+
+    switch (b.rule.type) {
+      case "allOf":
+        pool.forEach((id) => out.add(id));
+        break;
+
+      case "nOf":
+        // As many picks as there are options left — no choice remains.
+        if (
+          b.rule.n !== undefined &&
+          pool.length === b.rule.n &&
+          !pool.some((id) => COURSE_BY_ID.get(id)?.isPlaceholder)
+        )
+          pool.forEach((id) => out.add(id));
+        break;
+
+      case "nCredits": {
+        // A placeholder can be dropped as many times as you like, so a pool
+        // containing one has unbounded credits and forces nothing. Without
+        // this, Cornerstone's 6-credit REL pool looks like an exact fit and
+        // wrongly marks REL 327 and REL 333 as unavoidable.
+        if (pool.some((id) => COURSE_BY_ID.get(id)?.isPlaceholder)) break;
+        const need = b.rule.n ?? 0;
+        const total = pool.reduce((s, id) => s + creditsOf(id), 0);
+        pool.forEach((id) => {
+          if (total - creditsOf(id) < need) out.add(id);
+        });
+        break;
+      }
+
+      case "allOfGroups":
+        for (const g of b.groups ?? [])
+          forcedBy(g, prog).forEach((id) => out.add(id));
+        break;
+
+      /**
+       * Follow the reference. General Education is nested inside the major, so
+       * scoping to the enrolled programs alone would drop every GE course out
+       * of the ★ set — the courses a first-year student most needs marked.
+       */
+      case "programRef": {
+        const ref = PROGRAM_BY_ID.get(b.rule.programId ?? "");
+        if (ref && assertsRequirements(trustOfProgram(ref)))
+          for (const rb of ref.buckets)
+            forcedBy(rb, ref).forEach((id) => out.add(id));
+        break;
+      }
+
+      case "nOfGroups": {
+        const n = b.rule.n ?? 1;
+        const viable = (b.groups ?? []).filter((g) =>
+          poolIdsDeep(g, prog).every(isReachable),
+        );
+        const forcedPerGroup = viable.map((g) => forcedBy(g, prog));
+        // You must pick n of these. A course is unavoidable when fewer than n
+        // of the options let you skip it — which is why MATH 112X is required
+        // even though Foundational Math offers three routes: all three include
+        // it, so no route avoids it.
+        const every = new Set(forcedPerGroup.flatMap((s) => [...s]));
+        for (const id of every) {
+          const without = forcedPerGroup.filter((s) => !s.has(id)).length;
+          if (without < n) out.add(id);
+        }
+        break;
+      }
+    }
+    return out;
+  };
+
+  /**
+   * The student's own programs, and only those that assert.
+   *
+   * This used to be the literal list `[EE, AI_MINOR, GE_ABET]`, which was right
+   * by accident — those happened to be the only programs. With 204 more parsed
+   * out of the catalogue, "★ required — no alternative" has to rest on
+   * something better than a parser's self-assessment. See
+   * `assertsRequirements` for why `exact` is not enough here when it is enough
+   * for prerequisites.
+   */
   const out = new Set<string>();
-  for (const prog of [EE, AI_MINOR, GE_ABET]) {
-    const walk = (b: Bucket): void => {
-      if (b.rule.type === "allOf") b.pool?.forEach((id) => out.add(id));
-      b.groups?.forEach(walk);
-    };
-    prog.buckets.forEach(walk);
+  for (const id of enrolled) {
+    const prog = PROGRAM_BY_ID.get(id);
+    if (!prog || !assertsRequirements(trustOfProgram(prog))) continue;
+    for (const b of prog.buckets) forcedBy(b, prog).forEach((c) => out.add(c));
   }
-  REQUIRED_CACHE = out;
+
+  REQUIRED_CACHE.set(key, out);
+  return out;
+}
+
+/** All course ids inside a bucket and its groups, following shared pools. */
+function poolIdsDeep(b: Bucket, prog: Program): string[] {
+  const out = [...poolOfBucket(b, prog)];
+  for (const g of b.groups ?? []) out.push(...poolIdsDeep(g, prog));
   return out;
 }
 
@@ -108,10 +242,49 @@ export function evaluateProgram(
 }
 
 /** Unnamed sub-buckets fall back to a readable pool summary instead of a raw id. */
+/**
+ * A name for a bucket the catalogue never named.
+ *
+ * A short pool names itself — "BUS 301 + ENG 301" is clearer than any heading.
+ * Beyond three courses that becomes a wall of codes, so describe the rule
+ * instead. This used to give up there and fall through to `bucket.id`, which is
+ * how machine-read programs shipped requirements literally labelled `rule-1`,
+ * `rule-2`, `rule-3` — visible in Music's emphasis, and in every generated
+ * program with more than one clause under a heading.
+ */
 function fallbackLabel(bucket: Bucket): string | null {
   const pool = bucket.pool ?? [];
-  if (pool.length === 0 || pool.length > 3) return null;
-  return pool.map((id) => COURSE_BY_ID.get(id)?.code ?? id).join(" + ");
+  /**
+   * A `programRef` names itself by what it points at. Agribusiness references
+   * sixteen programs as unlabelled sibling clauses, so a student saw four rows
+   * reading `rule-1` … `rule-4`, each "needs 1 program", with no way to tell
+   * which. 15 programs were affected.
+   */
+  if (bucket.rule.type === "programRef") {
+    const ref = PROGRAM_BY_ID.get(bucket.rule.programId ?? "");
+    return ref ? ref.label : "Referenced program (not carried)";
+  }
+  // `fillTo` is the catch-all elective — "at least N credits from any eligible
+  // university credits". It names no courses, so a pool-first check never
+  // reaches it and it shipped as `rule-4`.
+  if (bucket.rule.type === "fillTo")
+    return `${bucket.rule.n} credits of electives`;
+  if (pool.length === 0) return null;
+  /**
+   * A short pool names itself — but the joiner has to match the rule. "PHIL
+   * 201 + PHIL 202" on a `pick 1` rule reads as "take both", which is the
+   * opposite of what it means. Conjunction for allOf, disjunction otherwise.
+   */
+  if (pool.length <= 3) {
+    const codes = pool.map((id) => COURSE_BY_ID.get(id)?.code ?? id);
+    return codes.join(bucket.rule.type === "allOf" ? " + " : " or ");
+  }
+
+  const rule = bucket.rule;
+  if (rule.type === "nCredits") return `${rule.n} credits from ${pool.length} courses`;
+  if (rule.type === "nOf") return `Choose ${rule.n} of ${pool.length}`;
+  if (rule.type === "allOf") return `All ${pool.length} courses`;
+  return null;
 }
 
 function evalBucket(bucket: Bucket, program: Program, ctx: Ctx): BucketEval {
@@ -316,12 +489,22 @@ export function obsoleteCourseIds(
 ): Set<string> {
   const inactive = new Set<string>();
   const active = new Set<string>();
-  const walk = (be: BucketEval, parentNN: boolean): void => {
-    const nn = be.notNeeded || parentNN;
+  const walk = (be: BucketEval, parentNN: boolean, asserts: boolean): void => {
+    const nn = (be.notNeeded || parentNN) && asserts;
     for (const id of be.poolResolved) (nn ? inactive : active).add(id);
-    be.children.forEach((c) => walk(c, nn));
+    be.children.forEach((c) => walk(c, nn, asserts));
   };
-  evals.forEach((pe) => pe.buckets.forEach((b) => walk(b, false)));
+  /**
+   * "Not needed" strikes a course through and prunes it from focus modes and
+   * the autoplanner. Claiming that from a machine-read program could hide a
+   * course the student actually needs, so only hand-checked programs get a
+   * vote. Machine-read programs still contribute their *active* pools, so
+   * nothing they require is ever marked obsolete by someone else's rule.
+   */
+  evals.forEach((pe) => {
+    const asserts = assertsRequirements(trustOfProgram(pe.program));
+    pe.buckets.forEach((b) => walk(b, false, asserts));
+  });
   const out = new Set<string>();
   for (const id of inactive) {
     if (active.has(id)) continue; // still needed somewhere else
@@ -350,4 +533,49 @@ export function bucketPoolIds(be: BucketEval, program: Program): Set<string> {
   };
   walk(be.bucket);
   return out;
+}
+
+/**
+ * Course sets the catalogue says must be taken in ONE term.
+ *
+ * "The following courses must be taken together in the same semester" —
+ * Business Management's IBC block, its Interdisciplinary Studies emphasis, and
+ * the Small Business minor. Requiring the three courses was never the missing
+ * part; nothing stopped a student spreading them across three semesters and
+ * finishing with a plan that looks complete and cannot be registered.
+ *
+ * Scoped to the student's own enrolment, and to programs that assert. A
+ * constraint read out of a program we have already flagged as incompletely
+ * understood is not one to enforce.
+ */
+const SAME_TERM_CACHE = new Map<string, string[][]>();
+export function sameTermGroups(): string[][] {
+  const enrolled = activeEnrollment();
+  const key = [...enrolled].sort().join("|");
+  const cached = SAME_TERM_CACHE.get(key);
+  if (cached) return cached;
+
+  const out: string[][] = [];
+  const walk = (b: Bucket) => {
+    if (b.sameTerm && (b.pool ?? []).length > 1) out.push([...b.pool!]);
+    for (const g of b.groups ?? []) walk(g);
+    if (b.rule.type === "programRef") {
+      const ref = PROGRAM_BY_ID.get(b.rule.programId ?? "");
+      if (ref && assertsRequirements(trustOfProgram(ref))) ref.buckets.forEach(walk);
+    }
+  };
+  for (const id of enrolled) {
+    const prog = PROGRAM_BY_ID.get(id);
+    if (!prog || !assertsRequirements(trustOfProgram(prog))) continue;
+    prog.buckets.forEach(walk);
+  }
+  SAME_TERM_CACHE.set(key, out);
+  return out;
+}
+
+/** The same-term set containing this course, if any. */
+export function sameTermPartners(courseId: string): string[] {
+  for (const g of sameTermGroups())
+    if (g.includes(courseId)) return g.filter((id) => id !== courseId);
+  return [];
 }

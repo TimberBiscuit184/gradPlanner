@@ -1,10 +1,27 @@
 import { COURSE_BY_ID, EE } from "../data";
 import type { Course, PrereqNode, Season } from "../types";
-import { prereqDepth, type Occurrence, type PlanModel } from "./plan";
+import { prereqDepth, prereqLeaves, type Occurrence, type PlanModel } from "./plan";
 import { requiredCourseIds } from "./requirements";
 
 const COUNTING = new Set(["completed", "in-progress", "registered", "planned"]);
 const MAX_TERM_CREDITS = 16;
+
+/**
+ * Rough cost of satisfying one branch of an OR: how many of its courses are not
+ * already on the timeline, then how deep the deepest of those sits. Used to
+ * order branches so the scheduler tries the cheapest first and commits to it —
+ * an OR means "pick one", so placing every branch over-plans the degree.
+ */
+function branchCost(
+  node: PrereqNode,
+  satisfiedAt: (id: string) => number | null,
+): number {
+  const unmet = prereqLeaves(node).filter(
+    (id) => COURSE_BY_ID.has(id) && satisfiedAt(id) === null,
+  );
+  if (!unmet.length) return 0;
+  return unmet.length * 100 + Math.max(...unmet.map((id) => prereqDepth(id)));
+}
 
 export interface AutoplanResult {
   additions: { courseId: string; termId: string }[];
@@ -21,7 +38,11 @@ export interface AutoplanResult {
  * anyway and double-counts here. It does not place every single-term elective;
  * that would over-plan courses the degree doesn't need.
  */
-export function planBottlenecksAsap(model: PlanModel): AutoplanResult {
+export function planBottlenecksAsap(
+  model: PlanModel,
+  /** "not needed" courses (unchosen option branches) — never worth scheduling. */
+  obsolete: ReadonlySet<string> = new Set(),
+): AutoplanResult {
   const additions: { courseId: string; termId: string }[] = [];
   const notes: string[] = [];
 
@@ -69,16 +90,18 @@ export function planBottlenecksAsap(model: PlanModel): AutoplanResult {
         }
         return max;
       }
-      let best: number | null = null;
       for (const k of node.or) {
         const already = orBranchSatisfied(k);
         if (already !== null) return already;
       }
-      for (const k of node.or) {
+      // Commit to one branch: cheapest first, first success wins.
+      for (const k of [...node.or].sort(
+        (a, b) => branchCost(a, satisfiedAt) - branchCost(b, satisfiedAt),
+      )) {
         const v = depIndex(k);
-        if (v !== null && (best === null || v < best)) best = v;
+        if (v !== null) return v;
       }
-      return best;
+      return null;
     };
     const orBranchSatisfied = (node: PrereqNode): number | null => {
       if (node == null) return -1;
@@ -105,20 +128,47 @@ export function planBottlenecksAsap(model: PlanModel): AutoplanResult {
       return null;
     }
 
+    // Earliest term index by which the corequisite expression can hold. Same
+    // shape as prereqs, but "same term" counts, so the caller compares with <=.
+    const coreqIndex = (node: PrereqNode): number | null => {
+      if (node == null) return -1;
+      if (typeof node === "string")
+        return satisfiedAt(node) ?? ensure(node, nextSeen);
+      if ("and" in node) {
+        let max = -1;
+        for (const k of node.and) {
+          const v = coreqIndex(k);
+          if (v === null) return null;
+          max = Math.max(max, v);
+        }
+        return max;
+      }
+      let best: number | null = null;
+      for (const k of node.or) {
+        const v = coreqIndex(k);
+        if (v !== null && (best === null || v < best)) best = v;
+      }
+      return best;
+    };
+
     for (const t of future) {
       if (t.index <= after) continue;
       if (c.termsConfirmed && !c.terms.includes(t.season as Season)) continue;
       if ((load.get(t.id) ?? 0) + c.credits > MAX_TERM_CREDITS) continue;
       // coreqs must sit in the same term or earlier
-      let coreqOk = true;
-      for (const q of c.coreq) {
-        const qi = satisfiedAt(q) ?? ensure(q, nextSeen);
-        if (qi === null || qi > t.index) {
-          coreqOk = false;
-          break;
-        }
-      }
-      if (!coreqOk) continue;
+      const ci = coreqIndex(c.coreq);
+      if (ci === null || ci > t.index) continue;
+      /**
+       * Re-check the load AFTER resolving corequisites.
+       *
+       * `coreqIndex` can itself place courses — into this very term, since a
+       * corequisite may sit alongside. The cap was read before that happened
+       * and never read again, so the term could be full by the time this
+       * course was pushed onto it. Nursing landed a 19-credit semester under a
+       * 16-credit cap this way: a check-then-act gap with the planner's own
+       * recursion running in between.
+       */
+      if ((load.get(t.id) ?? 0) + c.credits > MAX_TERM_CREDITS) continue;
 
       additions.push({ courseId: id, termId: t.id });
       load.set(t.id, (load.get(t.id) ?? 0) + c.credits);
@@ -147,6 +197,7 @@ export function planBottlenecksAsap(model: PlanModel): AutoplanResult {
       const c = COURSE_BY_ID.get(id)!;
       return (
         !c.isPlaceholder &&
+        !obsolete.has(id) &&
         (d.status === "available" || d.status === "locked") &&
         d.directUnlocks.length >= 4
       );
@@ -154,10 +205,13 @@ export function planBottlenecksAsap(model: PlanModel): AutoplanResult {
     .map(([id]) => id);
   for (const id of gates) ensure(id, new Set());
 
-  // 2. Required courses that are single-term (none today, but future-proof).
+  // 2. Required courses offered in only one season — scarce, so grab them early.
+  //    Must skip "not needed" options too: once the real 2026 schedule landed,
+  //    the retired ECEN 101 became single-season and this loop started
+  //    scheduling it, even though ECEN 100 already satisfies that requirement.
   const required = requiredCourseIds();
   for (const c of [...COURSE_BY_ID.values()]) {
-    if (!required.has(c.id) || c.isPlaceholder) continue;
+    if (!required.has(c.id) || c.isPlaceholder || obsolete.has(c.id)) continue;
     const d = model.derived.get(c.id)!;
     if ((d.status === "available" || d.status === "locked") && c.terms.length === 1)
       ensure(c.id, new Set());
@@ -277,13 +331,15 @@ export function planWishlist(
         }
         return max;
       }
-      // pick the OR branch that is cheapest to satisfy
-      let best: number | null = null;
-      for (const k of node.or) {
+      // Pick ONE branch — cheapest first, first success wins. Scoring every
+      // branch by calling resolve() would schedule the losers too.
+      for (const k of [...node.or].sort(
+        (a, b) => branchCost(a, satisfiedAt) - branchCost(b, satisfiedAt),
+      )) {
         const v = resolve(k);
-        if (v !== null && (best === null || v < best)) best = v;
+        if (v !== null) return v;
       }
-      return best;
+      return null;
     };
 
     const after = resolve(c.prereq);
@@ -292,19 +348,34 @@ export function planWishlist(
       return null;
     }
 
+    const coreqIndex = (node: PrereqNode): number | null => {
+      if (node == null) return -1;
+      if (typeof node === "string") return satisfiedAt(node) ?? place(node, next);
+      if ("and" in node) {
+        let max = -1;
+        for (const k of node.and) {
+          const v = coreqIndex(k);
+          if (v === null) return null;
+          max = Math.max(max, v);
+        }
+        return max;
+      }
+      let best: number | null = null;
+      for (const k of node.or) {
+        const v = coreqIndex(k);
+        if (v !== null && (best === null || v < best)) best = v;
+      }
+      return best;
+    };
+
     for (const t of future) {
       if (t.index <= after) continue;
       if (c.termsConfirmed && !c.terms.includes(t.season as Season)) continue;
       if ((load.get(t.id) ?? 0) + c.credits > maxCredits) continue;
-      let coreqOk = true;
-      for (const q of c.coreq) {
-        const qi = satisfiedAt(q) ?? place(q, next);
-        if (qi === null || qi > t.index) {
-          coreqOk = false;
-          break;
-        }
-      }
-      if (!coreqOk) continue;
+      const ci = coreqIndex(c.coreq);
+      if (ci === null || ci > t.index) continue;
+      // Same check-then-act gap as `planBottlenecksAsap` — see there.
+      if ((load.get(t.id) ?? 0) + c.credits > maxCredits) continue;
 
       additions.push({ courseId: id, termId: t.id });
       load.set(t.id, (load.get(t.id) ?? 0) + c.credits);

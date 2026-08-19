@@ -1,4 +1,4 @@
-import { COURSES, COURSE_BY_ID, EE, AI_MINOR, GE_ABET, STUDENT } from "../data";
+import { COURSES, COURSE_BY_ID, PROGRAMS, STUDENT } from "../data";
 import type {
   Bucket,
   Course,
@@ -7,10 +7,20 @@ import type {
   Placement,
   PrereqNode,
   Program,
+  Student,
   TimelineTerm,
   TranscriptEntry,
 } from "../types";
 import { meetsThreshold } from "./grades";
+import { enforcesPrereq, trustOf } from "./trust";
+import {
+  blockingRestriction,
+  checkRestrictions,
+  type RestrictionContext,
+} from "./restrictions";
+import { DEFAULT_PROGRAM_CODES } from "./programs";
+import { sameTermPartners } from "./requirements";
+import { relevantCourseIds } from "./scope";
 import { buildTimeline } from "./terms";
 
 /** One appearance of a course on the timeline — transcript entry or user placement. */
@@ -48,6 +58,12 @@ export interface PlanModel {
   totalPlanCredits: number;
   completedCourseIds: string[];
   totalEarnedCredits: number;
+  /**
+   * Program codes the student is declared in, carried on the model so
+   * restriction checks reach `validateDrop` without changing its signature at
+   * every call site.
+   */
+  programCodes: readonly string[];
 }
 
 // ---- program membership → minGrade threshold ----
@@ -63,23 +79,50 @@ function programPool(p: Program): Set<string> {
   return s;
 }
 
-const EE_POOL = programPool(EE);
-const AI_POOL = programPool(AI_MINOR);
-const GE_POOL = programPool(GE_ABET);
+/**
+ * Course pools, one per program in the registry, built once.
+ *
+ * This used to be three constants named EE_POOL / AI_POOL / GE_POOL with the
+ * grade rule written out by hand. Driving it off the registry is what lets a
+ * fourth program exist without editing this file — and it keeps each program's
+ * own `minGrade` attached to its own pool instead of assuming everyone shares
+ * the major's.
+ */
+const POOLS: { program: Program; pool: Set<string> }[] = PROGRAMS.map((p) => ({
+  program: p,
+  pool: programPool(p),
+}));
 
-/** Strictest minGrade among the programs whose pools contain the course. */
-export function thresholdFor(courseId: string): string | null {
-  if (EE_POOL.has(courseId) || AI_POOL.has(courseId)) return EE.minGrade; // "C-"
-  if (GE_POOL.has(courseId)) return GE_ABET.minGrade; // null → any credit-earning grade
-  return null;
+/**
+ * Which programs is this course allowed to count toward?
+ *
+ * Registry-wide rather than enrollment-filtered on purpose: the answer is a
+ * property of the catalogue, and the rail already shows what the student is
+ * actually enrolled in. Filtering here would make "Counts toward" silently
+ * incomplete when comparing programs.
+ */
+export function programsContaining(courseId: string): Program[] {
+  return POOLS.filter(({ pool }) => pool.has(courseId)).map((e) => e.program);
 }
 
-export function programsContaining(courseId: string): Program[] {
-  const out: Program[] = [];
-  if (EE_POOL.has(courseId)) out.push(EE);
-  if (GE_POOL.has(courseId)) out.push(GE_ABET);
-  if (AI_POOL.has(courseId)) out.push(AI_MINOR);
-  return out;
+/** Rank for `minGrade` strings — higher index is a stricter requirement. */
+const GRADE_ORDER = ["D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A"];
+
+/**
+ * Strictest minGrade among the programs whose pools contain the course.
+ *
+ * `null` means "any credit-earning grade" and is therefore the weakest possible
+ * requirement, not the strongest — a course in both GE (null) and the major
+ * (C-) has to clear C-.
+ */
+export function thresholdFor(courseId: string): string | null {
+  let best: string | null = null;
+  for (const { program, pool } of POOLS) {
+    if (!pool.has(courseId) || program.minGrade == null) continue;
+    if (best === null || GRADE_ORDER.indexOf(program.minGrade) > GRADE_ORDER.indexOf(best))
+      best = program.minGrade;
+  }
+  return best;
 }
 
 // ---- prereq expression helpers ----
@@ -95,26 +138,42 @@ export function prereqLeaves(node: PrereqNode, out: string[] = []): string[] {
   return out;
 }
 
-/** Direct unlocks: courses whose prereq expression names `id`. Direct only — never transitive. */
-export function directUnlocksOf(id: string): string[] {
-  return COURSES.filter((c) => prereqLeaves(c.prereq).includes(id)).map(
-    (c) => c.id,
-  );
+/**
+ * Reverse edge indexes, built in **one pass over the courses**, not one pass
+ * per course.
+ *
+ * These were `COURSES.map(c => COURSES.filter(…))`, which is O(N²) and
+ * re-derives every course's prerequisite leaves N times. At 136 courses that
+ * cost 21 ms and nobody noticed. At the full 2,032-course catalogue it cost
+ * **1.1 seconds of blocking work before React could render** — measured, not
+ * guessed. Inverting the loop makes it O(N·edges): the same 2,032 courses now
+ * index in single-digit milliseconds.
+ *
+ * Insertion order still follows `COURSES`, so unlock lists stay deterministic
+ * and the counts asserted in `npm run verify` do not move.
+ */
+function reverseIndex(edgesOf: (c: Course) => string[]): Map<string, string[]> {
+  const m = new Map<string, string[]>(COURSES.map((c) => [c.id, []]));
+  for (const c of COURSES) {
+    for (const dep of new Set(edgesOf(c))) m.get(dep)?.push(c.id);
+  }
+  return m;
 }
 
-const DIRECT_UNLOCKS = new Map<string, string[]>(
-  COURSES.map((c) => [c.id, directUnlocksOf(c.id)]),
-);
+const DIRECT_UNLOCKS = reverseIndex((c) => prereqLeaves(c.prereq));
 
-/** Dependency edges for the downstream walk: prereq AND coreq (a coreq is still a dependency). */
-const DEP_EDGES = new Map<string, string[]>(
-  COURSES.map((c) => [
-    c.id,
-    COURSES.filter(
-      (t) => prereqLeaves(t.prereq).includes(c.id) || t.coreq.includes(c.id),
-    ).map((t) => t.id),
-  ]),
-);
+/** Direct unlocks: courses whose prereq expression names `id`. Direct only — never transitive. */
+export function directUnlocksOf(id: string): string[] {
+  return DIRECT_UNLOCKS.get(id) ?? [];
+}
+
+/** Every course this one depends on, prereq or coreq — a coreq is still a dependency. */
+export function dependencyIds(c: Course): string[] {
+  return [...new Set([...prereqLeaves(c.prereq), ...prereqLeaves(c.coreq)])];
+}
+
+/** Dependency edges for the downstream walk: prereq AND coreq. Same one-pass build. */
+const DEP_EDGES = reverseIndex(dependencyIds);
 
 /** Transitive descendant set, for the downstream-highlight interaction only — never a node label. */
 export function transitiveDescendantsOf(id: string): Set<string> {
@@ -133,9 +192,19 @@ export function transitiveDescendantsOf(id: string): Set<string> {
 }
 
 /**
- * Longest prerequisite chain behind a course, counted globally (not per
- * cluster). 0 = no prerequisites at all; the tree uses this for the horizontal
- * stagger so "further right" always means "more prerequisites deep".
+ * How many semesters deep a course sits, counted globally (not per cluster).
+ * 0 = takeable immediately; the tree uses this for the horizontal stagger so
+ * "further right" always means "more prerequisites deep".
+ *
+ * Three rules, all of which matter for the column to be honest:
+ *  - A **prerequisite** costs a column: it must finish in an earlier term.
+ *  - A **corequisite** costs nothing: it may be taken in the same term, so
+ *    ECEN 299 draws beside ECEN 250 rather than one column right.
+ *  - **AND takes the deepest** branch (all are required); **OR takes the
+ *    shallowest** (the student picks one), matching how criticalPath and the
+ *    autoplanner resolve the same expressions. Flattening an OR to its leaves
+ *    and taking the max would rank a course by a path nobody would choose —
+ *    MATH 341's "MATH 112X or MATH 119" pushed it to column 7 instead of 1.
  */
 const DEPTH_CACHE = new Map<string, number>();
 export function prereqDepth(id: string, seen: Set<string> = new Set()): number {
@@ -144,13 +213,24 @@ export function prereqDepth(id: string, seen: Set<string> = new Set()): number {
   if (seen.has(id)) return 0; // cycle guard
   const c = COURSE_BY_ID.get(id);
   if (!c) return 0;
-  const deps = [...new Set([...prereqLeaves(c.prereq), ...c.coreq])].filter(
-    (p) => COURSE_BY_ID.has(p),
-  );
   const next = new Set(seen).add(id);
-  const d = deps.length
-    ? 1 + Math.max(...deps.map((p) => prereqDepth(p, next)))
-    : 0;
+
+  /** Depth of an expression, or null when it names nothing in the fixture. */
+  const exprDepth = (node: PrereqNode): number | null => {
+    if (node == null) return null;
+    if (typeof node === "string")
+      return COURSE_BY_ID.has(node) ? prereqDepth(node, next) : null;
+    const kids = "and" in node ? node.and : node.or;
+    const vals = kids
+      .map(exprDepth)
+      .filter((v): v is number => v !== null);
+    if (!vals.length) return null;
+    return "and" in node ? Math.max(...vals) : Math.min(...vals);
+  };
+
+  const pre = exprDepth(c.prereq);
+  const co = exprDepth(c.coreq);
+  const d = Math.max(pre === null ? 0 : pre + 1, co === null ? 0 : co);
   if (seen.size === 0) DEPTH_CACHE.set(id, d);
   return d;
 }
@@ -163,7 +243,7 @@ export function transitiveAncestorsOf(id: string): Set<string> {
     const cur = stack.pop()!;
     const c = COURSE_BY_ID.get(cur);
     if (!c) continue;
-    for (const prev of [...prereqLeaves(c.prereq), ...c.coreq]) {
+    for (const prev of dependencyIds(c)) {
       if (!COURSE_BY_ID.has(prev) || out.has(prev)) continue;
       out.add(prev);
       stack.push(prev);
@@ -171,6 +251,22 @@ export function transitiveAncestorsOf(id: string): Set<string> {
   }
   return out;
 }
+
+/**
+ * A course the university no longer runs. `terms: []` with confirmed terms is
+ * the encoding — see CLAUDE.md. Distinct from "we don't know when it runs".
+ */
+export function isRetired(c: Course): boolean {
+  return c.termsConfirmed && c.terms.length === 0;
+}
+
+/** What to take instead, where the catalog makes the successor obvious. */
+export const RETIRED_REPLACEMENT: Record<string, string> = {
+  CIT160:
+    "CSE 110 is the current equivalent — the catalog still accepts your CIT 160 credit as the prerequisite for CSE 111.",
+  ECEN101:
+    "ECEN 100 replaced it, and satisfies the same Introduction requirement.",
+};
 
 // ---- the model ----
 
@@ -181,9 +277,38 @@ const COUNTING_STATES = new Set([
   "planned",
 ]);
 
-export function buildPlan(placements: Placement[]): PlanModel {
-  const timeline = buildTimeline(STUDENT);
+/**
+ * A term you can still change. History is immutable, but a term you are merely
+ * registered for is not — you can still add and drop during registration, so
+ * the board lets you rearrange it.
+ */
+export function isEditableTerm(t: TimelineTerm): boolean {
+  return !t.real || t.status !== "complete";
+}
+
+/** Key for a dropped registration: one course out of one real term. */
+export function registrationKey(termId: string, courseId: string): string {
+  return `${termId}:${courseId}`;
+}
+
+export function buildPlan(
+  placements: Placement[],
+  /** Registrations the user has dropped — `termId:courseId` (see store). */
+  droppedRegistrations: readonly string[] = [],
+  /** Declared program codes, for enrollment restrictions. */
+  programCodes: readonly string[] = DEFAULT_PROGRAM_CODES,
+  /**
+   * Whose record this is. Defaults to the shipped one, which is **blank** — the
+   * app opens with no transcript so a new user starts clean. Tests pass a real
+   * record in, which is how the suite keeps asserting concrete numbers without
+   * that record being bundled into the app.
+   */
+  student: Student = STUDENT,
+): PlanModel {
+  const scope = relevantCourseIds();
+  const timeline = buildTimeline(student);
   const termById = new Map(timeline.map((t) => [t.id, t]));
+  const dropped = new Set(droppedRegistrations);
 
   // 1. Collect occurrences.
   const occByCourse = new Map<string, Occurrence[]>();
@@ -196,9 +321,13 @@ export function buildPlan(placements: Placement[]): PlanModel {
     occurrencesByTerm.get(o.termId)?.push(o);
   };
 
-  for (const term of STUDENT.terms) {
+  for (const term of student.terms) {
     const tl = termById.get(term.id)!;
     for (const e of term.courses) {
+      // Dropped from a term that is still editable — treat it as never taken.
+      // Completed history can never be dropped, so it is never filtered here.
+      if (isEditableTerm(tl) && dropped.has(registrationKey(term.id, e.id)))
+        continue;
       const passed =
         e.state === "completed" &&
         meetsThreshold(e.grade, thresholdFor(e.id));
@@ -258,7 +387,9 @@ export function buildPlan(placements: Placement[]): PlanModel {
       return last.state === "planned" ? "planned" : last.state;
     }
     // Not on the timeline at all: available vs locked by optimistic satisfiability.
-    return isSatisfiable(c.prereq) ? "available" : "locked";
+    return isSatisfiable(c.prereq) && isSatisfiable(c.coreq)
+      ? "available"
+      : "locked";
   };
 
   /** A prereq leaf is "reachable" if the course has any counting occurrence, or passes recursively. */
@@ -296,12 +427,21 @@ export function buildPlan(placements: Placement[]): PlanModel {
       earnedCredits,
       occurrences: occs,
       flags: [],
-      directUnlocks: DIRECT_UNLOCKS.get(c.id) ?? [],
+      /**
+       * Scoped to the planning set. "unlocks 9" has to mean nine courses *you*
+       * might take — with the whole catalogue loaded, ENG 301 unlocks 442
+       * courses university-wide, which made it the top suggestion for an
+       * electrical-engineering student. The graph edges stay unscoped; only
+       * this count, which drives the badge and the gate bonus, is filtered.
+       */
+      directUnlocks: (DIRECT_UNLOCKS.get(c.id) ?? []).filter((id) =>
+        scope.has(id),
+      ),
     });
   }
 
   // 3. Flags (at-risk logic).
-  const springFall = STUDENT.track.pattern === "spring-fall";
+  const springFall = student.track.pattern === "spring-fall";
   for (const c of COURSES) {
     const d = derived.get(c.id)!;
     if (c.isPlaceholder) continue; // placeholders never trigger warnings
@@ -358,6 +498,34 @@ export function buildPlan(placements: Placement[]): PlanModel {
           text: `${c.code} is not offered in ${term.label.split(" ")[0]} (offered: ${c.terms.join(", ")}).`,
         });
       }
+      /**
+       * Courses the catalogue requires in ONE term. Business Management's IBC
+       * block is three courses that must be registered together; the app used
+       * to require all three and say nothing when a student spread them across
+       * three semesters — a plan that looks finished and cannot be registered.
+       *
+       * A warning, not a block. The student builds the plan one course at a
+       * time, so the split is a normal intermediate state; the app's job is to
+       * say so, not to refuse the drop.
+       */
+      const partners = sameTermPartners(c.id);
+      if (partners.length) {
+        const elsewhere = partners.filter((id) =>
+          (occByCourse.get(id) ?? []).some(
+            (po) => COUNTING_STATES.has(po.state) && po.termId !== o.termId,
+          ),
+        );
+        if (elsewhere.length)
+          d.flags.push({
+            level: "warning",
+            unconfirmed: false,
+            text:
+              `${c.code} must be taken in the same semester as ` +
+              `${elsewhere.map((id) => COURSE_BY_ID.get(id)?.code ?? id).join(", ")}` +
+              ` — currently in a different term.`,
+          });
+      }
+
       const pr = checkPrereqAt(c, o.termIndex, occByCourse);
       if (!pr.ok) {
         d.flags.push({
@@ -383,6 +551,30 @@ export function buildPlan(placements: Placement[]): PlanModel {
     0,
   );
 
+  /**
+   * Enrollment gates, checked in a second pass.
+   *
+   * They live here rather than in the per-course loop above because a credit
+   * minimum needs the *total* earned credits, which is only known once every
+   * course has been derived. Each gate is now checked against the student:
+   * "restricted to programs 203, 687…" becomes a warning when you are not in
+   * one of them and says nothing at all when you are — where before every
+   * restriction rendered as the same undifferentiated info text.
+   */
+  const restrictionCtx: RestrictionContext = { programCodes, earnedCredits: totalEarnedCredits };
+  for (const c of COURSES) {
+    const d = derived.get(c.id);
+    if (!d) continue;
+    for (const rc of checkRestrictions(c, restrictionCtx)) {
+      if (rc.status === "met") continue; // nothing to say about a gate you clear
+      d.flags.push({
+        level: rc.status === "unmet" ? "warning" : "info",
+        unconfirmed: rc.status === "unknown",
+        text: rc.status === "unmet" ? `Not open to you: ${rc.detail}` : rc.detail,
+      });
+    }
+  }
+
   return {
     timeline,
     termById,
@@ -391,6 +583,7 @@ export function buildPlan(placements: Placement[]): PlanModel {
     totalPlanCredits,
     completedCourseIds,
     totalEarnedCredits,
+    programCodes,
   };
 }
 
@@ -428,35 +621,37 @@ export function checkPrereqAt(
         (allowEqual ? o.termIndex <= termIndex : o.termIndex < termIndex),
     );
 
-  const evalNode = (node: PrereqNode): boolean => {
+  /**
+   * `allowEqual` distinguishes the two rules: a prerequisite must sit strictly
+   * before T, a corequisite may sit in T itself. Both use the same expression
+   * shape, so this walks either one.
+   */
+  const evalNode = (node: PrereqNode, allowEqual: boolean): boolean => {
     if (node == null) return true;
     if (typeof node === "string") {
-      const ok = leafOk(node, false);
-      if (!ok) missing.push(COURSE_BY_ID.get(node)?.code ?? node);
+      const ok = leafOk(node, allowEqual);
+      if (!ok) {
+        const code = COURSE_BY_ID.get(node)?.code ?? node;
+        missing.push(allowEqual ? `${code} (coreq)` : code);
+      }
       return ok;
     }
     if ("and" in node) {
       // Evaluate all so `missing` is complete.
-      return node.and.map(evalNode).every(Boolean);
+      return node.and.map((k) => evalNode(k, allowEqual)).every(Boolean);
     }
     const before = missing.length;
-    const ok = node.or.some(evalNode);
+    const ok = node.or.some((k) => evalNode(k, allowEqual));
     if (ok) missing.length = before; // an OR that passed leaves no missing entries
     return ok;
   };
 
-  const prereqOk = evalNode(course.prereq);
-  let coreqOk = true;
-  for (const id of course.coreq) {
-    if (!leafOk(id, true)) {
-      coreqOk = false;
-      missing.push(`${COURSE_BY_ID.get(id)?.code ?? id} (coreq)`);
-    }
-  }
+  const prereqOk = evalNode(course.prereq, false);
+  const coreqOk = evalNode(course.coreq, true);
   return {
     ok: prereqOk && coreqOk,
     missing: [...new Set(missing)],
-    unconfirmed: !course.verified,
+    unconfirmed: !enforcesPrereq(trustOf(course)),
   };
 }
 
@@ -479,16 +674,39 @@ export function validateDrop(
   const c = COURSE_BY_ID.get(courseId)!;
   const term = model.termById.get(termId);
   if (!term) return { allowed: false, level: "blocked", reason: "Unknown term.", unconfirmed: false };
-  if (term.real) {
+  // History is immutable. A registered term is not — you can still add and drop
+  // during registration, so it stays editable.
+  if (term.real && term.status === "complete") {
     return {
       allowed: false,
       level: "blocked",
-      reason: `${term.label} is ${term.status === "complete" ? "history" : "already registered"} — real terms are read-only.`,
+      reason: `${term.label} is history — completed terms are read-only.`,
       unconfirmed: false,
     };
   }
   if (c.isPlaceholder) {
     return { allowed: true, level: "ok", reason: null, unconfirmed: false };
+  }
+
+  // Same-semester block: warn at the moment of the drop, so the student sees it
+  // while placing rather than after.
+  const partners = sameTermPartners(courseId);
+  if (partners.length) {
+    const elsewhere = partners.filter((id) =>
+      (model.derived.get(id)?.occurrences ?? []).some(
+        (o) => COUNTING_STATES.has(o.state) && o.termId !== termId,
+      ),
+    );
+    if (elsewhere.length)
+      return {
+        allowed: true,
+        level: "warning",
+        reason:
+          `Must be taken with ${elsewhere
+            .map((id) => COURSE_BY_ID.get(id)?.code ?? id)
+            .join(", ")} in the same semester.`,
+        unconfirmed: false,
+      };
   }
   // Duplicate placement of a non-placeholder that is already passed/active in that term
   const dup = model.derived
@@ -509,20 +727,71 @@ export function validateDrop(
   for (const [id, d] of model.derived) occByCourse.set(id, d.occurrences);
   const pr = checkPrereqAt(c, term.index, occByCourse);
   if (!pr.ok) {
-    const hard = c.verified; // confirmed edge → hard block; inferred edge → warn but allow
-    const reason =
-      `Prerequisite not satisfied by ${term.label}: ${pr.missing.join(", ")}` +
-      (pr.unconfirmed ? " (unconfirmed prerequisite)" : "");
+    /**
+     * Only a *complete* reading of the catalogue earns a hard block.
+     *
+     * `human` and `exact` mean every token of the rule was understood, so
+     * refusing is safe. `parsed` means we dropped something — possibly an OR
+     * branch that would have let this drop through — and `unsure` means we
+     * could not represent the shape at all. In both of those cases blocking
+     * risks refusing a registration the university allows, which is the one
+     * failure that makes a planner worth less than no planner. See
+     * `engine/trust.ts` for the asymmetry argument.
+     */
+    const trust = trustOf(c);
+    const hard = enforcesPrereq(trust);
+    const caveat =
+      trust === "parsed"
+        ? " (read from the catalog; some options could not be modelled, so this is a warning rather than a block)"
+        : trust === "unsure"
+          ? " (unconfirmed prerequisite)"
+          : pr.unconfirmed
+            ? " (rests on an unconfirmed prerequisite)"
+            : "";
+    const reason = `Prerequisite not satisfied by ${term.label}: ${pr.missing.join(", ")}${caveat}`;
     return hard
       ? { allowed: false, level: "blocked", reason, unconfirmed: false }
       : { allowed: true, level: "warning", reason, unconfirmed: true };
+  }
+  if (isRetired(c)) {
+    return {
+      allowed: false,
+      level: "blocked",
+      reason: `${c.code} is retired — it is not offered in any term, so it cannot be taken or retaken.${
+        RETIRED_REPLACEMENT[c.id] ? ` ${RETIRED_REPLACEMENT[c.id]}` : ""
+      }`,
+      unconfirmed: false,
+    };
   }
   if (c.termsConfirmed && !c.terms.includes(term.season)) {
     return {
       allowed: false,
       level: "blocked",
       reason: `${c.code} is not offered in ${term.label.split(" ")[0]} (offered: ${c.terms.join(", ")}).`,
-      unconfirmed: !c.verified,
+      unconfirmed: !enforcesPrereq(trustOf(c)),
+    };
+  }
+  /**
+   * An enrollment gate you do not clear — the catalogue restricting a course to
+   * declared majors, or demanding credits you have not earned.
+   *
+   * A warning, never a block, for the same reason machine-read prerequisites
+   * warn (see `engine/trust.ts`): our picture of what you are declared in comes
+   * from a transcript we did not write, declarations change, and refusing a
+   * registration the university would allow is the expensive mistake. Before
+   * this, planning MUSIC 102 — flatly closed to Electrical Engineering — said
+   * nothing at all.
+   */
+  const restricted = blockingRestriction(c, {
+    programCodes: model.programCodes,
+    earnedCredits: model.totalEarnedCredits,
+  });
+  if (restricted) {
+    return {
+      allowed: true,
+      level: "warning",
+      reason: `${c.code} may not be open to you — ${restricted.detail}`,
+      unconfirmed: false,
     };
   }
   if (!c.termsConfirmed) {
@@ -530,12 +799,60 @@ export function validateDrop(
       allowed: true,
       level: "info",
       reason: "Offered terms unconfirmed — check the class schedule before registering.",
-      unconfirmed: !c.verified,
+      unconfirmed: !enforcesPrereq(trustOf(c)),
     };
   }
   // A clean drop still renders dashed when the course's prereq edge is inferred
   // (verified:false) — the validity verdict itself rests on unconfirmed data.
-  return { allowed: true, level: "ok", reason: null, unconfirmed: !c.verified };
+  return {
+    allowed: true,
+    level: "ok",
+    reason: null,
+    unconfirmed: !enforcesPrereq(trustOf(c)),
+  };
+}
+
+export interface EarliestTerm {
+  /** First future term where this course would be a legal drop, if any. */
+  term: TimelineTerm | null;
+  /** When no term works: what has to be planned first. */
+  blockedBy: string[];
+  /** True when nothing can fix it — the course is retired. */
+  retired: boolean;
+}
+
+/**
+ * The soonest term a course could actually be taken, given the plan as it
+ * stands. Answers the question an at-risk badge raises but never resolves:
+ * "fine, so when *can* I take it?"
+ *
+ * Prerequisites are assumed to stay where they are — this reports the
+ * consequence of the current plan rather than re-optimising it. If a
+ * prerequisite is not planned anywhere, there is no earliest term and the
+ * missing courses are named instead.
+ */
+export function earliestLegalTerm(
+  courseId: string,
+  model: PlanModel,
+): EarliestTerm {
+  const c = COURSE_BY_ID.get(courseId);
+  if (!c) return { term: null, blockedBy: [], retired: false };
+  if (isRetired(c)) return { term: null, blockedBy: [], retired: true };
+
+  for (const t of model.timeline) {
+    if (t.real || !isEditableTerm(t)) continue;
+    if (validateDrop(courseId, t.id, model).allowed) {
+      return { term: t, blockedBy: [], retired: false };
+    }
+  }
+
+  // Nothing worked: report what the last term was still missing, which is the
+  // set that has to be planned before this course becomes reachable at all.
+  const occByCourse = new Map<string, Occurrence[]>();
+  for (const [id, d] of model.derived) occByCourse.set(id, d.occurrences);
+  const last = model.timeline[model.timeline.length - 1];
+  const pr = checkPrereqAt(c, last.index + 1, occByCourse);
+  return { term: null, blockedBy: pr.missing, retired: false };
 }
 
 /** at-risk is a modifier on top of the base status. */

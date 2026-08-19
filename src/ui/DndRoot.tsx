@@ -25,6 +25,20 @@ export type DragData =
   | { kind: "placement"; instanceId: string; courseId: string };
 
 /**
+ * Which term a drop zone stands for.
+ *
+ * Read from the droppable's `data`, never parsed back out of its id. There are
+ * two zones per term — the board column (`col:`) and the rail chip (`rail:`) —
+ * because dnd-kit keys droppables by id and giving both the same one silently
+ * discarded whichever registered first. Ids exist to be unique; `data` is where
+ * the meaning lives.
+ */
+function termOf(data: unknown): string | null {
+  const t = (data as { termId?: unknown } | undefined)?.termId;
+  return typeof t === "string" ? t : null;
+}
+
+/**
  * Keyboard drags jump between term drop zones (space to lift, arrows to move,
  * space to drop, escape to cancel) instead of nudging by pixels.
  */
@@ -39,7 +53,7 @@ const termCoordinateGetter: KeyboardCoordinateGetter = (
 
   const zones = droppableContainers
     .getEnabled()
-    .filter((c) => String(c.id).startsWith("term:"))
+    .filter((c) => !!termOf(c.data.current))
     .map((c) => ({ id: c.id, rect: droppableRects.get(c.id) }))
     .filter((z) => z.rect)
     .sort((a, b) => a.rect!.left - b.rect!.left || a.rect!.top - b.rect!.top);
@@ -76,12 +90,7 @@ export function DndRoot({ children }: { children: ReactNode }) {
   };
 
   const onDragOver = (e: DragOverEvent) => {
-    const overId = e.over ? String(e.over.id) : null;
-    store
-      .getState()
-      .setDragOverTerm(
-        overId?.startsWith("term:") ? overId.slice(5) : null,
-      );
+    store.getState().setDragOverTerm(termOf(e.over?.data.current));
   };
 
   const onDragEnd = (e: DragEndEvent) => {
@@ -90,9 +99,8 @@ export function DndRoot({ children }: { children: ReactNode }) {
     s.setDragging(null);
     s.setDragOverTerm(null);
     if (!data || !e.over) return;
-    const overId = String(e.over.id);
-    if (!overId.startsWith("term:")) return;
-    const termId = overId.slice(5);
+    const termId = termOf(e.over.data.current);
+    if (!termId) return;
 
     const verdict = validateDrop(data.courseId, termId, model);
     const code = COURSE_BY_ID.get(data.courseId)?.code ?? data.courseId;
@@ -137,8 +145,10 @@ export function DndRoot({ children }: { children: ReactNode }) {
         announcements: {
           onDragStart: ({ active }) =>
             `Picked up ${String(active.id)}. Use arrow keys to choose a term, space to drop, escape to cancel.`,
-          onDragOver: ({ over }) =>
-            over ? `Over ${String(over.id).replace("term:", "term ")}.` : "",
+          onDragOver: ({ over }) => {
+            const t = termOf(over?.data.current);
+            return t ? `Over term ${t}.` : "";
+          },
           onDragEnd: ({ over }) =>
             over ? `Dropped on ${String(over.id)}.` : "Drag cancelled.",
           onDragCancel: () => "Drag cancelled.",
